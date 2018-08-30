@@ -1,0 +1,294 @@
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.exe
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.pdb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.dll
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.xml
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.csprojResolveAssemblyReference.cache
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.exe
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.pdb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\PlayerSprite1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass3.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WallRock1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemySprite1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSword1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\ProjectileBow1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponBow1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\actionBarBackground.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\HealthBar2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGladiator1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGladiator2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGoblin1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemySkeleton1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileSand1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponAxe1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponAxe2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponDagger1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponHammer1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponMaul1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSpear1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSword2.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.exe
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.pdb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\PlayerSprite1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass2.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass3.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WallRock1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemySprite1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSword1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\actionBarBackground.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGladiator1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGladiator2.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGoblin1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemySkeleton1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\HealthBar2.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\ProjectileBow1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileSand1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponAxe1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponAxe2.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponBow1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponDagger1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponHammer1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponMaul1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSpear1.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSword2.xnb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.exe
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.pdb
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.dll
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.xml
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\Felix\Documents\RPG Game - Backup 5th March 2\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.csprojResolveAssemblyReference.cache
+E:\RPG Game\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.exe
+E:\RPG Game\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.pdb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\PlayerSprite1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass2.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass3.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WallRock1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemySprite1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSword1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\actionBarBackground.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGladiator1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGladiator2.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGoblin1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemySkeleton1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\HealthBar2.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\ProjectileBow1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileSand1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponAxe1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponAxe2.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponBow1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponDagger1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponHammer1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponMaul1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSpear1.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSword2.xnb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.exe
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.pdb
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\MonoGame.Framework.dll
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.dll
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XAudio2.dll
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D11.dll
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.DXGI.dll
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct2D1.dll
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XInput.dll
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.RawInput.dll
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D9.dll
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\MonoGame.Framework.xml
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.xml
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XAudio2.xml
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D11.xml
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.DXGI.xml
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct2D1.xml
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XInput.xml
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.RawInput.xml
+E:\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D9.xml
+E:\RPG Game\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.csprojResolveAssemblyReference.cache
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\Shield1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\font\font.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSpear2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSpear3.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\speedBoost1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileSand2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileSand3.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WallRock2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\continueButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\startButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\resetButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\Potions.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\thunderStone.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\blueShockwaveBullet.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\redShockwaveBullet.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGladiator2Large.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponMaulLarge.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\Shield2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\ElvenTrinket.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileBrick1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\AchievementsButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\LoadGameButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\NewGameButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\SandboxButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TitleSprite.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\shuriken1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\shuriken2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\shuriken3.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\SaveButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\charmSprite.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\FireSpider.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\BlueSpider.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponGrapple1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\pixel.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\blankButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\backButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\font\font20.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\confirmButton.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponBow2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemySkeleton2.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileClay1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TilePillar1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileStone1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\ValueEditor1.xnb
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.exe.manifest
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.application
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.exe.manifest
+C:\Users\Felix\Documents\RPG Game\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.application
+C:\Users\Felix\Desktop\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.csprojAssemblyReference.cache
+C:\Users\Felix\Desktop\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.csproj.CoreCompileInputs.cache
+C:\Users\Felix\Desktop\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.exe
+C:\Users\Felix\Desktop\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.pdb
+C:\Users\Felix\Desktop\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.exe.manifest
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\PlayerSprite1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileGrass3.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WallRock1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemySprite1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSword1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\actionBarBackground.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGladiator1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGladiator2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGoblin1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemySkeleton1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\HealthBar2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\ProjectileBow1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileSand1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponAxe1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponAxe2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponBow1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponDagger1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponHammer1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponMaul1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSpear1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSword2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\Shield1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSpear2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponSpear3.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\font\font.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\speedBoost1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileSand2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileSand3.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WallRock2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\continueButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\startButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\resetButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\Potions.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\thunderStone.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\blueShockwaveBullet.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\redShockwaveBullet.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemyGladiator2Large.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponMaulLarge.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\Shield2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\ElvenTrinket.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileBrick1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\AchievementsButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\LoadGameButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\NewGameButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\SandboxButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TitleSprite.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\shuriken1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\shuriken2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\shuriken3.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\SaveButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\charmSprite.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\FireSpider.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\BlueSpider.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponGrapple1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\pixel.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\blankButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\backButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\font\font20.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\confirmButton.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\WeaponBow2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\EnemySkeleton2.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileClay1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TilePillar1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\TileStone1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\Content\graphics\ValueEditor1.xnb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.exe.config
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.exe.manifest
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.application
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.exe
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\MainGame.pdb
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.dll
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.xml
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.csprojAssemblyReference.cache
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.csproj.CoreCompileInputs.cache
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.exe.manifest
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.application
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.csproj.CopyComplete
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.exe
+C:\Users\Felix\Desktop\RPG Game Folder\RPG Game\MainGame\MainGame\obj\x86\Debug\MainGame.pdb

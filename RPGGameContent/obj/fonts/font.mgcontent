@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/Felix/Documents/RPG Game/RPGGameContent/fonts/font.spritefont</SourceFile>
+  <SourceTime>2017-04-15T17:37:32.3993968-04:00</SourceTime>
+  <DestFile>C:/Users/Felix/Documents/RPG Game/RPGGameContent/bin/fonts/font.xnb</DestFile>
+  <DestTime>2017-05-31T23:49:42.5355546-04:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2015-04-29T13:14:44-04:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2015-04-29T13:14:44-04:00</ProcessorTime>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>
