@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MainGame.Items;
+using MainGame.Screens.Trade_Screen;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -30,11 +32,18 @@ namespace MainGame.Screens
         StaticEntity backButton;
 
         ContentManager Content { get; set; }
+        TradeScreenContents TradeContents { get; set; }
         #endregion
 
         #region Constructors
-        public SaveGameScreen(OnScreenChanged screenChanged, ContentManager content) : base(screenChanged)
+        public SaveGameScreen(OnScreenChanged screenChanged, ContentManager content, TradeScreenContents tradeContents) : base(screenChanged)
         {
+            TradeContents = tradeContents;
+            Content = content;
+
+            for (int i = 0; i < GameConstants.NUMBER_OF_SAVES; i++)
+                CheckGameData(i, levelData, weapon1ItemBoxes, weapon2ItemBoxes, shield1ItemBoxes, charm1ItemBoxes);
+
             var TileSize = GameConstants.TILE_SIZE;
             fileSelected = -1;
             blankButtonSprite = Content.Load<Texture2D>("graphics/blankButton");
@@ -72,12 +81,12 @@ namespace MainGame.Screens
             }
             if (backButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
             {
-                gameState = GameState.Trade;
+                ScreenChanged(new TradeScreen(ScreenChanged, Content, TradeContents));
             }
             else if (confirmButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
             {
                 SaveGame(fileSelected);
-                gameState = GameState.Trade;
+                ScreenChanged(new TradeScreen(ScreenChanged, Content, TradeContents));
             }
         }
 
@@ -96,42 +105,72 @@ namespace MainGame.Screens
             StreamWriter outputFile;
             outputFile = File.CreateText("SaveGame" + slot.ToString());
 
-            outputFile.WriteLine(level);
-            outputFile.WriteLine(player1.HitPoints);
-            outputFile.WriteLine(player1.Weapon1.ID);
-            outputFile.WriteLine(player1.Weapon2.ID);
-            outputFile.WriteLine(player1.Shield1.ID);
-            outputFile.WriteLine(player1.Charm1.ID);
+            outputFile.WriteLine(TradeContents.Level);
+            outputFile.WriteLine(TradeContents.Health);
+            outputFile.WriteLine(TradeContents.Weapon1.ID);
+            outputFile.WriteLine(TradeContents.Weapon2.ID);
+            outputFile.WriteLine(TradeContents.Shield1.ID);
+            outputFile.WriteLine(TradeContents.Charm1.ID);
 
-            foreach (ItemBox box in tradeItemBoxes)
+            //TODO: Clean up this code
+            List<Item> items = new List<Item>();
+            items.Add(TradeContents.Item1);
+            items.Add(TradeContents.Item2);
+            items.Add(TradeContents.Item3);
+
+            foreach (Item item in items)
             {
-                if (box.IsActive == false)
+                if (item == null)
                 {
                     outputFile.WriteLine(-1);
                     outputFile.WriteLine(-1);
                 }
                 else
                 {
-                    switch (box.Type)
+                    if (item is Weapon)
                     {
-                        case ItemType.Weapon:
-                            outputFile.WriteLine(0);
-                            outputFile.WriteLine(box.Weapon.ID);
-                            break;
-                        case ItemType.Shield:
-                            outputFile.WriteLine(1);
-                            outputFile.WriteLine(box.Shield.ID);
-                            break;
-                        case ItemType.Charm:
-                            outputFile.WriteLine(2);
-                            outputFile.WriteLine(box.Charm.ID);
-                            break;
+                        outputFile.WriteLine(0);
+                        outputFile.WriteLine(((Weapon)item).ID);
+                    }
+                    if (item is Shield)
+                    {
+                        outputFile.WriteLine(1);
+                        outputFile.WriteLine(((Shield)item).ID);
+                    }
+                    if (item is Charm)
+                    {
+                        outputFile.WriteLine(2);
+                        outputFile.WriteLine(((Charm)item).ID);
                     }
                 }
-
             }
 
             outputFile.Close();
+        }
+
+        public bool CheckGameData(int slot, List<String> levelData, List<ItemBox> weapon1Box, List<ItemBox> weapon2Box, List<ItemBox> shield1Box, List<ItemBox> charm1Box)
+        {
+            StreamReader inputFile;
+            bool checkSuccessful = true;
+            try
+            {
+                inputFile = File.OpenText("SaveGame" + slot.ToString());
+
+                //Put the get items methods in their own class with the weapon factories
+                levelData.RemoveAt(slot);
+                levelData.Insert(slot, "Level " + inputFile.ReadLine() + "    " + inputFile.ReadLine() + " hitpoints.");
+                weapon1Box.ElementAt(slot).ReplaceItem(ItemFactoryContainer.GetWeaponFromID(int.Parse(inputFile.ReadLine())));
+                weapon2Box.ElementAt(slot).ReplaceItem(ItemFactoryContainer.GetWeaponFromID(int.Parse(inputFile.ReadLine())));
+                shield1Box.ElementAt(slot).ReplaceItem(ItemFactoryContainer.GetShieldFromID(int.Parse(inputFile.ReadLine())));
+                charm1Box.ElementAt(slot).ReplaceItem(ItemFactoryContainer.GetCharmFromID(int.Parse(inputFile.ReadLine())));
+
+                inputFile.Close();
+            }
+            catch
+            {
+                checkSuccessful = false;
+            }
+            return checkSuccessful;
         }
     }
 }

@@ -75,6 +75,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameConstants.cs" />
+    <Compile Include="Items\Item.cs" />
     <Compile Include="Pathfinding.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Screens\SandboxScreen.cs" />
     <Compile Include="Screens\SaveGameScreen.cs" />
     <Compile Include="Screens\Screen.cs" />
+    <Compile Include="Screens\Trade Screen\TradeScreenContents.cs" />
     <Compile Include="Screens\TradeScreen.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MainGame.Items;
+using MainGame.Screens.Trade_Screen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -46,22 +48,40 @@ namespace MainGame.Screens
         float Health;
         float oldHealth;
 
+        int level;
+
         string hoveredItemName = "";
         string hoveredItemType = "";
         string hoveredItemDamage = "";
         string hoveredItemCooldown = "";
         string hoveredItemEffects = "";
         string hoveredItemTooltip = "";
+
+        TradeScreenContents TradeContents { get; set; }
         #endregion
 
         #region Constructors
-        public TradeScreen(OnScreenChanged screenChanged, ContentManager content) : base(screenChanged)
+        public TradeScreen(OnScreenChanged screenChanged, ContentManager content, TradeScreenContents tradeContents) : base(screenChanged)
         {
             Content = content;
+            TradeContents = tradeContents;
             saveGameOverrideEnabled = false;
             tradeItemBoxes = new List<ItemBox>();
             tradeItemBoxBackgrounds = new List<StaticEntity>();
 
+            level = tradeContents.Level;
+            Health = tradeContents.Health;
+            oldHealth = Health;
+            weapon1 = tradeContents.Weapon1;
+            weapon2 = tradeContents.Weapon2;
+            shield1 = tradeContents.Shield1;
+            charm1 = tradeContents.Charm1;
+
+            oldWeapon1 = weapon1;
+            oldWeapon2 = weapon2;
+            oldShield1 = shield1;
+            oldCharm1 = charm1;
+            
             actionBarBackground = Content.Load<Texture2D>("graphics/actionBarBackground");
 
             //TODO: Remove
@@ -98,9 +118,31 @@ namespace MainGame.Screens
             equippedItemBoxes.Add(new ItemBox("Charm1", box4Location, charm1.Sprite, charm1));
             equippedItemBoxBackgrounds.Add(new StaticEntity("Charm1", box4Location, actionBarBackground));
 
-            tradeItemBoxes.Add(new ItemBox("item1", firstBoxLocation, actionBarBackground, weaponFactory.CreateSword()));
-            tradeItemBoxes.Add(new ItemBox("item2", secondBoxLocation, actionBarBackground, weaponFactory.CreateSword()));
-            tradeItemBoxes.Add(new ItemBox("item3", thirdBoxLocation, actionBarBackground, weaponFactory.CreateSword()));
+            //TODO: Rewrite once items inheritance is sorted out
+            List<Item> items = new List<Item>();
+            items.Add(tradeContents.Item1);
+            items.Add(tradeContents.Item2);
+            items.Add(tradeContents.Item3);
+
+            foreach(Item i in items)
+            {
+                if(i is Weapon)
+                {
+                    tradeItemBoxes.Add(new ItemBox("item", firstBoxLocation, actionBarBackground, (Weapon)i));
+                }
+                else if (i is Shield)
+                {
+                    tradeItemBoxes.Add(new ItemBox("item", firstBoxLocation, actionBarBackground, (Shield)i));
+                }
+                else if(i is Charm)
+                {
+                    tradeItemBoxes.Add(new ItemBox("item", firstBoxLocation, actionBarBackground, (Charm)i));
+                }
+            }
+
+            //tradeItemBoxes.Add(new ItemBox("item1", firstBoxLocation, actionBarBackground, tradeContents.Item1));
+            //tradeItemBoxes.Add(new ItemBox("item2", secondBoxLocation, actionBarBackground, tradeContents.Item2));
+            //tradeItemBoxes.Add(new ItemBox("item3", thirdBoxLocation, actionBarBackground, tradeContents.Item3));
             healingButton = new StaticEntity("Healing", fourthBoxLocation, Content.Load<Texture2D>("graphics/Potions"));
             resetButton = new StaticEntity("Reset Button", fifthBoxLocation, Content.Load<Texture2D>("graphics/resetButton"));
             Texture2D saveButtonSprite = Content.Load<Texture2D>("graphics/saveButton");
@@ -145,10 +187,10 @@ namespace MainGame.Screens
             if (((level - 1) % 10 == 0 || saveGameOverrideEnabled) && saveButton.CollisionRectangle.Contains(mouse.Position)
                 && mouse.LeftButton == ButtonState.Pressed)
             {
-                gameState = GameState.SaveGame;
-                fileSelected = -1;
-                for (int i = 0; i < NumberOfSaves; i++)
-                    CheckGameData(i, levelData, weapon1ItemBoxes, weapon2ItemBoxes, shield1ItemBoxes, charm1ItemBoxes);
+                ScreenChanged(new SaveGameScreen(ScreenChanged, Content, TradeContents));
+                //fileSelected = -1;
+                //for (int i = 0; i < NumberOfSaves; i++)
+                //    CheckGameData(i, levelData, weapon1ItemBoxes, weapon2ItemBoxes, shield1ItemBoxes, charm1ItemBoxes);
             }
             DoItemBoxUpdate(mouse, tradeItemBoxes, tradeItemBoxBackgrounds, equippedItemBoxes);
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MainGame.Items;
+using MainGame.Screens.Trade_Screen;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -30,6 +32,7 @@ namespace MainGame.Screens
         StaticEntity backButton;
 
         ContentManager Content { get; set; }
+        TradeScreenContents TradeContents { get; set; }
         #endregion
 
         #region Constructors
@@ -72,12 +75,12 @@ namespace MainGame.Screens
             }
             if (backButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
             {
-                gameState = GameState.MainMenu;
+                ScreenChanged(new MainMenuScreen(ScreenChanged, Content));
             }
             else if (confirmButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
             {
                 if (LoadGame(fileSelected) == true)
-                    gameState = GameState.Trade;
+                    ScreenChanged(new TradeScreen(ScreenChanged, Content, TradeContents));
             }
         }
 
@@ -93,47 +96,55 @@ namespace MainGame.Screens
 
         private bool LoadGame(int slot)
         {
+            TradeContents = new TradeScreenContents();
             StreamReader inputFile;
             bool loadSuccessful = true;
             try
             {
                 inputFile = File.OpenText("SaveGame" + slot.ToString());
 
-                level = int.Parse(inputFile.ReadLine());
-                Health = int.Parse(inputFile.ReadLine());
-                oldHealth = Health;
-                player1.HitPoints = Health;
-                weapon1 = GetWeaponFromID(int.Parse(inputFile.ReadLine()));
-                oldWeapon1 = weapon1;
-                player1.Weapon1 = weapon1;
-                weapon2 = GetWeaponFromID(int.Parse(inputFile.ReadLine()));
-                oldWeapon2 = weapon2;
-                player1.Weapon2 = weapon2;
-                shield1 = GetShieldFromID(int.Parse(inputFile.ReadLine()));
-                oldShield1 = shield1;
-                player1.Shield1 = shield1;
-                charm1 = GetCharmFromID(int.Parse(inputFile.ReadLine()));
-                oldCharm1 = charm1;
-                player1.Charm1 = charm1;
+                //TODO: Clean up this code
+
+                TradeContents.Level = int.Parse(inputFile.ReadLine());
+                TradeContents.Health = int.Parse(inputFile.ReadLine());
+                //oldHealth = Health;
+                //player1.HitPoints = Health;
+                TradeContents.Weapon1 = ItemFactoryContainer.GetWeaponFromID(int.Parse(inputFile.ReadLine()));
+                //oldWeapon1 = weapon1;
+                //player1.Weapon1 = weapon1;
+                TradeContents.Weapon2 = ItemFactoryContainer.GetWeaponFromID(int.Parse(inputFile.ReadLine()));
+                //oldWeapon2 = weapon2;
+                //player1.Weapon2 = weapon2;
+                TradeContents.Shield1 = ItemFactoryContainer.GetShieldFromID(int.Parse(inputFile.ReadLine()));
+                //oldShield1 = shield1;
+                //player1.Shield1 = shield1;
+                TradeContents.Charm1 = ItemFactoryContainer.GetCharmFromID(int.Parse(inputFile.ReadLine()));
+                //oldCharm1 = charm1;
+                //player1.Charm1 = charm1;
+                List<Item> items = new List<Item>();
                 for (int i = 0; i < 3; i++)
                 {
                     switch (int.Parse(inputFile.ReadLine()))
                     {
                         case -1:
-                            tradeItemBoxes.ElementAt(i).IsActive = false;
+                            items.Add(null);
                             inputFile.ReadLine();
                             break;
                         case 0:
-                            tradeItemBoxes.ElementAt(i).ReplaceItem(GetWeaponFromID(int.Parse(inputFile.ReadLine())));
+                            items.Add(ItemFactoryContainer.GetWeaponFromID(int.Parse(inputFile.ReadLine())));
                             break;
                         case 1:
-                            tradeItemBoxes.ElementAt(i).ReplaceItem(GetShieldFromID(int.Parse(inputFile.ReadLine())));
+                            items.Add(ItemFactoryContainer.GetShieldFromID(int.Parse(inputFile.ReadLine())));
                             break;
                         case 2:
-                            tradeItemBoxes.ElementAt(i).ReplaceItem(GetCharmFromID(int.Parse(inputFile.ReadLine())));
+                            items.Add(ItemFactoryContainer.GetCharmFromID(int.Parse(inputFile.ReadLine())));
                             break;
                     }
                 }
+
+                TradeContents.Item1 = items.ElementAt(0);
+                TradeContents.Item2 = items.ElementAt(1);
+                TradeContents.Item3 = items.ElementAt(2);
 
                 inputFile.Close();
             }

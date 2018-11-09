@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using MainGame.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -1696,7 +1697,7 @@ namespace MainGame
         
     }
 
-    public class Weapon : DynamicEntity
+    public class Weapon : DynamicEntity, Item
     {
         #region Properties
         int id;
@@ -2875,7 +2876,7 @@ namespace MainGame
 
     }
 
-    public class Shield
+    public class Shield : Item
     {
         #region Properties
         int id;
@@ -3090,7 +3091,7 @@ namespace MainGame
 
     }
 
-    public class Charm
+    public class Charm : Item
     {
         #region Properties
         int id;

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MainGame.Screens.Trade_Screen;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -134,7 +135,7 @@ namespace MainGame.Screens
         #endregion
 
         #region Constructor
-        public CombatScreen(OnScreenChanged screenChanged, ContentManager content) : base(screenChanged)
+        public CombatScreen(OnScreenChanged screenChanged, ContentManager content, TradeScreenContents tradeContents) : base(screenChanged)
         {
             Content = content;
 
@@ -188,8 +189,8 @@ namespace MainGame.Screens
             //Load sprite
             player1Sprite = Content.Load<Texture2D>(@"graphics\PlayerSprite1");
             playerStartingLocation = new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.WINDOW_HEIGHT / 2);
-            Health = GameConstants.PLAYER_MAX_HIT_POINTS;
-            player1 = new Player("Player", playerStartingLocation, player1Sprite, new Vector2(0, 0), GameConstants.PLAYER_MAX_HIT_POINTS, healthBarSprite, weapon1, weapon2, shield1, charm1, GameConstants.PLAYER_BASE_SPEED);
+            Health = tradeContents.Health;
+            player1 = new Player("Player", playerStartingLocation, player1Sprite, new Vector2(0, 0), GameConstants.PLAYER_MAX_HIT_POINTS, healthBarSprite, tradeContents.Weapon1, tradeContents.Weapon2, tradeContents.Shield1, tradeContents.Charm1, GameConstants.PLAYER_BASE_SPEED);
             #endregion
 
             #region Create Background
@@ -250,6 +251,7 @@ namespace MainGame.Screens
             #region Player pausing logic
             if (keyboard.IsKeyDown(Keys.Escape) && !escapeButtonPreviouslyPressed)
             {
+                //TODO: Pausing logic
                 gameState = GameState.PlayerPaused;
             }
             #endregion
@@ -258,6 +260,7 @@ namespace MainGame.Screens
             if (enemies.Count == 0)
             {
                 ////TODO: Initialize trade window
+                ///
                 ////Add the item boxes that are to be filled from enemies to a list
                 ////Call AddItemFromEnemy with that list
                 ////Get all the items from deadenemies and add them at random to the item boxes
@@ -438,7 +441,7 @@ namespace MainGame.Screens
             #region Game Over
             if (player1.HitPoints <= 0)
             {
-                gameState = GameState.GameOver;
+                ScreenChanged(new GameOverScreen(ScreenChanged, Content));
             }
             #endregion
         }
