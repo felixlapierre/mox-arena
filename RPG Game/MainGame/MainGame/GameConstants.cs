@@ -10,6 +10,8 @@ namespace MainGame
     {
         public const int WINDOW_WIDTH = 1000;
         public const int WINDOW_HEIGHT = 750;
+        public const int ACTION_BAR_HEIGHT = 50;
+
         public const int TILE_SIZE = 50;
         public const int TILES_WIDE = WINDOW_WIDTH / TILE_SIZE;
         public const int TILES_HIGH = WINDOW_HEIGHT / TILE_SIZE;

@@ -131,6 +131,8 @@ namespace MainGame.Screens
         //TODO: Remove these or reconsider their implementation
         ContentManager Content { get; set; }
         Random random = new Random();
+        bool playerPaused = false;
+        int unpauseTimer = 0;
 
         #endregion
 
@@ -252,8 +254,26 @@ namespace MainGame.Screens
             if (keyboard.IsKeyDown(Keys.Escape) && !escapeButtonPreviouslyPressed)
             {
                 //TODO: Pausing logic
-                gameState = GameState.PlayerPaused;
+                if(playerPaused)
+                {
+                    playerPaused = false;
+                    unpauseTimer = 3000;
+                } else
+                {
+                    playerPaused = true;
+                }
             }
+
+            if (playerPaused)
+            {
+                return;
+            }
+            if(unpauseTimer > 0)
+            {
+                unpauseTimer -= gameTime.ElapsedGameTime.Milliseconds;
+                return;
+            }
+
             #endregion
 
             #region Next level logic
@@ -504,6 +524,17 @@ namespace MainGame.Screens
 
             #region Text
             spriteBatch.DrawString(font, "Score: " + score.ToString(), new Vector2(0, 0), Color.Black);
+
+            if (unpauseTimer > 0 && !playerPaused)
+            {
+                Vector2 stringSize = font.MeasureString("Get Ready!");
+                spriteBatch.DrawString(font, "Get Ready!", new Vector2(GameConstants.WINDOW_WIDTH / 2 - stringSize.X / 2, 0), Color.Black);
+            }
+            else if (playerPaused)
+            {
+                Vector2 stringSize = font.MeasureString("Game is Paused");
+                spriteBatch.DrawString(font, "Game is Paused", new Vector2(GameConstants.WINDOW_WIDTH / 2 - stringSize.X / 2, 0), Color.Black);
+            }
             #endregion
         }
 
