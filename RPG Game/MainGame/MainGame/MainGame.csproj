@@ -74,6 +74,7 @@
     <Compile Include="Effect.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Game2.cs" />
     <Compile Include="GameConstants.cs" />
     <Compile Include="GameCore.cs" />
     <Compile Include="Items\Charms\CharmFactory.cs" />
@@ -93,6 +94,9 @@
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\Trade Screen\TradeScreenContents.cs" />
     <Compile Include="Screens\TradeScreen.cs" />
+    <Compile Include="Textures\ContentLoader.cs" />
+    <Compile Include="Textures\FontLoader.cs" />
+    <Compile Include="Textures\TextureLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -105,356 +109,206 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\PlayerSprite1.xnb">
-      <Link>Content\graphics\PlayerSprite1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TileGrass1.xnb">
-      <Link>Content\graphics\TileGrass1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TileGrass2.xnb">
-      <Link>Content\graphics\TileGrass2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TileGrass3.xnb">
-      <Link>Content\graphics\TileGrass3.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WallRock1.xnb">
-      <Link>Content\graphics\WallRock1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\EnemySprite1.xnb">
-      <Link>Content\graphics\EnemySprite1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponSword1.xnb">
-      <Link>Content\graphics\WeaponSword1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\actionBarBackground.xnb">
-      <Link>Content\graphics\actionBarBackground.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\EnemyGladiator1.xnb">
-      <Link>Content\graphics\EnemyGladiator1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\EnemyGladiator2.xnb">
-      <Link>Content\graphics\EnemyGladiator2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\EnemyGoblin1.xnb">
-      <Link>Content\graphics\EnemyGoblin1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\EnemySkeleton1.xnb">
-      <Link>Content\graphics\EnemySkeleton1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\HealthBar2.xnb">
-      <Link>Content\graphics\HealthBar2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\ProjectileBow1.xnb">
-      <Link>Content\graphics\ProjectileBow1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TileSand1.xnb">
-      <Link>Content\graphics\TileSand1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponAxe1.xnb">
-      <Link>Content\graphics\WeaponAxe1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponAxe2.xnb">
-      <Link>Content\graphics\WeaponAxe2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponBow1.xnb">
-      <Link>Content\graphics\WeaponBow1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponDagger1.xnb">
-      <Link>Content\graphics\WeaponDagger1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponHammer1.xnb">
-      <Link>Content\graphics\WeaponHammer1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponMaul1.xnb">
-      <Link>Content\graphics\WeaponMaul1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponSpear1.xnb">
-      <Link>Content\graphics\WeaponSpear1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponSword2.xnb">
-      <Link>Content\graphics\WeaponSword2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\Shield1.xnb">
-      <Link>Content\graphics\Shield1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponSpear2.xnb">
-      <Link>Content\graphics\WeaponSpear2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponSpear3.xnb">
-      <Link>Content\graphics\WeaponSpear3.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\fonts\font.xnb">
-      <Link>Content\font\font.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\speedBoost1.xnb">
-      <Link>Content\graphics\speedBoost1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TileSand2.xnb">
-      <Link>Content\graphics\TileSand2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TileSand3.xnb">
-      <Link>Content\graphics\TileSand3.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WallRock2.xnb">
-      <Link>Content\graphics\WallRock2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\continueButton.xnb">
-      <Link>Content\graphics\continueButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\startButton.xnb">
-      <Link>Content\graphics\startButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\resetButton.xnb">
-      <Link>Content\graphics\resetButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\Potions.xnb">
-      <Link>Content\graphics\Potions.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\thunderStone.xnb">
-      <Link>Content\graphics\thunderStone.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\blueShockwaveBullet.xnb">
-      <Link>Content\graphics\blueShockwaveBullet.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\redShockwaveBullet.xnb">
-      <Link>Content\graphics\redShockwaveBullet.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\EnemyGladiator2Large.xnb">
-      <Link>Content\graphics\EnemyGladiator2Large.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponMaulLarge.xnb">
-      <Link>Content\graphics\WeaponMaulLarge.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\Shield2.xnb">
-      <Link>Content\graphics\Shield2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\ElvenTrinket.xnb">
-      <Link>Content\graphics\ElvenTrinket.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TileBrick1.xnb">
-      <Link>Content\graphics\TileBrick1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\AchievementsButton.xnb">
-      <Link>Content\graphics\AchievementsButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\LoadGameButton.xnb">
-      <Link>Content\graphics\LoadGameButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\NewGameButton.xnb">
-      <Link>Content\graphics\NewGameButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\SandboxButton.xnb">
-      <Link>Content\graphics\SandboxButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TitleSprite.xnb">
-      <Link>Content\graphics\TitleSprite.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\shuriken1.xnb">
-      <Link>Content\graphics\shuriken1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\shuriken2.xnb">
-      <Link>Content\graphics\shuriken2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\shuriken3.xnb">
-      <Link>Content\graphics\shuriken3.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\SaveButton.xnb">
-      <Link>Content\graphics\SaveButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\charmSprite.xnb">
-      <Link>Content\graphics\charmSprite.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\FireSpider.xnb">
-      <Link>Content\graphics\FireSpider.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\BlueSpider.xnb">
-      <Link>Content\graphics\BlueSpider.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponGrapple1.xnb">
-      <Link>Content\graphics\WeaponGrapple1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\pixel.xnb">
-      <Link>Content\graphics\pixel.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\blankButton.xnb">
-      <Link>Content\graphics\blankButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\backButton.xnb">
-      <Link>Content\graphics\backButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\fonts\font20.xnb">
-      <Link>Content\font\font20.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\confirmButton.xnb">
-      <Link>Content\graphics\confirmButton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\WeaponBow2.xnb">
-      <Link>Content\graphics\WeaponBow2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\EnemySkeleton2.xnb">
-      <Link>Content\graphics\EnemySkeleton2.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TileClay1.xnb">
-      <Link>Content\graphics\TileClay1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TilePillar1.xnb">
-      <Link>Content\graphics\TilePillar1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\TileStone1.xnb">
-      <Link>Content\graphics\TileStone1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\..\RPGGameContent\bin\graphics\ValueEditor1.xnb">
-      <Link>Content\graphics\ValueEditor1.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
+    <None Include="Content\Content.mgcb" />
+    <None Include="Content\fonts\font.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\fonts\font20.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\charms\basic1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\blueSpider1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\fireSpider1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\gladiator1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\gladiator2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\gladiator2large.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\goblin1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\healthBar1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\human1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\player1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\skeleton1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\creatures\skeleton2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\projectiles\arrow1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\projectiles\blueBall1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\projectiles\redBall1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\projectiles\shuriken1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\projectiles\shuriken2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\projectiles\shuriken3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\shields\boots1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\shields\elvenTrinket1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\shields\shield1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\shields\shield2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\shields\thunderStone1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\brick1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\clay1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\grass1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\grass2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\grass3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\pillar1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\rock1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\rock2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\sand1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\sand2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\sand3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\tiles\stone1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\blankBackground.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\adventure.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\back.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\confirm.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\continue.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\loadGame.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\newGame.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\reset.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\sandbox.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\saveGame.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\select.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\buttons\start.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\potions.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\title.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\userinterface\valueEditor.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\axe1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\axe2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\bow1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\bow2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\dagger1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\grapple1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\hammer1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\maul1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\maul2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\spear1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\spear2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\spear3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\sword1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\graphics\weapons\sword2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -473,6 +327,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

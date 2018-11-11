@@ -7,11 +7,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MainGame.Textures
+namespace MainGame.ContentLoaders
 {
     class FontLoader : ContentLoader<SpriteFont>
     {
-        public FontLoader(ContentManager content) : base(content, "fonts")
+        public FontLoader(ContentManager content) : base(content, "/fonts")
         {
 
         }

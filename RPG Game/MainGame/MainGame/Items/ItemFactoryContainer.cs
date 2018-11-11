@@ -56,7 +56,7 @@ namespace MainGame.Items
             #endregion
 
             #region Load Weapons
-            weaponSword1 = Content.Load<Texture2D>("graphics/WeaponSword1");
+            weaponSword1 = Content.Load<Texture2D>("graphics/weapons/sword1");
             weaponSword2 = Content.Load<Texture2D>("graphics/WeaponSword2");
             weaponBow1 = Content.Load<Texture2D>("graphics/WeaponBow1");
             weaponBow2 = Content.Load<Texture2D>("graphics/WeaponBow2");
