@@ -21,6 +21,11 @@ namespace MainGame
 
         public const int NUMBER_OF_SAVES = 5;
 
+        public const int NUMBER_OF_ROCKS = 30;
+        public const int SAFE_ZONE_SIZE = 10; //In tiles. Area in which enemies cannot spawn
+
+        public const int PAUSE_DELAY = 1500;
+
         public const bool GOD_MODE = false;
     }
 }

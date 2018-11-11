@@ -2673,7 +2673,7 @@ namespace MainGame
             gameState = GameState.Paused;
             pauseDurationLeft = BetweenLevelPause;
             //Update once to properly adjust health bars
-            player1.HealthBar.Update(gameTime, player1);
+            player1.HealthBar.Update(player1);
             foreach (Enemy enemy in enemies)
                 enemy.Update(gameTime);
         }

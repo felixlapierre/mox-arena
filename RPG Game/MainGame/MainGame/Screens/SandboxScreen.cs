@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MainGame.Items;
+using MainGame.Screens.Trade_Screen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -52,11 +54,12 @@ namespace MainGame.Screens
         WeaponFactory weaponFactory;
         ShieldFactory shieldFactory;
         CharmFactory charmFactory;
+        bool leftMousePreviouslyPressed = false;
 
         ContentManager Content { get; set; }
         #endregion
 
-        public SandboxScreen(OnScreenChanged screenChanged, ContentManager content, Game1 tempGame1) : base(screenChanged)
+        public SandboxScreen(OnScreenChanged screenChanged, ContentManager content) : base(screenChanged)
         {
             Content = content;
             actionBarBackground = content.Load<Texture2D>("graphics/actionBarBackground");
@@ -76,9 +79,9 @@ namespace MainGame.Screens
             startButton = new StaticEntity("Start Button", new Vector2(WindowWidth / 2, WindowHeight / 2), startButtonSprite);
             backButton = new StaticEntity("Back Button", new Vector2(TileSize * 2, WindowHeight - TileSize), backButtonSprite);
 
-            weaponFactory = tempGame1.weaponFactory;
-            shieldFactory = tempGame1.shieldFactory;
-            charmFactory = tempGame1.charmFactory;
+            weaponFactory = ItemFactoryContainer.Weapons;
+            shieldFactory = ItemFactoryContainer.Shields;
+            charmFactory = ItemFactoryContainer.Charms;
 
             weapon1 = weaponFactory.CreateSword();
             weapon2 = weaponFactory.CreateBow();
@@ -406,12 +409,14 @@ namespace MainGame.Screens
             {
                 ScreenChanged(new MainMenuScreen(ScreenChanged, Content));
             }
-            //TODO: Uncomment this and fix the logic
-            //if (playButton.CollisionRectangle.Contains(new Vector2(mouse.X, mouse.Y)) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
-            //{
-            //    InitiateCombat(gameTime);
-            //}
-        }
+
+            if (playButton.CollisionRectangle.Contains(new Vector2(mouse.X, mouse.Y)) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
+            {
+                TradeScreenContents tradeContents = new TradeScreenContents(GameConstants.PLAYER_MAX_HIT_POINTS, 1, weapon1, weapon2, shield1, charm1);
+                ScreenChanged(new CombatScreen(ScreenChanged, Content, tradeContents));
+            }
+            leftMousePreviouslyPressed = mouse.LeftButton == ButtonState.Pressed;
+        } 
 
         public void ItemBoxHovered(ItemBox itemBox, MouseState mouse)
         {

@@ -31,6 +31,11 @@ namespace MainGame.Screens
         StaticEntity confirmButton;
         StaticEntity backButton;
 
+        SpriteFont font;
+        SpriteFont font20;
+        Texture2D actionBarBackground;
+        StaticEntity background;
+
         ContentManager Content { get; set; }
         TradeScreenContents TradeContents { get; set; }
         #endregion
@@ -38,6 +43,7 @@ namespace MainGame.Screens
         #region Constructors
         public LoadGameScreen(OnScreenChanged screenChanged, ContentManager content) : base(screenChanged)
         {
+            Content = content;
             var TileSize = GameConstants.TILE_SIZE;
             fileSelected = -1;
             blankButtonSprite = Content.Load<Texture2D>("graphics/blankButton");
@@ -61,6 +67,14 @@ namespace MainGame.Screens
                 charm1ItemBoxes.Add(new ItemBox("Charm1 File " + i.ToString(), new Vector2(TileSize * 10, TileSize * 3 + i * TileSize * 2)));
             }
             confirmButton = new StaticEntity("Confirm Button", new Vector2(TileSize * 5, GameConstants.WINDOW_HEIGHT - TileSize), confirmButtonSprite);
+
+            font = Content.Load<SpriteFont>("font/font");
+            font20 = Content.Load<SpriteFont>("font/font20");
+            actionBarBackground = Content.Load<Texture2D>("graphics/actionBarBackground");
+            background = new StaticEntity("Background", new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.WINDOW_HEIGHT / 2), actionBarBackground);
+
+            for (int i = 0; i < GameConstants.NUMBER_OF_SAVES; i++)
+                CheckGameData(i, levelData, weapon1ItemBoxes, weapon2ItemBoxes, shield1ItemBoxes, charm1ItemBoxes);
         }
 
         public override void Update(GameTime gameTime)
@@ -87,6 +101,40 @@ namespace MainGame.Screens
         public override void Draw(SpriteBatch spriteBatch)
         {
             MouseState mouse = Mouse.GetState();
+
+            background.Draw(spriteBatch, new Rectangle(0, 0, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT));
+
+            if (fileSelected != -1)
+            {
+                if (confirmButton.CollisionRectangle.Contains(mouse.Position))
+                    confirmButton.Draw(spriteBatch, Color.LightBlue);
+                else
+                    confirmButton.Draw(spriteBatch);
+            }
+
+            foreach (StaticEntity button in fileButtons)
+            {
+                if (fileButtons.IndexOf(button) == fileSelected)
+                    button.Draw(spriteBatch, Color.SteelBlue);
+                else if (button.CollisionRectangle.Contains(mouse.Position))
+                    button.Draw(spriteBatch, Color.LightBlue);
+                else
+                    button.Draw(spriteBatch);
+            }
+
+            for (int i = 0; i < levelData.Count; i++)
+                spriteBatch.DrawString(font, levelData.ElementAt(i), new Vector2(GameConstants.TILE_SIZE * 3.1f, GameConstants.TILE_SIZE * 2.7f + GameConstants.TILE_SIZE * 2 * i), Color.Black);
+            foreach (ItemBox box in weapon1ItemBoxes)
+                box.Draw(spriteBatch);
+            foreach (ItemBox box in weapon2ItemBoxes)
+                box.Draw(spriteBatch);
+            foreach (ItemBox box in shield1ItemBoxes)
+                box.Draw(spriteBatch);
+            foreach (ItemBox box in charm1ItemBoxes)
+                box.Draw(spriteBatch);
+
+            spriteBatch.DrawString(font20, "Load Game", new Vector2(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE), Color.Black);
+
             if (backButton.CollisionRectangle.Contains(mouse.Position))
                 backButton.Draw(spriteBatch, Color.LightBlue);
             else
@@ -155,5 +203,31 @@ namespace MainGame.Screens
 
             return loadSuccessful;
         }
+
+        public bool CheckGameData(int slot, List<String> levelData, List<ItemBox> weapon1Box, List<ItemBox> weapon2Box, List<ItemBox> shield1Box, List<ItemBox> charm1Box)
+        {
+            StreamReader inputFile;
+            bool checkSuccessful = true;
+            try
+            {
+                inputFile = File.OpenText("SaveGame" + slot.ToString());
+
+                //Put the get items methods in their own class with the weapon factories
+                levelData.RemoveAt(slot);
+                levelData.Insert(slot, "Level " + inputFile.ReadLine() + "    " + inputFile.ReadLine() + " hitpoints.");
+                weapon1Box.ElementAt(slot).ReplaceItem(ItemFactoryContainer.GetWeaponFromID(int.Parse(inputFile.ReadLine())));
+                weapon2Box.ElementAt(slot).ReplaceItem(ItemFactoryContainer.GetWeaponFromID(int.Parse(inputFile.ReadLine())));
+                shield1Box.ElementAt(slot).ReplaceItem(ItemFactoryContainer.GetShieldFromID(int.Parse(inputFile.ReadLine())));
+                charm1Box.ElementAt(slot).ReplaceItem(ItemFactoryContainer.GetCharmFromID(int.Parse(inputFile.ReadLine())));
+
+                inputFile.Close();
+            }
+            catch
+            {
+                checkSuccessful = false;
+            }
+            return checkSuccessful;
+        }
+
     }
 }

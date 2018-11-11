@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MainGame.Items;
+using MainGame.Screens.Trade_Screen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace MainGame.Screens
 {
@@ -27,11 +30,18 @@ namespace MainGame.Screens
         StaticEntity loadGameButton;
         StaticEntity sandboxButton;
         StaticEntity adventureButton;
+
+        ContentManager Content { get; set; }
+
+        //TODO: Get rid of this when buttons have been refactored
+        bool leftMousePreviouslyPressed = false;
         #endregion
 
         #region Constructors
         public MainMenuScreen(OnScreenChanged screenChanged, ContentManager content) : base(screenChanged)
         {
+            Content = content;
+
             tileBrick1Sprite = content.Load<Texture2D>(@"graphics\TileBrick1");
             titleSprite = content.Load<Texture2D>(@"graphics/TitleSprite");
             newGameSprite = content.Load<Texture2D>(@"graphics/NewGameButton");
@@ -71,44 +81,43 @@ namespace MainGame.Screens
 
         public override void Update(GameTime gameTime)
         {
-            //if (newGameButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
-            //{
-            //    gameMode = GameMode.Arena;
-            //    weapon1 = weaponFactory.CreateSword();
-            //    weapon2 = weaponFactory.CreateBow();
-            //    shield1 = shieldFactory.CreateBasicShield();
-            //    charm1 = charmFactory.CreateEmptyCharm();
-            //    InitiateCombat(gameTime);
-            //}
-            //else if (loadGameButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
-            //{
-            //    gameMode = GameMode.Arena;
-            //    gameState = GameState.LoadGame;
-            //    fileSelected = -1;
-            //    for (int i = 0; i < NumberOfSaves; i++)
-            //        CheckGameData(i, levelData, weapon1ItemBoxes, weapon2ItemBoxes, shield1ItemBoxes, charm1ItemBoxes);
+            MouseState mouse = Mouse.GetState();
+            if (newGameButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
+            {                
+                TradeScreenContents playerStartingGear = new TradeScreenContents(GameConstants.PLAYER_MAX_HIT_POINTS, 1,
+                    ItemFactoryContainer.Weapons.CreateSword(), ItemFactoryContainer.Weapons.CreateBow(),
+                    ItemFactoryContainer.Shields.CreateBasicShield(), ItemFactoryContainer.Charms.CreateEmptyCharm());
 
-            //}
-            //else if (sandboxButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
-            //{
-            //    gameState = GameState.Sandbox;
-            //}
-            //else if (adventureButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
-            //{
-            //    gameMode = GameMode.Adventure;
-            //    if (!keyboard.IsKeyDown(Keys.LeftShift))
-            //    {
-            //        gameState = GameState.Battle;
-            //        InitiateCombat(gameTime);
-            //    }
-            //    else
-            //    {
-            //        gameState = GameState.Editor;
-            //        leftMousePreviouslyPressed = true;
-            //        InitiateLevelEditor();
-            //    }
+                ScreenChanged(new CombatScreen(ScreenChanged, Content, playerStartingGear));
+            }
+            else if (loadGameButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
+            {
+                ScreenChanged(new LoadGameScreen(ScreenChanged, Content));
 
-            //}
+            }
+            else if (sandboxButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
+            {
+                ScreenChanged(new SandboxScreen(ScreenChanged, Content));
+            }
+            else if (adventureButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
+            {
+                //TODO: Support adventure mode and level editor
+                //gameMode = GameMode.Adventure;
+                //if (!keyboard.IsKeyDown(Keys.LeftShift))
+                //{
+                //    gameState = GameState.Battle;
+                //    InitiateCombat(gameTime);
+                //}
+                //else
+                //{
+                //    gameState = GameState.Editor;
+                //    leftMousePreviouslyPressed = true;
+                //    InitiateLevelEditor();
+                //}
+
+            }
+
+            leftMousePreviouslyPressed = mouse.LeftButton == ButtonState.Pressed;
         }
         #endregion
     }

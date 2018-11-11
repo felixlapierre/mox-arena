@@ -27,10 +27,9 @@ namespace MainGame.Screens
         StaticEntity healingButton;
         bool playerIsHealing;
 
+        StaticEntity background;
         Texture2D actionBarBackground;
         Texture2D healthBarSprite;
-
-        Player player1;
 
         Weapon weapon1;
         Weapon weapon2;
@@ -58,6 +57,14 @@ namespace MainGame.Screens
         string hoveredItemTooltip = "";
 
         TradeScreenContents TradeContents { get; set; }
+
+        SpriteFont font;
+
+        Texture2D playButtonSprite;
+        StaticEntity playButton;
+
+        //TODO: Change code to remove this one buttons are refactored
+        bool leftMousePreviouslyPressed = false;
         #endregion
 
         #region Constructors
@@ -81,40 +88,44 @@ namespace MainGame.Screens
             oldWeapon2 = weapon2;
             oldShield1 = shield1;
             oldCharm1 = charm1;
-            
+
             actionBarBackground = Content.Load<Texture2D>("graphics/actionBarBackground");
+            background = new StaticEntity("Background", new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.WINDOW_HEIGHT / 2), actionBarBackground);
+            playButtonSprite = Content.Load<Texture2D>("graphics/continueButton");
+            playButton = new StaticEntity("Play Button", new Vector2(GameConstants.WINDOW_WIDTH - GameConstants.TILE_SIZE * 5 / 2, GameConstants.WINDOW_HEIGHT - GameConstants.TILE_SIZE), playButtonSprite);
 
             //TODO: Remove
-            int TileSize = GameConstants.TILE_SIZE;
+
+            font = Content.Load<SpriteFont>("font/font");
 
             healthBarSprite = Content.Load<Texture2D>("graphics/HealthBar2");
-            playerTradeMenuHealth = new HealthBar("Trade Menu Health", new Vector2(TileSize, GameConstants.TILE_SIZE - (TileSize * 3 + 15)), healthBarSprite);
+            playerTradeMenuHealth = new HealthBar("Trade Menu Health", new Vector2(GameConstants.TILE_SIZE, GameConstants.WINDOW_HEIGHT - (GameConstants.TILE_SIZE * 3 + 15)), healthBarSprite);
 
-            Vector2 firstBoxLocation = new Vector2(TileSize / 2 + TileSize * 1, TileSize * 3);
-            Vector2 secondBoxLocation = new Vector2(TileSize / 2 + TileSize * 3, TileSize * 3);
-            Vector2 thirdBoxLocation = new Vector2(TileSize / 2 + TileSize * 5, TileSize * 3);
-            Vector2 fourthBoxLocation = new Vector2(TileSize / 2 + TileSize * 7, TileSize * 3);
-            Vector2 fifthBoxLocation = new Vector2(TileSize / 2 + TileSize * 9, TileSize * 3);
+            Vector2 firstBoxLocation = new Vector2(GameConstants.TILE_SIZE / 2 + GameConstants.TILE_SIZE * 1, GameConstants.TILE_SIZE * 3);
+            Vector2 secondBoxLocation = new Vector2(GameConstants.TILE_SIZE / 2 + GameConstants.TILE_SIZE * 3, GameConstants.TILE_SIZE * 3);
+            Vector2 thirdBoxLocation = new Vector2(GameConstants.TILE_SIZE / 2 + GameConstants.TILE_SIZE * 5, GameConstants.TILE_SIZE * 3);
+            Vector2 fourthBoxLocation = new Vector2(GameConstants.TILE_SIZE / 2 + GameConstants.TILE_SIZE * 7, GameConstants.TILE_SIZE * 3);
+            Vector2 fifthBoxLocation = new Vector2(GameConstants.TILE_SIZE / 2 + GameConstants.TILE_SIZE * 9, GameConstants.TILE_SIZE * 3);
 
             equippedItemBoxBackgrounds = new List<StaticEntity>();
             equippedItemBoxes = new List<ItemBox>();
 
-            int equipBoxX = (int)(TileSize * 1.5);
-            int equipBoxY = (int)(GameConstants.WINDOW_HEIGHT - TileSize * 2.5);
+            int equipBoxX = (int)(GameConstants.TILE_SIZE * 1.5);
+            int equipBoxY = (int)(GameConstants.WINDOW_HEIGHT - GameConstants.TILE_SIZE * 2.5);
 
             Vector2 box1Location = new Vector2(equipBoxX, equipBoxY);
             equippedItemBoxes.Add(new ItemBox("Weapon1", box1Location, weapon1.Sprite, weapon1));
             equippedItemBoxBackgrounds.Add(new StaticEntity("Weapon1", box1Location, actionBarBackground));
 
-            Vector2 box2Location = new Vector2(equipBoxX + TileSize * 1, equipBoxY);
+            Vector2 box2Location = new Vector2(equipBoxX + GameConstants.TILE_SIZE * 1, equipBoxY);
             equippedItemBoxes.Add(new ItemBox("Weapon2", box2Location, weapon2.Sprite, weapon2));
             equippedItemBoxBackgrounds.Add(new StaticEntity("Weapon2", box2Location, actionBarBackground));
 
-            Vector2 box3Location = new Vector2(equipBoxX + TileSize * 2, equipBoxY);
+            Vector2 box3Location = new Vector2(equipBoxX + GameConstants.TILE_SIZE * 2, equipBoxY);
             equippedItemBoxes.Add(new ItemBox("Shield1", box3Location, shield1.Sprite, shield1));
             equippedItemBoxBackgrounds.Add(new StaticEntity("Shield1", box3Location, actionBarBackground));
 
-            Vector2 box4Location = new Vector2(equipBoxX + TileSize * 3, equipBoxY);
+            Vector2 box4Location = new Vector2(equipBoxX + GameConstants.TILE_SIZE * 3, equipBoxY);
             equippedItemBoxes.Add(new ItemBox("Charm1", box4Location, charm1.Sprite, charm1));
             equippedItemBoxBackgrounds.Add(new StaticEntity("Charm1", box4Location, actionBarBackground));
 
@@ -124,19 +135,36 @@ namespace MainGame.Screens
             items.Add(tradeContents.Item2);
             items.Add(tradeContents.Item3);
 
-            foreach(Item i in items)
+            for (int i = 0; i < items.Count; i++)
             {
-                if(i is Weapon)
+                Item item = items.ElementAt(i);
+                Vector2 location;
+                switch(i)
                 {
-                    tradeItemBoxes.Add(new ItemBox("item", firstBoxLocation, actionBarBackground, (Weapon)i));
+                    //Default case or there will be warnings
+                    default:
+                        location = firstBoxLocation;
+                        break;
+                    case 1:
+                        location = secondBoxLocation;
+                        break;
+                    case 2:
+                        location = thirdBoxLocation;
+                        break;
                 }
-                else if (i is Shield)
+                //TODO: Fix this spaghetti
+                //The constructor of ItemBox is misused, don't but actionBarBackground as the sprite.
+                if (item is Weapon)
                 {
-                    tradeItemBoxes.Add(new ItemBox("item", firstBoxLocation, actionBarBackground, (Shield)i));
+                    tradeItemBoxes.Add(new ItemBox("item", location, ((Weapon)item).Sprite, (Weapon)item));
                 }
-                else if(i is Charm)
+                else if (item is Shield)
                 {
-                    tradeItemBoxes.Add(new ItemBox("item", firstBoxLocation, actionBarBackground, (Charm)i));
+                    tradeItemBoxes.Add(new ItemBox("item", location, ((Shield)item).Sprite, (Shield)item));
+                }
+                else if (item is Charm)
+                {
+                    tradeItemBoxes.Add(new ItemBox("item", location, ((Charm)item).Sprite, (Charm)item));
                 }
             }
 
@@ -146,7 +174,7 @@ namespace MainGame.Screens
             healingButton = new StaticEntity("Healing", fourthBoxLocation, Content.Load<Texture2D>("graphics/Potions"));
             resetButton = new StaticEntity("Reset Button", fifthBoxLocation, Content.Load<Texture2D>("graphics/resetButton"));
             Texture2D saveButtonSprite = Content.Load<Texture2D>("graphics/saveButton");
-            saveButton = new StaticEntity("Save Button", new Vector2(GameConstants.WINDOW_WIDTH - TileSize * 3, TileSize * 2), saveButtonSprite);
+            saveButton = new StaticEntity("Save Button", new Vector2(GameConstants.WINDOW_WIDTH - GameConstants.TILE_SIZE * 3, GameConstants.TILE_SIZE * 2), saveButtonSprite);
 
             tradeItemBoxBackgrounds.Add(new StaticEntity("item1Background", firstBoxLocation, actionBarBackground));
             tradeItemBoxBackgrounds.Add(new StaticEntity("item2Background", secondBoxLocation, actionBarBackground));
@@ -158,7 +186,100 @@ namespace MainGame.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+            MouseState mouse = Mouse.GetState();
+
+            background.Draw(spriteBatch, new Rectangle(0, 0, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT));
+
+            #region Item Boxes
+            foreach (StaticEntity equipItemBoxBackground in equippedItemBoxBackgrounds)
+                equipItemBoxBackground.Draw(spriteBatch, Color.DimGray);
+
+            foreach (ItemBox itemBox in equippedItemBoxes)
+            {
+                if (itemBox.Sprite != null)
+                {
+                    if (itemBox.IsHovered)
+                        itemBox.Draw(spriteBatch, Color.LightSteelBlue);
+                    else
+                        itemBox.Draw(spriteBatch);
+                }
+            }
+            #endregion
+
+            #region Tooltip text
+            if (hoveredItemName != "")
+            {
+                spriteBatch.DrawString(font, hoveredItemName, new Vector2(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE * 7), Color.Black);
+
+                spriteBatch.DrawString(font, hoveredItemType, new Vector2(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE * 7 + font.LineSpacing), Color.Black);
+
+                if (hoveredItemDamage != "")
+                    spriteBatch.DrawString(font, "Damage: " + hoveredItemDamage, new Vector2(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE * 7 + font.LineSpacing * 2), Color.Black);
+
+                spriteBatch.DrawString(font, "Effects: " + hoveredItemEffects, new Vector2(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE * 7 + font.LineSpacing * 3), Color.Black);
+                if (hoveredItemCooldown != "")
+                    spriteBatch.DrawString(font, "Cooldown: " + hoveredItemCooldown + " second(s)", new Vector2(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE * 7 + font.LineSpacing * 4), Color.Black);
+                spriteBatch.DrawString(font, hoveredItemTooltip, new Vector2(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE * 7 + font.LineSpacing * 5), Color.Black);
+            }
+            #endregion
+
+            if (playButton.CollisionRectangle.Contains(mouse.Position))
+                playButton.Draw(spriteBatch, Color.LightSteelBlue);
+            else
+                playButton.Draw(spriteBatch);
+
+            #region Text
+            spriteBatch.DrawString(font, "The arena allows you to choose one item to take from your defeated foes.", new Vector2(GameConstants.TILE_SIZE / 2, GameConstants.TILE_SIZE / 2), Color.Black);
+            spriteBatch.DrawString(font, "If you are injured, you may choose to take a healing potion instead.", new Vector2(GameConstants.TILE_SIZE / 2, GameConstants.TILE_SIZE / 2 + font.LineSpacing), Color.Black);
+            spriteBatch.DrawString(font, "Left click on a piece of equipment to select it. Right click if you'd like to equip a weapon in slot 2.", new Vector2(GameConstants.TILE_SIZE / 2, GameConstants.TILE_SIZE / 2 + font.LineSpacing * 3), Color.Black);
+            Color healTextColor = Color.Black;
+            if (oldCharm1.Type == CharmType.Lifesteal)
+                healTextColor = Color.Crimson;
+            spriteBatch.DrawString(font, "Heal", new Vector2(GameConstants.TILE_SIZE * 7 + (GameConstants.TILE_SIZE - font.MeasureString("Heal").X) / 2, GameConstants.TILE_SIZE * 3 - (GameConstants.TILE_SIZE / 2 + font.LineSpacing)), healTextColor);
+            spriteBatch.DrawString(font, "Undo", new Vector2(GameConstants.TILE_SIZE * 9 + (GameConstants.TILE_SIZE - font.MeasureString("Undo").X) / 2, GameConstants.TILE_SIZE * 3 - (GameConstants.TILE_SIZE / 2 + font.LineSpacing)), Color.Black);
+            spriteBatch.DrawString(font, "Level: " + level.ToString(), new Vector2(GameConstants.WINDOW_WIDTH - font.MeasureString("Level:     ").X, 0), Color.Black);
+
+            #endregion
+
+            #region Item boxes
+            foreach (StaticEntity itemBoxBackground in tradeItemBoxBackgrounds)
+                itemBoxBackground.Draw(spriteBatch, Color.DimGray);
+
+            foreach (ItemBox itemBox in tradeItemBoxes)
+            {
+                if (itemBox.Sprite != null && itemBox.IsActive)
+                {
+                    if (itemBox.IsHovered)
+                        itemBox.Draw(spriteBatch, Color.LightSteelBlue);
+                    else
+                        itemBox.Draw(spriteBatch);
+                }
+            }
+
+            #endregion
+
+            #region Buttons
+
+            if (resetButton.CollisionRectangle.Contains(mouse.Position))
+                resetButton.Draw(spriteBatch, Color.LightSteelBlue);
+            else
+                resetButton.Draw(spriteBatch);
+
+            if (oldCharm1.Type == CharmType.Lifesteal)
+                healingButton.Draw(spriteBatch, Color.DarkGray);
+            else if (healingButton.CollisionRectangle.Contains(mouse.Position))
+                healingButton.Draw(spriteBatch, Color.LightSteelBlue);
+            else
+                healingButton.Draw(spriteBatch);
+            if ((level - 1) % 10 == 0 || saveGameOverrideEnabled)
+            {
+                if (saveButton.CollisionRectangle.Contains(mouse.Position))
+                    saveButton.Draw(spriteBatch, Color.LightSteelBlue);
+                else
+                    saveButton.Draw(spriteBatch);
+            }
+            playerTradeMenuHealth.Draw(spriteBatch, (int)Health, GameConstants.PLAYER_MAX_HIT_POINTS, new Vector2(0, 0));
+            #endregion
         }
 
         public override void Update(GameTime gameTime)
@@ -197,14 +318,19 @@ namespace MainGame.Screens
             //playerTradeMenuHealth.Update(gameTime, player1); Health bar does not need to update as it is not moving
             if (playerIsHealing)
             {
-                Health = oldHealth + player1.MaxHitPoints / 2;
-                if (Health > player1.MaxHitPoints)
-                    Health = player1.MaxHitPoints;
+                Health = oldHealth + GameConstants.PLAYER_MAX_HIT_POINTS / 2;
+                if (Health > GameConstants.PLAYER_MAX_HIT_POINTS)
+                    Health = GameConstants.PLAYER_MAX_HIT_POINTS;
             }
             else
                 Health = oldHealth;
 
-            player1.HitPoints = Health;
+            if (playButton.CollisionRectangle.Contains(new Vector2(mouse.X, mouse.Y)) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
+            {
+                TradeScreenContents tradeContents = new TradeScreenContents(Health, level, weapon1, weapon2, shield1, charm1);
+                ScreenChanged(new CombatScreen(ScreenChanged, Content, tradeContents));
+            }
+            leftMousePreviouslyPressed = mouse.LeftButton == ButtonState.Pressed;
         }
 
         private void DoItemBoxUpdate(MouseState mouse, List<ItemBox> itemBoxes, List<StaticEntity> itemBoxBackgrounds, List<ItemBox> equippedItemBoxes)
@@ -253,7 +379,7 @@ namespace MainGame.Screens
                 box.Update();
         }
 
-        public void ItemBoxHovered(ItemBox itemBox, MouseState mouse)
+        private void ItemBoxHovered(ItemBox itemBox, MouseState mouse)
         {
             if (itemBox.IsActive == false)
                 return;

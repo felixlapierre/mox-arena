@@ -31,6 +31,11 @@ namespace MainGame.Screens
         StaticEntity confirmButton;
         StaticEntity backButton;
 
+        SpriteFont font;
+        SpriteFont font20;
+        Texture2D actionBarBackground;
+        StaticEntity background;
+
         ContentManager Content { get; set; }
         TradeScreenContents TradeContents { get; set; }
         #endregion
@@ -41,15 +46,11 @@ namespace MainGame.Screens
             TradeContents = tradeContents;
             Content = content;
 
-            for (int i = 0; i < GameConstants.NUMBER_OF_SAVES; i++)
-                CheckGameData(i, levelData, weapon1ItemBoxes, weapon2ItemBoxes, shield1ItemBoxes, charm1ItemBoxes);
-
-            var TileSize = GameConstants.TILE_SIZE;
             fileSelected = -1;
             blankButtonSprite = Content.Load<Texture2D>("graphics/blankButton");
             confirmButtonSprite = Content.Load<Texture2D>("graphics/confirmButton");
             backButtonSprite = Content.Load<Texture2D>("graphics/backButton");
-            backButton = new StaticEntity("Back Button", new Vector2(TileSize * 2, GameConstants.WINDOW_HEIGHT - TileSize), backButtonSprite);
+            backButton = new StaticEntity("Back Button", new Vector2(GameConstants.TILE_SIZE * 2, GameConstants.WINDOW_HEIGHT - GameConstants.TILE_SIZE), backButtonSprite);
 
             fileButtons = new List<StaticEntity>();
             levelData = new List<String>();
@@ -59,14 +60,23 @@ namespace MainGame.Screens
             charm1ItemBoxes = new List<ItemBox>();
             for (int i = 0; i < GameConstants.NUMBER_OF_SAVES; i++)
             {
-                fileButtons.Add(new StaticEntity("Button " + i.ToString(), new Vector2(TileSize * 2, TileSize * 3 + i * TileSize * 2), blankButtonSprite));
+                fileButtons.Add(new StaticEntity("Button " + i.ToString(), new Vector2(GameConstants.TILE_SIZE * 2, GameConstants.TILE_SIZE * 3 + i * GameConstants.TILE_SIZE * 2), blankButtonSprite));
                 levelData.Add("");
-                weapon1ItemBoxes.Add(new ItemBox("Weapon1 File " + i.ToString(), new Vector2(TileSize * 7, TileSize * 3 + i * TileSize * 2)));
-                weapon2ItemBoxes.Add(new ItemBox("Weapon2 File " + i.ToString(), new Vector2(TileSize * 8, TileSize * 3 + i * TileSize * 2)));
-                shield1ItemBoxes.Add(new ItemBox("Shield1 File " + i.ToString(), new Vector2(TileSize * 9, TileSize * 3 + i * TileSize * 2)));
-                charm1ItemBoxes.Add(new ItemBox("Charm1 File " + i.ToString(), new Vector2(TileSize * 10, TileSize * 3 + i * TileSize * 2)));
+                weapon1ItemBoxes.Add(new ItemBox("Weapon1 File " + i.ToString(), new Vector2(GameConstants.TILE_SIZE * 7, GameConstants.TILE_SIZE * 3 + i * GameConstants.TILE_SIZE * 2)));
+                weapon2ItemBoxes.Add(new ItemBox("Weapon2 File " + i.ToString(), new Vector2(GameConstants.TILE_SIZE * 8, GameConstants.TILE_SIZE * 3 + i * GameConstants.TILE_SIZE * 2)));
+                shield1ItemBoxes.Add(new ItemBox("Shield1 File " + i.ToString(), new Vector2(GameConstants.TILE_SIZE * 9, GameConstants.TILE_SIZE * 3 + i * GameConstants.TILE_SIZE * 2)));
+                charm1ItemBoxes.Add(new ItemBox("Charm1 File " + i.ToString(), new Vector2(GameConstants.TILE_SIZE * 10, GameConstants.TILE_SIZE * 3 + i * GameConstants.TILE_SIZE * 2)));
             }
-            confirmButton = new StaticEntity("Confirm Button", new Vector2(TileSize * 5, GameConstants.WINDOW_HEIGHT - TileSize), confirmButtonSprite);
+            confirmButton = new StaticEntity("Confirm Button", new Vector2(GameConstants.TILE_SIZE * 5, GameConstants.WINDOW_HEIGHT - GameConstants.TILE_SIZE), confirmButtonSprite);
+
+            font = Content.Load<SpriteFont>("font/font");
+            font20 = Content.Load<SpriteFont>("font/font20");
+
+            actionBarBackground = Content.Load<Texture2D>("graphics/actionBarBackground");
+            background = new StaticEntity("Background", new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.WINDOW_HEIGHT / 2), actionBarBackground);
+
+            for (int i = 0; i < GameConstants.NUMBER_OF_SAVES; i++)
+                CheckGameData(i, levelData, weapon1ItemBoxes, weapon2ItemBoxes, shield1ItemBoxes, charm1ItemBoxes);
         }
 
         public override void Update(GameTime gameTime)
@@ -93,6 +103,42 @@ namespace MainGame.Screens
         public override void Draw(SpriteBatch spriteBatch)
         {
             MouseState mouse = Mouse.GetState();
+
+            background.Draw(spriteBatch, new Rectangle(0, 0, GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT));
+
+            if (fileSelected != -1)
+            {
+                if (confirmButton.CollisionRectangle.Contains(mouse.Position))
+                    confirmButton.Draw(spriteBatch, Color.LightBlue);
+                else
+                    confirmButton.Draw(spriteBatch);
+            }
+
+            foreach (StaticEntity button in fileButtons)
+            {
+                if (fileButtons.IndexOf(button) == fileSelected)
+                    button.Draw(spriteBatch, Color.SteelBlue);
+                else if (button.CollisionRectangle.Contains(mouse.Position))
+                    button.Draw(spriteBatch, Color.LightBlue);
+                else
+                    button.Draw(spriteBatch);
+            }
+
+            for (int i = 0; i < levelData.Count; i++)
+                spriteBatch.DrawString(font, levelData.ElementAt(i), new Vector2(GameConstants.TILE_SIZE * 3.1f, GameConstants.TILE_SIZE * 2.7f + GameConstants.TILE_SIZE * 2 * i), Color.Black);
+            foreach (ItemBox box in weapon1ItemBoxes)
+                box.Draw(spriteBatch);
+            foreach (ItemBox box in weapon2ItemBoxes)
+                box.Draw(spriteBatch);
+            foreach (ItemBox box in shield1ItemBoxes)
+                box.Draw(spriteBatch);
+            foreach (ItemBox box in charm1ItemBoxes)
+                box.Draw(spriteBatch);
+
+            spriteBatch.DrawString(font20, "Save Game", new Vector2(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE), Color.Black);
+            //else if (gameState == GameState.LoadGame)
+            //    spriteBatch.DrawString(font20, "Load Game", new Vector2(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE), Color.Black);
+
             if (backButton.CollisionRectangle.Contains(mouse.Position))
                 backButton.Draw(spriteBatch, Color.LightBlue);
             else

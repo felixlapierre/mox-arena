@@ -1,4 +1,5 @@
-﻿using MainGame.Screens.Trade_Screen;
+﻿using MainGame.Items;
+using MainGame.Screens.Trade_Screen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,12 +19,7 @@ namespace MainGame.Screens
         Texture2D player1Sprite;
         Vector2 playerStartingLocation;
 
-        Weapon weapon1;
-        Weapon weapon2;
-        Shield shield1;
-        Charm charm1;
-
-        float Health;
+        int Level;
 
         EnemyFactory enemyFactory;
         List<Enemy> enemies = new List<Enemy>();
@@ -41,7 +37,7 @@ namespace MainGame.Screens
 
         Pathfinding pathfinder;
 
-        public WeaponFactory weaponFactory;
+        WeaponFactory weaponFactory;
         Texture2D weaponSword1;
         Texture2D weaponSword2;
         Texture2D weaponBow1;
@@ -61,14 +57,14 @@ namespace MainGame.Screens
         Texture2D weaponShuriken3;
         Texture2D weaponGrapple1;
 
-        public ShieldFactory shieldFactory;
+        ShieldFactory shieldFactory;
         Texture2D shieldBasic1;
         Texture2D shieldBasic2;
         Texture2D speedBoost1;
         Texture2D thunderStone;
         Texture2D elvenTrinket;
 
-        public CharmFactory charmFactory;
+        CharmFactory charmFactory;
         Texture2D charmSprite;
 
         List<Projectile> friendlyProjectiles = new List<Projectile>();
@@ -76,9 +72,6 @@ namespace MainGame.Screens
         LineDrawer lineDrawer;
         Texture2D blueShockwaveBullet;
         Texture2D redShockwaveBullet;
-
-        int TilesWide;
-        int TilesHigh;
 
         List<GridEntity> tiles = new List<GridEntity>();
         List<GridEntity> obstacles = new List<GridEntity>();
@@ -130,6 +123,7 @@ namespace MainGame.Screens
 
         //TODO: Remove these or reconsider their implementation
         ContentManager Content { get; set; }
+
         Random random = new Random();
         bool playerPaused = false;
         int unpauseTimer = 0;
@@ -140,6 +134,10 @@ namespace MainGame.Screens
         public CombatScreen(OnScreenChanged screenChanged, ContentManager content, TradeScreenContents tradeContents) : base(screenChanged)
         {
             Content = content;
+
+            Level = tradeContents.Level;
+
+            actionBarBackground = Content.Load<Texture2D>("graphics/actionBarBackground");
 
             #region Load Weapons
             weaponSword1 = Content.Load<Texture2D>("graphics/WeaponSword1");
@@ -167,6 +165,9 @@ namespace MainGame.Screens
             weaponFactory = new WeaponFactory(weaponSword1, weaponBow1, weaponBow2, projectileBow1, weaponSword2, weaponAxe1, weaponAxe2,
                 weaponMaul1, weaponMaulLarge, weaponHammer1, weaponDagger1, weaponSpear1, weaponSpear2, weaponSpear3, weaponShuriken1,
                 weaponShuriken2, weaponShuriken3, redShockwaveBullet, blueShockwaveBullet, weaponGrapple1);
+
+            Texture2D pixel = Content.Load<Texture2D>("graphics/pixel");
+            lineDrawer = new LineDrawer(pixel);
             #endregion
 
             #region Load Shields
@@ -191,8 +192,10 @@ namespace MainGame.Screens
             //Load sprite
             player1Sprite = Content.Load<Texture2D>(@"graphics\PlayerSprite1");
             playerStartingLocation = new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.WINDOW_HEIGHT / 2);
-            Health = tradeContents.Health;
-            player1 = new Player("Player", playerStartingLocation, player1Sprite, new Vector2(0, 0), GameConstants.PLAYER_MAX_HIT_POINTS, healthBarSprite, tradeContents.Weapon1, tradeContents.Weapon2, tradeContents.Shield1, tradeContents.Charm1, GameConstants.PLAYER_BASE_SPEED);
+
+            //TODO: Fix the ugly code where we set the player health afterwards
+            player1 = new Player("Player", playerStartingLocation, player1Sprite, new Vector2(0, 0), GameConstants.PLAYER_MAX_HIT_POINTS, healthBarSprite, tradeContents.Weapon1.Copy(), tradeContents.Weapon2.Copy(), tradeContents.Shield1.Copy(), tradeContents.Charm1.Copy(), GameConstants.PLAYER_BASE_SPEED);
+            player1.HitPoints = tradeContents.Health;
             #endregion
 
             #region Create Background
@@ -234,13 +237,58 @@ namespace MainGame.Screens
             enemyFireSpider1 = Content.Load<Texture2D>("graphics/FireSpider");
             enemyBlueSpider1 = Content.Load<Texture2D>("graphics/BlueSpider");
 
-            pathfinder = new Pathfinding(TilesWide, TilesHigh, GameConstants.TILE_SIZE, weaponDagger1, PathfinderType.BasicPathfinder);
+            pathfinder = new Pathfinding(GameConstants.TILES_WIDE, GameConstants.TILES_HIGH, GameConstants.TILE_SIZE, weaponDagger1, PathfinderType.BasicPathfinder);
             enemyFactory = new EnemyFactory(weaponFactory, shieldFactory, charmFactory, pathfinder, healthBarSprite, enemySprite1, enemyGladiator1, enemyGladiator2, enemyGladiator2Large,
                 enemyGoblin1, enemySkeleton1, enemySkeleton2, enemyFireSpider1, enemyBlueSpider1);
 
             #endregion
 
+            #region Create User Interface
             font = Content.Load<SpriteFont>("font/font");
+            score = 0;
+
+            Vector2 firstIconLocation = new Vector2((GameConstants.TILES_WIDE - 0.5f) * GameConstants.TILE_SIZE, (GameConstants.TILES_HIGH + 0.5f) * GameConstants.TILE_SIZE);
+            Texture2D firstIconSprite;
+            firstIconSprite = player1.Charm1.Sprite;
+
+            Vector2 secondIconLocation = new Vector2(firstIconLocation.X - GameConstants.TILE_SIZE, firstIconLocation.Y);
+            Texture2D secondIconSprite = player1.Shield1.Sprite;
+
+            Vector2 thirdIconLocation = new Vector2(secondIconLocation.X - GameConstants.TILE_SIZE, secondIconLocation.Y);
+            Texture2D thirdIconSprite = player1.Weapon2.Sprite;
+
+
+            Vector2 fourthIconLocation = new Vector2(thirdIconLocation.X - GameConstants.TILE_SIZE, thirdIconLocation.Y);
+            Texture2D fourthIconSprite = player1.Weapon1.Sprite;
+
+            charm1Icon = new StaticEntity("Charm 1 Icon", firstIconLocation, firstIconSprite);
+            shield1Icon = new StaticEntity("Shield 1 Icon", secondIconLocation, secondIconSprite);
+            weapon2Icon = new StaticEntity("Weapon 1 Icon", thirdIconLocation, thirdIconSprite);
+            weapon1Icon = new StaticEntity("Weapon 2 Icon", fourthIconLocation, fourthIconSprite);
+
+            icon1Background = new StaticEntity("Icon 1 Background", firstIconLocation, actionBarBackground);
+            icon2Background = new StaticEntity("Icon 2 Background", secondIconLocation, actionBarBackground);
+            icon3Background = new StaticEntity("Icon 3 Background", thirdIconLocation, actionBarBackground);
+            icon4Background = new StaticEntity("Icon 4 Background", fourthIconLocation, actionBarBackground);
+            #endregion
+
+            CreateObstacles();
+
+            //Create Enemies
+            CreateEnemies(enemyFactory, enemies);
+            
+            pathfinder.MapTilesHigh = GameConstants.TILES_HIGH;
+            pathfinder.MapTilesWide = GameConstants.TILES_WIDE;
+            unpauseTimer = GameConstants.PAUSE_DELAY;
+
+            //Update once to properly adjust health bars
+            player1.HealthBar.Update(player1);
+            foreach (Enemy enemy in enemies)
+                enemy.HealthBar.Update(enemy);
+
+            //TODO: Move this to the Player class where it belongs - right now this causes a bug where charm effects on weapons
+            //stack every level. Bug is funny so i'll leave it until charms are refactored.
+            player1.ApplyCharmEffects();
         }
         #endregion
 
@@ -253,16 +301,16 @@ namespace MainGame.Screens
             #region Player pausing logic
             if (keyboard.IsKeyDown(Keys.Escape) && !escapeButtonPreviouslyPressed)
             {
-                //TODO: Pausing logic
                 if(playerPaused)
                 {
                     playerPaused = false;
-                    unpauseTimer = 3000;
+                    unpauseTimer = GameConstants.PAUSE_DELAY;
                 } else
                 {
                     playerPaused = true;
                 }
             }
+            escapeButtonPreviouslyPressed = keyboard.IsKeyDown(Keys.Escape);
 
             if (playerPaused)
             {
@@ -276,47 +324,21 @@ namespace MainGame.Screens
 
             #endregion
 
-            #region Next level logic
+            #region Next Level logic
             if (enemies.Count == 0)
             {
-                ////TODO: Initialize trade window
-                ///
-                ////Add the item boxes that are to be filled from enemies to a list
-                ////Call AddItemFromEnemy with that list
-                ////Get all the items from deadenemies and add them at random to the item boxes
-                
-                //List<ItemBox> enemyFilledBoxes = new List<ItemBox>();
-                //enemyFilledBoxes.Add(tradeItemBoxes.ElementAt(0));
-                //enemyFilledBoxes.Add(tradeItemBoxes.ElementAt(1));
-                //AddItemFromEnemy(enemyFilledBoxes, deadEnemies);
-                //AddRandomItem(tradeItemBoxes.ElementAt(2), weaponFactory, shieldFactory);
+                //TODO: Initialize trade window
+                float health = player1.HitPoints;
+                int level = Level + 1;
 
-                //deadEnemies.Clear();
-                //friendlyProjectiles.Clear();
-                //enemyProjectiles.Clear();
+                Item item1 = AddItemFromEnemy(deadEnemies);
+                Item item2 = AddItemFromEnemy(deadEnemies);
+                Item item3 = AddRandomItem();
 
-                //player1.XLocation = WindowWidth / 2;
-                //player1.YLocation = WindowHeight / 2;
+                TradeScreenContents tradeContents = new TradeScreenContents(player1.HitPoints, level, player1.Weapon1, player1.Weapon2, player1.Shield1, player1.Charm1,
+                    item1, item2, item3);
 
-                //player1.Weapon1.CooldownRemaining = 0;
-                //player1.Weapon2.CooldownRemaining = 0;
-                //player1.Shield1.CooldownRemaining = 0;
-
-                //player1.ActiveEffects.Clear();
-
-                //gameState = GameState.Trade;
-                //saveGameOverrideEnabled = false;
-
-                //oldWeapon1 = weapon1;
-                //oldWeapon2 = weapon2;
-                //oldShield1 = shield1;
-                //oldCharm1 = charm1;
-                //Health = player1.HitPoints;
-                //oldHealth = player1.HitPoints;
-                //playerIsHealing = false;
-
-                //level += 1;
-
+                ScreenChanged(new TradeScreen(ScreenChanged, Content, tradeContents));
             }
 
             #endregion
@@ -519,7 +541,7 @@ namespace MainGame.Screens
             weapon1Icon.Draw(spriteBatch);
             weapon2Icon.Draw(spriteBatch);
             shield1Icon.Draw(spriteBatch);
-            charm1Icon.Draw(spriteBatch, charm1.Color);
+            charm1Icon.Draw(spriteBatch, player1.Charm1.Color);
             #endregion
 
             #region Text
@@ -541,9 +563,9 @@ namespace MainGame.Screens
         #region Private Methods
         private void CreateTiles()
         {
-            for (int i = 0; i < TilesWide; i++)
+            for (int i = 0; i < GameConstants.TILES_WIDE; i++)
             {
-                for (int j = 0; j < TilesHigh; j++)
+                for (int j = 0; j < GameConstants.TILES_HIGH; j++)
                 {
                     Texture2D currentSprite = PickRandomTexture(tileSprites);
 
@@ -554,11 +576,562 @@ namespace MainGame.Screens
             }
         }
 
+        private void CreateObstacles()
+        {
+            for (int i = 1; i <= GameConstants.NUMBER_OF_ROCKS; i++)
+            {
+                //Choose a random x and y location that is inside the screen
+                bool locationIsValid = false;
+                int x = 0;
+                int y = 0;
+                while (!locationIsValid)
+                {
+                    x = random.Next(0, GameConstants.WINDOW_WIDTH / GameConstants.TILE_SIZE);
+                    y = random.Next(0, GameConstants.WINDOW_HEIGHT / GameConstants.TILE_SIZE);
+                    locationIsValid = true;
+                    foreach (GridEntity obstacle in obstacles)
+                    {
+                        if (obstacle.XPosition == x && obstacle.YPosition == y)
+                            locationIsValid = false;
+                    }
+                    if (x == (GameConstants.WINDOW_WIDTH / GameConstants.TILE_SIZE) / 2 ||
+                    x == (GameConstants.WINDOW_WIDTH / GameConstants.TILE_SIZE) / 2 - 1 ||
+                    y == (GameConstants.WINDOW_HEIGHT / GameConstants.TILE_SIZE) / 2 ||
+                    y == (GameConstants.WINDOW_HEIGHT / GameConstants.TILE_SIZE) / 2 - 1)
+                        locationIsValid = false;
+                }
+
+                Vector2 obsLocation = new Vector2(x * GameConstants.TILE_SIZE + GameConstants.TILE_SIZE / 2,
+                    y * GameConstants.TILE_SIZE + GameConstants.TILE_SIZE / 2);
+                //Create the obstacle
+                obstacles.Add(GetObstacleFromID(1, x, y, 1));
+            }
+        }
+
+        private void CreateEnemies(EnemyFactory enemyFactory, List<Enemy> enemies)
+        {
+            List<Enemy> choices = new List<Enemy>();
+            Vector2 zero = new Vector2(0, 0);
+            switch (Level)
+            {
+                #region Levels 1-10
+                case 1:
+                    enemies.Add(enemyFactory.CreateSwordsman(GetEnemyLocation()));
+                    break;
+                case 2:
+                    enemies.Add(enemyFactory.CreateSkeletonArcher(GetEnemyLocation()));
+                    break;
+                case 3:
+                    choices.Add(enemyFactory.CreateSwordsman(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(GetEnemyLocation()));
+                    PickRandomEnemies(enemies, choices, 2);
+                    break;
+                case 4:
+                    enemies.Add(enemyFactory.CreateGoblinMauler(GetEnemyLocation()));
+                    break;
+                case 5:
+                    choices.Add(enemyFactory.CreateSwordsman(zero));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    PickRandomEnemies(enemies, choices, 2);
+                    break;
+                case 6:
+                    enemies.Add(enemyFactory.CreateSpearman(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    PickRandomEnemies(enemies, choices, 1);
+                    break;
+                case 7:
+                    enemies.Add(enemyFactory.CreateSpearman(GetEnemyLocation()));
+                    enemies.Add(enemyFactory.CreateSpearThrower(GetEnemyLocation()));
+                    break;
+                case 8:
+                case 9:
+                    choices.Add(enemyFactory.CreateSwordsman(zero));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateSpearman(zero));
+                    choices.Add(enemyFactory.CreateSpearThrower(zero));
+                    PickRandomEnemies(enemies, choices, 3);
+                    break;
+                case 10:
+                    enemies.Add(enemyFactory.CreateGiant(GetEnemyLocation()));
+                    break;
+                #endregion
+
+                #region Levels 11-20
+                case 11:
+                    enemies.Add(enemyFactory.CreateHeavy(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateSpearman(zero));
+                    PickRandomEnemies(enemies, choices, 1);
+                    enemies.ElementAt(0).Charm1 = charmFactory.CreateSpeedCharm();
+                    enemies.ElementAt(0).ApplyCharmEffects();
+                    break;
+                case 12:
+                case 13:
+                case 14:
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateSpearman(zero));
+                    choices.Add(enemyFactory.CreateSpearThrower(zero));
+                    choices.Add(enemyFactory.CreateHeavy(zero));
+                    PickRandomEnemies(enemies, choices, 3);
+                    enemies.ElementAt(0).Charm1 = charmFactory.CreateSpeedCharm();
+                    enemies.ElementAt(0).ApplyCharmEffects();
+                    break;
+                case 15:
+                    enemies.Add(enemyFactory.CreateFireSpider(GetEnemyLocation()));
+                    enemies.Add(enemyFactory.CreateFireSpider(GetEnemyLocation()));
+                    enemies.Add(enemyFactory.CreateFireSpider(GetEnemyLocation()));
+                    break;
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                    choices.Add(enemyFactory.CreateFireSpider(zero));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateSpearman(zero));
+                    choices.Add(enemyFactory.CreateSpearThrower(zero));
+                    choices.Add(enemyFactory.CreateHeavy(zero));
+                    PickRandomEnemies(enemies, choices, 3);
+                    enemies.ElementAt(0).Charm1 = charmFactory.CreateSpeedCharm();
+                    enemies.ElementAt(0).ApplyCharmEffects();
+                    break;
+                case 20:
+                    enemies.Add(enemyFactory.CreateBotengNinja(GetEnemyLocation()));
+                    enemies.ElementAt(0).Charm1 = charmFactory.CreateSpeedCharm();
+                    break;
+                #endregion
+
+                #region Levels 21-30
+                case 21:
+                case 22:
+                    choices.Add(enemyFactory.CreateFireSpider(zero));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateSpearman(zero));
+                    choices.Add(enemyFactory.CreateSpearThrower(zero));
+                    choices.Add(enemyFactory.CreateHeavy(zero));
+                    PickRandomEnemies(enemies, choices, 3);
+                    break;
+                case 23:
+                case 24:
+                    choices.Add(enemyFactory.CreateFireSpider(zero));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateSpearman(zero));
+                    choices.Add(enemyFactory.CreateSpearThrower(zero));
+                    choices.Add(enemyFactory.CreateHeavy(zero));
+                    PickRandomEnemies(enemies, choices, 3);
+                    foreach (Enemy createdEnemy in enemies)
+                    {
+                        createdEnemy.Charm1 = charmFactory.CreateSpeedCharm();
+                        createdEnemy.ApplyCharmEffects();
+                    }
+                    break;
+                case 25:
+                    enemies.Add(enemyFactory.CreatePlasmaSpider(GetEnemyLocation()));
+                    enemies.Add(enemyFactory.CreatePlasmaSpider(GetEnemyLocation()));
+                    enemies.Add(enemyFactory.CreatePlasmaSpider(GetEnemyLocation()));
+                    break;
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+                    choices.Add(enemyFactory.CreateFireSpider(zero));
+                    choices.Add(enemyFactory.CreatePlasmaSpider(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateSpearman(zero));
+                    choices.Add(enemyFactory.CreateSpearThrower(zero));
+                    choices.Add(enemyFactory.CreateHeavy(zero));
+                    PickRandomEnemies(enemies, choices, 4);
+                    break;
+                case 30:
+                    enemies.Add(enemyFactory.CreateHiraNinja(GetEnemyLocation()));
+                    enemies.ElementAt(0).Charm1 = charmFactory.CreateHigherCooldown();
+                    break;
+                #endregion
+
+                #region Levels 31-40
+                case 31:
+                    enemies.Add(enemyFactory.CreateJungleSpearman(GetEnemyLocation()));
+                    break;
+                case 32:
+                    enemies.Add(enemyFactory.CreateJungleSpearman(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateFireSpider(zero));
+                    choices.Add(enemyFactory.CreatePlasmaSpider(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateSpearman(zero));
+                    choices.Add(enemyFactory.CreateJungleSpearman(zero));
+                    choices.Add(enemyFactory.CreateHeavy(zero));
+                    choices.Add(enemyFactory.CreateBarbarian(zero));
+                    PickRandomEnemies(enemies, choices, 3);
+                    break;
+                case 33:
+                case 34:
+                    choices.Add(enemyFactory.CreateFireSpider(zero));
+                    choices.Add(enemyFactory.CreatePlasmaSpider(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateSpearman(zero));
+                    choices.Add(enemyFactory.CreateJungleSpearman(zero));
+                    choices.Add(enemyFactory.CreateHeavy(zero));
+                    choices.Add(enemyFactory.CreateBarbarian(zero));
+                    PickRandomEnemies(enemies, choices, 4);
+                    break;
+                case 35:
+                    enemies.Add(enemyFactory.CreateHiraNinja(GetEnemyLocation()));
+                    enemies.Add(enemyFactory.CreateTaagoNinja(GetEnemyLocation()));
+                    break;
+                case 36:
+                case 37:
+                case 38:
+                case 39:
+                    choices.Add(enemyFactory.CreateFireSpider(zero));
+                    choices.Add(enemyFactory.CreatePlasmaSpider(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateSkeletonArcher(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateSpearman(zero));
+                    choices.Add(enemyFactory.CreateJungleSpearman(zero));
+                    choices.Add(enemyFactory.CreateHeavy(zero));
+                    choices.Add(enemyFactory.CreateGiant(zero));
+                    choices.Add(enemyFactory.CreateBarbarian(zero));
+                    PickRandomEnemies(enemies, choices, 4);
+                    break;
+                case 40:
+                    enemies.Add(enemyFactory.CreateGiantGrappler(GetEnemyLocation()));
+                    break;
+                #endregion
+
+                #region Levels 41-50
+                //Adds jungle spear, poison dagger, ice bow
+                case 41:
+                    enemies.Add(enemyFactory.CreateFrostArcher(GetEnemyLocation()));
+                    enemies.Add(enemyFactory.CreateSkeletonArcher(GetEnemyLocation()));
+                    enemies.Add(enemyFactory.CreateFrostArcher(GetEnemyLocation()));
+                    break;
+                case 42:
+                case 43:
+                    enemies.Add(enemyFactory.CreateFrostArcher(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreatePlasmaSpider(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateFireSpider(zero));
+                    choices.Add(enemyFactory.CreateHeavy(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    choices.Add(enemyFactory.CreateFrostArcher(GetEnemyLocation()));
+                    PickRandomEnemies(enemies, choices, 2);
+                    enemies.ElementAt(0).Charm1 = charmFactory.CreateSpeedCharm();
+                    enemies.ElementAt(0).ApplyCharmEffects();
+                    enemies.ElementAt(1).Charm1 = charmFactory.CreateLifestealCharm();
+                    enemies.ElementAt(1).ApplyCharmEffects();
+                    break;
+                case 44:
+                    enemies.Add(enemyFactory.CreateFrostArcher(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateFrostArcher(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreatePlasmaSpider(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateFireSpider(zero));
+                    choices.Add(enemyFactory.CreateHeavy(zero));
+                    choices.Add(enemyFactory.CreateGoblinMauler(zero));
+                    PickRandomEnemies(enemies, choices, 3);
+                    enemies.ElementAt(0).Charm1 = charmFactory.CreateBurstCharm();
+                    enemies.ElementAt(0).ApplyCharmEffects();
+                    break;
+                case 45:
+                    enemies.Add(enemyFactory.CreateDaggerTosser(GetEnemyLocation()));
+                    enemies.ElementAt(0).Shield1 = shieldFactory.CreateBasicShield();
+                    break;
+                case 46:
+                case 47:
+                case 48:
+                case 49:
+                    choices.Add(enemyFactory.CreateFrostArcher(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateDaggerTosser(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreatePlasmaSpider(GetEnemyLocation()));
+                    choices.Add(enemyFactory.CreateFireSpider(zero));
+                    PickRandomEnemies(enemies, choices, 3);
+                    if (random.Next(2) == 1)
+                        enemies.ElementAt(0).Charm1 = charmFactory.CreateBurstCharm();
+                    else
+                        enemies.ElementAt(0).Charm1 = charmFactory.CreateHigherCooldown();
+                    enemies.ElementAt(0).ApplyCharmEffects();
+                    break;
+                case 50:
+                    Enemy enemy = enemyFactory.CreateSwordsman(GetEnemyLocation());
+                    enemy.HitPoints = 100;
+                    enemy.MaxHitPoints = 100;
+                    enemy.Charm1 = charmFactory.CreateLifestealCharm();
+                    enemy.ApplyCharmEffects();
+                    enemy.Weapon1 = weaponFactory.CreateHelsingor();
+                    enemy.Weapon2 = weaponFactory.CreateIceBow();
+                    enemy.Shield1 = shieldFactory.CreateBasicShield();
+                    enemies.Add(enemy);
+                    break;
+                #endregion
+
+                default:
+                    CreateEnemiesOld(enemyFactory, enemies);
+                    break;
+            }
+        }
+
+        public void CreateEnemiesOld(EnemyFactory enemyFactory, List<Enemy> enemies)
+        {
+            //Determine the current difficulty Level
+            int difficultyLevel = 1 + (int)Math.Ceiling(((decimal)Level / 4));
+            int numberOfEnemies = 1;
+            if (Level < 3)
+                numberOfEnemies = 1;
+            else if (Level >= 3 && Level < 8)
+                numberOfEnemies = 2;
+            else if (Level >= 8 && Level < 15)
+                numberOfEnemies = 3;
+            else if (Level >= 15 && Level < 23)
+                numberOfEnemies = 4;
+            else
+                numberOfEnemies = 5;
+
+            //Generate a location
+            Vector2 location;
+
+            if (Level == 10)
+            {
+                location = GetEnemyLocation();
+                enemies.Add(enemyFactory.CreateGiant(location));
+                return;
+            }
+            if (Level == 20)
+            {
+                location = GetEnemyLocation();
+                enemies.Add(enemyFactory.CreateGiant(location));
+                location = GetEnemyLocation();
+                enemies.Add(enemyFactory.CreateGiant(location));
+                return;
+            }
+            if (Level == 30)
+            {
+                location = GetEnemyLocation();
+                enemies.Add(enemyFactory.CreateGiant(location));
+                location = GetEnemyLocation();
+                enemies.Add(enemyFactory.CreateGiant(location));
+                location = GetEnemyLocation();
+                enemies.Add(enemyFactory.CreateGiant(location));
+                return;
+            }
+
+            for (int i = 1; i <= numberOfEnemies; i++)
+            {
+                //Main loop that creates an enemy
+                location = GetEnemyLocation();
+                //Generate a random number to decide which enemy it will be
+                int maxEnemyID = 2;
+                if (difficultyLevel <= 8)
+                    maxEnemyID += difficultyLevel;
+                else
+                    maxEnemyID = 15;
+
+                int enemyID = random.Next(1, maxEnemyID);
+
+                //Choose the enemy based on the number generated
+                switch (enemyID)
+                {
+                    case 1:
+                        enemies.Add(enemyFactory.CreateSwordsman(location));
+                        break;
+                    case 2:
+                        enemies.Add(enemyFactory.CreateGoblinMauler(location));
+                        break;
+                    case 3:
+                        enemies.Add(enemyFactory.CreateSkeletonArcher(location));
+                        break;
+                    case 4:
+                        enemies.Add(enemyFactory.CreateSpearman(location));
+                        break;
+                    case 5:
+                        enemies.Add(enemyFactory.CreateSpearThrower(location));
+                        break;
+                    case 6:
+                        enemies.Add(enemyFactory.CreateHeavy(location));
+                        break;
+                    case 7:
+                        enemies.Add(enemyFactory.CreateBarbarian(location));
+                        break;
+                    case 8:
+                        enemies.Add(enemyFactory.CreateGoblinArcanist(location));
+                        break;
+                    case 9:
+                        enemies.Add(enemyFactory.CreateGiant(location));
+                        break;
+                    case 10:
+                        enemies.Add(enemyFactory.CreateFireSpider(location));
+                        break;
+                    case 11:
+                        enemies.Add(enemyFactory.CreatePlasmaSpider(location));
+                        break;
+                    case 12:
+                        enemies.Add(enemyFactory.CreateHiraNinja(location));
+                        break;
+                    case 13:
+                        enemies.Add(enemyFactory.CreateBotengNinja(location));
+                        break;
+                    case 14:
+                        enemies.Add(enemyFactory.CreateTaagoNinja(location));
+                        break;
+                    case 15:
+                        enemies.Add(enemyFactory.CreateGiantGrappler(location));
+                        break;
+                    default:
+                        enemies.Add(enemyFactory.CreateSwordsman(location));
+                        break;
+                }
+            }
+        }
+
+        private GridEntity GetObstacleFromID(int id, int x, int y, int z)
+        {
+            GridEntity obstacle = new GridEntity();
+            Vector2 location = new Vector2(x * GameConstants.TILE_SIZE + GameConstants.TILE_SIZE / 2, 
+                y * GameConstants.TILE_SIZE + GameConstants.TILE_SIZE / 2);
+            switch (id)
+            {
+                case 1:
+                    obstacle = new GridEntity("Rock", x, y, z, location, 10, wallRock1Sprite);
+                    break;
+                case 2:
+                    obstacle = new GridEntity("Stone", x, y, z, location, 10, tileStone1Sprite);
+                    break;
+                case 3:
+                    obstacle = new GridEntity("ClayTile", x, y, z, location, 10, tileClay1Sprite);
+                    break;
+                case 4:
+                    obstacle = new GridEntity("Pillar", x, y, z, location, 10, tilePillar1Sprite);
+                    break;
+                default:
+                    obstacle = new GridEntity("Rock", x, y, z, location, wallRock1Sprite);
+                    break;
+
+            }
+            obstacle.ID = id;
+            return obstacle;
+        }
+
+        public Vector2 GetEnemyLocation()
+        {
+            /// Generate a random position on the grid for the enemy. Repeat the process
+            /// until a position that is not occupied by an obstacle is obtained.
+            bool positionValid = true;
+            int enemyX = 0;
+            int enemyY = 0;
+            Rectangle illegalArea = new Rectangle(GameConstants.WINDOW_WIDTH / GameConstants.TILE_SIZE / 2 - GameConstants.SAFE_ZONE_SIZE / 2, GameConstants.WINDOW_HEIGHT / GameConstants.TILE_SIZE / 2 - GameConstants.SAFE_ZONE_SIZE / 2, GameConstants.SAFE_ZONE_SIZE, GameConstants.SAFE_ZONE_SIZE);
+            do
+            {
+                positionValid = true;
+                enemyX = random.Next(0, GameConstants.WINDOW_WIDTH / GameConstants.TILE_SIZE);
+                enemyY = random.Next(0, GameConstants.WINDOW_HEIGHT / GameConstants.TILE_SIZE);
+                foreach (GridEntity obstacle in obstacles)
+                {
+                    if (obstacle.XPosition == enemyX && obstacle.YPosition == enemyY)
+                    {
+                        positionValid = false;
+                    }
+                }
+                if (illegalArea.Contains(new Vector2(enemyX, enemyY)))
+                    positionValid = false;
+            } while (positionValid == false);
+
+            //Determine the location of the creature based on its position, then create the creature
+            Vector2 enemyLocation = new Vector2(enemyX * GameConstants.TILE_SIZE + GameConstants.TILE_SIZE / 2, enemyY * GameConstants.TILE_SIZE + GameConstants.TILE_SIZE / 2);
+            return enemyLocation;
+        }
+
         private Texture2D PickRandomTexture(List<Texture2D> textures)
         {
             Texture2D chosenTexture = textures.ElementAt(0);
             int index = random.Next(textures.Count);
             return textures.ElementAt(index);
+        }
+
+        public void PickRandomEnemies(List<Enemy> mainEnemyList, List<Enemy> choices, int numberOfEnemies)
+        {
+            for (int i = 0; i < numberOfEnemies; i++)
+            {
+                int enemyID = random.Next(0, choices.Count);
+                Enemy enemy = choices.ElementAt(enemyID).Copy();
+                enemy.Location = GetEnemyLocation();
+                enemy.UpdateDrawRectangleAnimated();
+                mainEnemyList.Add(enemy);
+            }
+        }
+
+        public Item AddRandomItem()
+        {
+            int selector = random.Next(1, 13);
+            if (selector < 7) //Select weapon
+            {
+                selector = random.Next(0, 21);
+                return ItemFactoryContainer.GetWeaponFromID(selector);
+            }
+            else if (selector < 12) // Select shield
+            {
+                selector = random.Next(0, 5);
+                return ItemFactoryContainer.GetShieldFromID(selector);
+            }
+            else
+            {
+                selector = random.Next(0, 5);
+                return ItemFactoryContainer.GetCharmFromID(selector);
+            }
+        }
+
+        public Item AddItemFromEnemy(List<Enemy> enemies)
+        {
+            int totalItems = 0;
+            int idChosen = 0;
+            List<Weapon> weapons = new List<Weapon>();
+            List<Shield> shields = new List<Shield>();
+            List<Charm> charms = new List<Charm>();
+
+            foreach (Enemy enemy in enemies)
+            {
+                if (enemy.Weapon1.Type != WeaponType.Blank)
+                    weapons.Add(ItemFactoryContainer.GetWeaponFromID(enemy.Weapon1.ID));
+                if (enemy.Weapon2.Type != WeaponType.Blank)
+                    weapons.Add(ItemFactoryContainer.GetWeaponFromID(enemy.Weapon2.ID));
+                if (enemy.Shield1.Type != ShieldType.Blank)
+                    shields.Add(ItemFactoryContainer.GetShieldFromID(enemy.Shield1.ID));
+                if (enemy.Charm1.Type != CharmType.Blank)
+                    charms.Add(ItemFactoryContainer.GetCharmFromID(enemy.Charm1.ID));
+            }
+
+            totalItems = weapons.Count + shields.Count + charms.Count;
+            List<int> chosenItems = new List<int>();
+                bool chosenIdValid = false;
+                while (chosenIdValid != true)
+                {
+                    idChosen = random.Next(totalItems);
+                    if (!chosenItems.Contains(idChosen))
+                    {
+                        chosenIdValid = true;
+                        chosenItems.Add(idChosen);
+                    }
+                    else if (totalItems <= chosenItems.Count)
+                    {
+                        idChosen = -1;
+                        chosenIdValid = true;
+                    }
+
+                }
+                if (idChosen == -1)
+                    return null;
+                else if (idChosen < weapons.Count)
+                    return (weapons.ElementAt(idChosen));
+                else if (idChosen < weapons.Count + shields.Count)
+                    return (shields.ElementAt(idChosen - weapons.Count));
+                else
+                    return (charms.ElementAt(idChosen - (weapons.Count + shields.Count)));
         }
 
         private void UpdateProjectiles(GameTime gameTime, List<Projectile> projectiles, List<GridEntity> obstacles)
@@ -596,17 +1169,17 @@ namespace MainGame.Screens
         public bool CheckIfOffScreen(StaticEntity staticEntity)
         {
             bool isOffScreen = false;
-            if (staticEntity.CollisionRectangle.Right < 0 || staticEntity.CollisionRectangle.Left > TilesWide * GameConstants.TILE_SIZE)
+            if (staticEntity.CollisionRectangle.Right < 0 || staticEntity.CollisionRectangle.Left > GameConstants.TILES_WIDE * GameConstants.TILE_SIZE)
                 isOffScreen = true;
-            if (staticEntity.CollisionRectangle.Bottom < 0 || staticEntity.CollisionRectangle.Top > TilesHigh * GameConstants.TILE_SIZE)
+            if (staticEntity.CollisionRectangle.Bottom < 0 || staticEntity.CollisionRectangle.Top > GameConstants.TILES_HIGH * GameConstants.TILE_SIZE)
                 isOffScreen = true;
             return isOffScreen;
         }
 
         private void EdgeCollision(DynamicEntity dynamicEntity)
         {
-            int width = TilesWide * GameConstants.TILE_SIZE;
-            int height = TilesHigh * GameConstants.TILE_SIZE;
+            int width = GameConstants.TILES_WIDE * GameConstants.TILE_SIZE;
+            int height = GameConstants.TILES_HIGH * GameConstants.TILE_SIZE;
             int halfEntityWidth = dynamicEntity.CollisionRectangle.Width / 2;
             int halfEntityHeight = dynamicEntity.CollisionRectangle.Height / 2;
             if (dynamicEntity.XLocation < halfEntityWidth)
@@ -624,7 +1197,7 @@ namespace MainGame.Screens
             dynamicEntity.UpdateRectangle();
         }
 
-        public void DynamicToStaticCollision(Creature creature, StaticEntity staticEntity)
+        private void DynamicToStaticCollision(Creature creature, StaticEntity staticEntity)
         {
             if (creature.CollisionRectangle.Intersects(staticEntity.CollisionRectangle) && creature.Noclip == false)
             {

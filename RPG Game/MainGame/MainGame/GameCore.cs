@@ -1,4 +1,5 @@
-﻿using MainGame.Screens;
+﻿using MainGame.Items;
+using MainGame.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,7 +21,6 @@ namespace MainGame
         public GameCore()
         {
             graphics = new GraphicsDeviceManager(this);
-            spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
 
             Content.RootDirectory = "Content";
 
@@ -28,8 +28,6 @@ namespace MainGame
             graphics.PreferredBackBufferHeight = GameConstants.WINDOW_HEIGHT + GameConstants.ACTION_BAR_HEIGHT;
 
             IsMouseVisible = true;
-
-            CurrentScreen = new MainMenuScreen(OnScreenChanged, Content);
         }
 
         /// <summary>
@@ -55,7 +53,8 @@ namespace MainGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-
+            ItemFactoryContainer.Initialize(Content);
+            CurrentScreen = new MainMenuScreen(OnScreenChanged, Content);
         }
 
         /// <summary>
