@@ -3,28 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace MainGame.ContentLoaders
+namespace MainGame.ContentLoaders.Textures
 {
-    class FontLoader : ContentLoader<SpriteFont>
+    class CreatureLoader : TextureLoader
     {
-        private static FontLoader Instance;
+        private static CreatureLoader Instance;
 
-        private FontLoader(ContentManager content) : base(content, "/fonts")
+        private CreatureLoader(ContentManager content) : base(content, "/projectiles")
         {
 
         }
 
         public static void Initialize(ContentManager content)
         {
-            if(Instance == null)
-                Instance = new FontLoader(content);
+            if (Instance == null)
+                Instance = new CreatureLoader(content);
         }
 
-        public static FontLoader GetInstance()
+        public static CreatureLoader GetInstance()
         {
             if (Instance == null)
                 throw new LoaderNotInitializedException();
@@ -32,3 +30,4 @@ namespace MainGame.ContentLoaders
         }
     }
 }
+

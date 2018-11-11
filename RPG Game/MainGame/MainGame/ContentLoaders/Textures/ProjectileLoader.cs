@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace MainGame.ContentLoaders
+namespace MainGame.ContentLoaders.Textures
 {
-    class FontLoader : ContentLoader<SpriteFont>
+    class ProjectileLoader : TextureLoader
     {
-        private static FontLoader Instance;
+        private static ProjectileLoader Instance;
 
-        private FontLoader(ContentManager content) : base(content, "/fonts")
+        private ProjectileLoader(ContentManager content) : base(content, "/projectiles")
         {
 
         }
@@ -21,10 +19,10 @@ namespace MainGame.ContentLoaders
         public static void Initialize(ContentManager content)
         {
             if(Instance == null)
-                Instance = new FontLoader(content);
+                Instance = new ProjectileLoader(content);
         }
 
-        public static FontLoader GetInstance()
+        public static ProjectileLoader GetInstance()
         {
             if (Instance == null)
                 throw new LoaderNotInitializedException();

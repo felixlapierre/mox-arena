@@ -33,4 +33,12 @@ namespace MainGame.ContentLoaders
         }
         #endregion
     }
+
+    public class LoaderNotInitializedException : Exception
+    {
+        public LoaderNotInitializedException() : base("Cannot get instance of a content loader before it was initialized.")
+        {
+
+        }
+    }
 }
