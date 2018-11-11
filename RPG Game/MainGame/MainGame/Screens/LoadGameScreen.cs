@@ -125,13 +125,17 @@ namespace MainGame.Screens
             for (int i = 0; i < levelData.Count; i++)
                 spriteBatch.DrawString(font, levelData.ElementAt(i), new Vector2(GameConstants.TILE_SIZE * 3.1f, GameConstants.TILE_SIZE * 2.7f + GameConstants.TILE_SIZE * 2 * i), Color.Black);
             foreach (ItemBox box in weapon1ItemBoxes)
-                box.Draw(spriteBatch);
+                if(box.IsActive)
+                    box.Draw(spriteBatch);
             foreach (ItemBox box in weapon2ItemBoxes)
-                box.Draw(spriteBatch);
+                if (box.IsActive)
+                    box.Draw(spriteBatch);
             foreach (ItemBox box in shield1ItemBoxes)
-                box.Draw(spriteBatch);
+                if (box.IsActive)
+                    box.Draw(spriteBatch);
             foreach (ItemBox box in charm1ItemBoxes)
-                box.Draw(spriteBatch);
+                if (box.IsActive)
+                    box.Draw(spriteBatch);
 
             spriteBatch.DrawString(font20, "Load Game", new Vector2(GameConstants.TILE_SIZE, GameConstants.TILE_SIZE), Color.Black);
 
