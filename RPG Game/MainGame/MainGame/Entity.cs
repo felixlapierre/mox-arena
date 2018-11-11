@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using MainGame.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -326,7 +327,7 @@ namespace MainGame
         }
         #endregion
 
-        public void Update(GameTime gameTime, Creature creature)
+        public void Update(Creature creature)
         {
             location.X = creature.Location.X - drawRectangle.Width / 2;
             location.Y = creature.Location.Y - creature.DrawRectangle.Height / 2 - distanceAboveCreature;
@@ -337,6 +338,15 @@ namespace MainGame
         public void Draw(SpriteBatch spriteBatch, Creature creature, Vector2 offset)
         {
             int percentRemaining = (int)Math.Ceiling((decimal)creature.HitPoints / (decimal)creature.MaxHitPoints * 100);
+            int x = 50 - percentRemaining / 2;
+            int y = 0;
+            Rectangle currentDrawRectangle = new Rectangle(drawRectangle.X + (int)offset.X, drawRectangle.Y + (int)offset.Y, drawRectangle.Width, drawRectangle.Height);
+            spriteBatch.Draw(sprite, currentDrawRectangle, new Rectangle(x, y, 50, drawRectangle.Height), Color.White);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, int healthRemaining, int maxHealth, Vector2 offset)
+        {
+            int percentRemaining = (int)Math.Ceiling((decimal)healthRemaining / (decimal)maxHealth * 100);
             int x = 50 - percentRemaining / 2;
             int y = 0;
             Rectangle currentDrawRectangle = new Rectangle(drawRectangle.X + (int)offset.X, drawRectangle.Y + (int)offset.Y, drawRectangle.Width, drawRectangle.Height);
@@ -871,7 +881,7 @@ namespace MainGame
                 hitPoints -= PoisonDamage;
 
             //Update health bar
-            healthBar.Update(gameTime, this);
+            healthBar.Update(this);
         }
 
         public new void Update(GameTime gameTime, List<Projectile> projectiles)
@@ -1696,7 +1706,7 @@ namespace MainGame
         
     }
 
-    public class Weapon : DynamicEntity
+    public class Weapon : DynamicEntity, Item
     {
         #region Properties
         int id;
@@ -2875,7 +2885,7 @@ namespace MainGame
 
     }
 
-    public class Shield
+    public class Shield : Item
     {
         #region Properties
         int id;
@@ -3090,7 +3100,7 @@ namespace MainGame
 
     }
 
-    public class Charm
+    public class Charm : Item
     {
         #region Properties
         int id;

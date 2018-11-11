@@ -74,9 +74,25 @@
     <Compile Include="Effect.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameConstants.cs" />
+    <Compile Include="GameCore.cs" />
+    <Compile Include="Items\Charms\CharmFactory.cs" />
+    <Compile Include="Items\Item.cs" />
+    <Compile Include="Items\ItemFactoryContainer.cs" />
+    <Compile Include="Items\Shields\ShieldFactory.cs" />
+    <Compile Include="Items\Weapons\WeaponFactory.cs" />
     <Compile Include="Pathfinding.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\CombatScreen.cs" />
+    <Compile Include="Screens\GameOverScreen.cs" />
+    <Compile Include="Screens\LoadGameScreen.cs" />
+    <Compile Include="Screens\MainMenuScreen.cs" />
+    <Compile Include="Screens\SandboxScreen.cs" />
+    <Compile Include="Screens\SaveGameScreen.cs" />
+    <Compile Include="Screens\Screen.cs" />
+    <Compile Include="Screens\Trade Screen\TradeScreenContents.cs" />
+    <Compile Include="Screens\TradeScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

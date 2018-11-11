@@ -167,7 +167,7 @@ namespace MainGame
         #endregion
 
         #region Weapons
-        WeaponFactory weaponFactory;
+        public WeaponFactory weaponFactory;
         Texture2D weaponSword1;
         Texture2D weaponSword2;
         Texture2D weaponBow1;
@@ -189,7 +189,7 @@ namespace MainGame
         #endregion
 
         #region Shields
-        ShieldFactory shieldFactory;
+        public ShieldFactory shieldFactory;
         Texture2D shieldBasic1;
         Texture2D shieldBasic2;
         Texture2D speedBoost1;
@@ -198,7 +198,7 @@ namespace MainGame
         #endregion
 
         #region Charms
-        CharmFactory charmFactory;
+        public CharmFactory charmFactory;
         Texture2D charmSprite;
         #endregion
 
@@ -2673,7 +2673,7 @@ namespace MainGame
             gameState = GameState.Paused;
             pauseDurationLeft = BetweenLevelPause;
             //Update once to properly adjust health bars
-            player1.HealthBar.Update(gameTime, player1);
+            player1.HealthBar.Update(player1);
             foreach (Enemy enemy in enemies)
                 enemy.Update(gameTime);
         }
