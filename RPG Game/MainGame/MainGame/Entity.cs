@@ -283,7 +283,7 @@ namespace MainGame
             delayRemaining = delay;
         }
 
-        public void Update(GameTime gameTime, Vector2 playerLocation, List<Enemy> enemies, EnemyFactory enemyFactory)
+        public void Update(GameTime gameTime, Vector2 playerLocation, List<Enemy> enemies, EnemyFactoryOld enemyFactory)
         {
             float distanceToPlayer = (float)Math.Sqrt(Math.Pow(playerLocation.X - location.X,2) + Math.Pow(playerLocation.Y - location.Y,2));
             if (quantityRemaining > 0 && distanceToPlayer <= distanceActivated)
@@ -1331,7 +1331,7 @@ namespace MainGame
         }
     }
 
-    public class EnemyFactory
+    public class EnemyFactoryOld
     {
         #region Properties
         Texture2D healthBarSprite;
@@ -1345,9 +1345,9 @@ namespace MainGame
         Texture2D enemyFireSpider1;
         Texture2D enemyBlueSpider1;
 
-        WeaponFactory weaponFactory;
-        ShieldFactory shieldFactory;
-        CharmFactory charmFactory;
+        WeaponFactoryOld weaponFactory;
+        ShieldFactoryOld shieldFactory;
+        CharmFactoryOld charmFactory;
         Pathfinding pathfinder;
         public Pathfinding Pathfinder
         {
@@ -1361,7 +1361,7 @@ namespace MainGame
         #endregion
 
         #region Constructors
-        public EnemyFactory(WeaponFactory weaponFactory, ShieldFactory shieldFactory, CharmFactory charmFactory, Pathfinding pathfinder, Texture2D healthBarSprite,
+        public EnemyFactoryOld(WeaponFactoryOld weaponFactory, ShieldFactoryOld shieldFactory, CharmFactoryOld charmFactory, Pathfinding pathfinder, Texture2D healthBarSprite,
             Texture2D enemySprite1, Texture2D enemyGladiator1, Texture2D enemyGladiator2, Texture2D enemyGladiator2Large,
             Texture2D enemyGoblin1, Texture2D enemySkeleton1, Texture2D enemySkeleton2, Texture2D enemyFireSpider1, Texture2D enemyBlueSpider1)
         {
@@ -2070,7 +2070,7 @@ namespace MainGame
 
     }
 
-    public class WeaponFactory
+    public class WeaponFactoryOld
     {
         #region Properties
         Texture2D weaponSword1;
@@ -2096,7 +2096,7 @@ namespace MainGame
         #endregion
 
         #region Constructors
-        public WeaponFactory(Texture2D weaponSword1, Texture2D weaponBow1, Texture2D weaponBow2, Texture2D projectileBow1, Texture2D weaponSword2,
+        public WeaponFactoryOld(Texture2D weaponSword1, Texture2D weaponBow1, Texture2D weaponBow2, Texture2D projectileBow1, Texture2D weaponSword2,
             Texture2D weaponAxe1, Texture2D weaponAxe2, Texture2D weaponMaul1, Texture2D weaponMaulLarge, Texture2D weaponHammer1, Texture2D weaponDagger1,
             Texture2D weaponSpear1, Texture2D weaponSpear2, Texture2D weaponSpear3, Texture2D weaponShuriken1, Texture2D weaponShuriken2,
             Texture2D weaponShuriken3, Texture2D redShockwaveBullet, Texture2D blueShockwaveBullet, Texture2D weaponGrapple1)
@@ -2981,7 +2981,7 @@ namespace MainGame
         }
     }
 
-    public class ShieldFactory
+    public class ShieldFactoryOld
     {
         #region Properties
         Texture2D spriteShield1;
@@ -2993,7 +2993,7 @@ namespace MainGame
         #endregion
 
         #region Constructors
-        public ShieldFactory(Texture2D spriteShield1, Texture2D spriteShield2, Texture2D speedBoost1, Texture2D thunderStone,
+        public ShieldFactoryOld(Texture2D spriteShield1, Texture2D spriteShield2, Texture2D speedBoost1, Texture2D thunderStone,
             Texture2D blueShockwaveSprite, Texture2D elvenTrinket)
         {
             this.spriteShield1 = spriteShield1;
@@ -3173,14 +3173,14 @@ namespace MainGame
         }
     }
 
-    public class CharmFactory
+    public class CharmFactoryOld
     {
         #region Properties
         Texture2D charmSprite;
         #endregion
 
         #region Constructors
-        public CharmFactory(Texture2D charmSprite)
+        public CharmFactoryOld(Texture2D charmSprite)
         {
             this.charmSprite = charmSprite;
         }

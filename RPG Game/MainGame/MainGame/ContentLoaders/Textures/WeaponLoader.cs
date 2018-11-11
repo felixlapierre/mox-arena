@@ -16,7 +16,7 @@ namespace MainGame.ContentLoaders.Textures
 
         }
 
-        static void Initialize(ContentManager content)
+        public static void Initialize(ContentManager content)
         {
             if(Instance == null)
                 Instance = new WeaponLoader(content);

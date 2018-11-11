@@ -4,37 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MainGame.ContentLoaders.Textures;
 
 namespace MainGame.Items.Shields
 {
     public class ShieldFactory
     {
         #region Properties
-        Texture2D spriteShield1;
-        Texture2D spriteShield2;
-        Texture2D speedBoost1;
-        Texture2D thunderStone;
-        Texture2D blueShockwaveSprite;
-        Texture2D elvenTrinket;
+        ShieldLoader shieldLoader;
+        ProjectileLoader projectileLoader;
         #endregion
 
         #region Constructors
-        public ShieldFactory(Texture2D spriteShield1, Texture2D spriteShield2, Texture2D speedBoost1, Texture2D thunderStone,
-            Texture2D blueShockwaveSprite, Texture2D elvenTrinket)
+        public ShieldFactory()
         {
-            this.spriteShield1 = spriteShield1;
-            this.spriteShield2 = spriteShield2;
-            this.speedBoost1 = speedBoost1;
-            this.thunderStone = thunderStone;
-            this.blueShockwaveSprite = blueShockwaveSprite;
-            this.elvenTrinket = elvenTrinket;
+            shieldLoader = ShieldLoader.GetInstance();
+            projectileLoader = ProjectileLoader.GetInstance();
         }
         #endregion
 
         public Shield CreateSpeedboost()
         {
             string name = "Boots of Speed";
-            Texture2D sprite = speedBoost1;
+            Texture2D sprite = shieldLoader.Get("boots1");
             List<Effect> activeEffects = new List<Effect>();
             activeEffects.Add(new Effect(EffectType.Speed, 250, 2.0f));
             activeEffects.Add(new Effect(EffectType.Spin, 250, (float)Math.PI / 8));
@@ -47,7 +39,7 @@ namespace MainGame.Items.Shields
         public Shield CreateBasicShield()
         {
             string name = "Iron Shield";
-            Texture2D sprite = spriteShield1;
+            Texture2D sprite = shieldLoader.Get("shield1");
             List<Effect> activeEffects = new List<Effect>();
             activeEffects.Add(new Effect(EffectType.Unhittable, 500, 0f));
             int cooldown = 3000;
@@ -59,7 +51,7 @@ namespace MainGame.Items.Shields
         public Shield CreateTowerShield()
         {
             string name = "Tower Shield";
-            Texture2D sprite = spriteShield2;
+            Texture2D sprite = shieldLoader.Get("shield2");
             List<Effect> activeEffects = new List<Effect>();
             activeEffects.Add(new Effect(EffectType.Unhittable, 210, 0f));
             activeEffects.Add(new Effect(EffectType.Pacify, 210, 0f));
@@ -74,9 +66,9 @@ namespace MainGame.Items.Shields
         public Shield CreateThunderStone()
         {
             string name = "Thunder Stone";
-            Texture2D sprite = thunderStone;
+            Texture2D sprite = shieldLoader.Get("thunderStone1");
             List<Effect> activeEffects = new List<Effect>();
-            activeEffects.Add(new Effect(EffectType.Shockwave, 10, 1.0f, blueShockwaveSprite, 5, 400));
+            activeEffects.Add(new Effect(EffectType.Shockwave, 10, 1.0f, projectileLoader.Get("blueBall"), 5, 400));
             int cooldown = 6000;
             Shield shield = new Shield(name, sprite, activeEffects, cooldown);
             shield.ID = 3;
@@ -88,7 +80,7 @@ namespace MainGame.Items.Shields
         public Shield CreateSuperShield()
         {
             string name = "Odin's Shield";
-            Texture2D sprite = spriteShield1;
+            Texture2D sprite = shieldLoader.Get("shield1");
             List<Effect> activeEffects = new List<Effect>();
             activeEffects.Add(new Effect(EffectType.Unhittable, 2000, 0f));
             int cooldown = 4000;
@@ -98,7 +90,7 @@ namespace MainGame.Items.Shields
         public Shield CreateElvenTrinket()
         {
             string name = "Elven Trinket";
-            Texture2D sprite = elvenTrinket;
+            Texture2D sprite = shieldLoader.Get("elvenTrinket1");
             List<Effect> activeEffects = new List<Effect>();
             activeEffects.Add(new Effect(EffectType.Unhittable, 250, 0f));
             activeEffects.Add(new Effect(EffectType.Speed, 250, 2.0f));
@@ -112,7 +104,7 @@ namespace MainGame.Items.Shields
         public Shield CreateBullrush()
         {
             string name = "Bullrush";
-            Texture2D sprite = elvenTrinket;
+            Texture2D sprite = shieldLoader.Get("elvenTrinket1");
             List<Effect> activeEffects = new List<Effect>();
             activeEffects.Add(new Effect(EffectType.Unhittable, 1000, 0f));
             activeEffects.Add(new Effect(EffectType.Speed, 1000, 1.5f));
@@ -122,8 +114,5 @@ namespace MainGame.Items.Shields
             shield.ID = 4;
             return shield;
         }
-
-
     }
-
 }

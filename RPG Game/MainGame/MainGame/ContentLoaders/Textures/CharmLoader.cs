@@ -22,7 +22,7 @@ namespace MainGame.ContentLoaders.Textures
                 Instance = new CharmLoader(content);
         }
 
-        public CharmLoader GetInstance()
+        public static CharmLoader GetInstance()
         {
             if (Instance == null)
                 throw new LoaderNotInitializedException();

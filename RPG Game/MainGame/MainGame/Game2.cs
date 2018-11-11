@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
+using MainGame.ContentLoaders;
+using MainGame.ContentLoaders.Textures;
 
 namespace MainGame
 {
@@ -31,6 +33,7 @@ namespace MainGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            ContentLoaders.ContentLoaderInitializer.InitializeAllContentLoaders(Content);
 
             base.Initialize();
         }
@@ -40,7 +43,7 @@ namespace MainGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            axe1 = Content.Load<Texture2D>("graphics/weapons/axe1");
+            axe1 = WeaponLoader.GetInstance().Get("axe1");
 
             Content.Unload();
         }
@@ -62,7 +65,7 @@ namespace MainGame
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            spriteBatch.Draw(axe1, new Rectangle(0, 0, 100, 100), Color.White);
+            spriteBatch.Draw(axe1, new Rectangle(0, 0, 1000, 800), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }

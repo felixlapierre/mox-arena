@@ -71,6 +71,15 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ContentLoaders\ContentLoaderInitializer.cs" />
+    <Compile Include="ContentLoaders\Textures\CharmLoader.cs" />
+    <Compile Include="ContentLoaders\Textures\CreatureLoader.cs" />
+    <Compile Include="ContentLoaders\Textures\ProjectileLoader.cs" />
+    <Compile Include="ContentLoaders\Textures\ShieldLoader.cs" />
+    <Compile Include="ContentLoaders\Textures\TileLoader.cs" />
+    <Compile Include="ContentLoaders\Textures\UserInterfaceLoader.cs" />
+    <Compile Include="ContentLoaders\Textures\WeaponLoader.cs" />
+    <Compile Include="Creatures\EnemyFactory.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
@@ -94,9 +103,9 @@
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\Trade Screen\TradeScreenContents.cs" />
     <Compile Include="Screens\TradeScreen.cs" />
-    <Compile Include="Textures\ContentLoader.cs" />
-    <Compile Include="Textures\FontLoader.cs" />
-    <Compile Include="Textures\TextureLoader.cs" />
+    <Compile Include="ContentLoaders\ContentLoader.cs" />
+    <Compile Include="ContentLoaders\FontLoader.cs" />
+    <Compile Include="ContentLoaders\TextureLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -153,6 +162,7 @@
     <None Include="Content\graphics\creatures\skeleton2.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\graphics\pixel.xnb" />
     <None Include="Content\graphics\projectiles\arrow1.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -10,6 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MainGame.ContentLoaders;
+using MainGame.ContentLoaders.Textures;
+using MainGame.Creatures;
+
+using MainGame.Items.Weapons;
+using MainGame.Items.Shields;
+using MainGame.Items.Charms;
+
 namespace MainGame.Screens
 {
     class CombatScreen : Screen
@@ -122,8 +130,6 @@ namespace MainGame.Screens
 
 
         //TODO: Remove these or reconsider their implementation
-        ContentManager Content { get; set; }
-
         Random random = new Random();
         bool playerPaused = false;
         int unpauseTimer = 0;
@@ -131,66 +137,34 @@ namespace MainGame.Screens
         #endregion
 
         #region Constructor
-        public CombatScreen(OnScreenChanged screenChanged, ContentManager content, TradeScreenContents tradeContents) : base(screenChanged)
+        public CombatScreen(OnScreenChanged screenChanged, TradeScreenContents tradeContents) : base(screenChanged)
         {
-            Content = content;
-
             Level = tradeContents.Level;
 
-            actionBarBackground = Content.Load<Texture2D>("graphics/actionBarBackground");
+            UserInterfaceLoader uiLoader = UserInterfaceLoader.GetInstance();
+            FontLoader fontLoader = FontLoader.GetInstance();
+            CreatureLoader creatureLoader = CreatureLoader.GetInstance();
+            TileLoader tileLoader = TileLoader.GetInstance();
 
-            #region Load Weapons
-            weaponSword1 = Content.Load<Texture2D>("graphics/WeaponSword1");
-            weaponSword2 = Content.Load<Texture2D>("graphics/WeaponSword2");
-            weaponBow1 = Content.Load<Texture2D>("graphics/WeaponBow1");
-            weaponBow2 = Content.Load<Texture2D>("graphics/WeaponBow2");
-            projectileBow1 = Content.Load<Texture2D>("graphics/ProjectileBow1");
-            weaponAxe1 = Content.Load<Texture2D>("graphics/WeaponAxe1");
-            weaponAxe2 = Content.Load<Texture2D>("graphics/WeaponAxe2");
-            weaponMaul1 = Content.Load<Texture2D>("graphics/WeaponMaul1");
-            weaponMaulLarge = Content.Load<Texture2D>("graphics/WeaponMaulLarge");
-            weaponHammer1 = Content.Load<Texture2D>("graphics/WeaponHammer1");
-            weaponDagger1 = Content.Load<Texture2D>("graphics/WeaponDagger1");
-            weaponSpear1 = Content.Load<Texture2D>("graphics/WeaponSpear1");
-            weaponSpear2 = Content.Load<Texture2D>("graphics/WeaponSpear2");
-            weaponSpear3 = Content.Load<Texture2D>("graphics/WeaponSpear3");
-            weaponShuriken1 = Content.Load<Texture2D>("graphics/shuriken1");
-            weaponShuriken2 = Content.Load<Texture2D>("graphics/shuriken2");
-            weaponShuriken3 = Content.Load<Texture2D>("graphics/shuriken3");
-            weaponGrapple1 = Content.Load<Texture2D>("graphics/WeaponGrapple1");
+            weaponFactory = ItemFactoryContainer.Weapons;
+            shieldFactory = ItemFactoryContainer.Shields;
+            charmFactory = ItemFactoryContainer.Charms;            
 
-            redShockwaveBullet = Content.Load<Texture2D>("graphics/redShockwaveBullet");
-            blueShockwaveBullet = Content.Load<Texture2D>("graphics/blueShockwaveBullet");
+            actionBarBackground = uiLoader.Get("blankBackground");
 
-            weaponFactory = new WeaponFactory(weaponSword1, weaponBow1, weaponBow2, projectileBow1, weaponSword2, weaponAxe1, weaponAxe2,
-                weaponMaul1, weaponMaulLarge, weaponHammer1, weaponDagger1, weaponSpear1, weaponSpear2, weaponSpear3, weaponShuriken1,
-                weaponShuriken2, weaponShuriken3, redShockwaveBullet, blueShockwaveBullet, weaponGrapple1);
 
-            Texture2D pixel = Content.Load<Texture2D>("graphics/pixel");
+            //TODO: STOP CHEATING
+            Texture2D pixel = uiLoader.Get("../pixel");
+
             lineDrawer = new LineDrawer(pixel);
-            #endregion
-
-            #region Load Shields
-            shieldBasic1 = Content.Load<Texture2D>("graphics/Shield1");
-            shieldBasic2 = Content.Load<Texture2D>("graphics/Shield2");
-            speedBoost1 = Content.Load<Texture2D>("graphics/speedBoost1");
-            thunderStone = Content.Load<Texture2D>("graphics/thunderStone");
-            elvenTrinket = Content.Load<Texture2D>("graphics/ElvenTrinket");
-
-            shieldFactory = new ShieldFactory(shieldBasic1, shieldBasic2, speedBoost1, thunderStone, blueShockwaveBullet, elvenTrinket);
-            #endregion
-
-            #region Load Charms
-            charmSprite = Content.Load<Texture2D>("graphics/charmSprite");
-            charmFactory = new CharmFactory(charmSprite);
-            #endregion
 
             #region Create Player
+
             //Health bar sprite
-            healthBarSprite = Content.Load<Texture2D>("graphics/HealthBar2");
+            healthBarSprite = creatureLoader.Get("healthBar1");
 
             //Load sprite
-            player1Sprite = Content.Load<Texture2D>(@"graphics\PlayerSprite1");
+            player1Sprite = creatureLoader.Get("player1");
             playerStartingLocation = new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.WINDOW_HEIGHT / 2);
 
             //TODO: Fix the ugly code where we set the player health afterwards
@@ -201,15 +175,15 @@ namespace MainGame.Screens
             #region Create Background
             //Create tiles to fill screen
 
-            tileGrass1Sprite = Content.Load<Texture2D>(@"graphics\TileGrass1");
-            tileGrass2Sprite = Content.Load<Texture2D>(@"graphics\TileGrass2");
-            tileGrass3Sprite = Content.Load<Texture2D>(@"graphics\TileGrass3");
-            tileSand1Sprite = Content.Load<Texture2D>(@"graphics\TileSand1");
-            tileSand2Sprite = Content.Load<Texture2D>(@"graphics\TileSand2");
-            tileSand3Sprite = Content.Load<Texture2D>(@"graphics\TileSand3");
-            tileClay1Sprite = Content.Load<Texture2D>(@"graphics\TileClay1");
-            tileStone1Sprite = Content.Load<Texture2D>(@"graphics\TileStone1");
-            tilePillar1Sprite = Content.Load<Texture2D>(@"graphics\TilePillar1");
+            tileGrass1Sprite = tileLoader.Get("grass1");
+            tileGrass2Sprite = tileLoader.Get("grass2");
+            tileGrass3Sprite = tileLoader.Get("grass3");
+            tileSand1Sprite = tileLoader.Get("sand1");
+            tileSand2Sprite = tileLoader.Get("sand2");
+            tileSand3Sprite = tileLoader.Get("sand3");
+            tileClay1Sprite = tileLoader.Get("clay1");
+            tileStone1Sprite = tileLoader.Get("stone1");
+            tilePillar1Sprite = tileLoader.Get("pillar1");
 
             tileSprites.Add(tileSand1Sprite);
             tileSprites.Add(tileSand2Sprite);
@@ -218,8 +192,8 @@ namespace MainGame.Screens
             #endregion
 
             #region Obstacles
-            wallRock1Sprite = Content.Load<Texture2D>(@"graphics\wallRock1");
-            wallRock2Sprite = Content.Load<Texture2D>(@"graphics/wallRock2");
+            wallRock1Sprite = tileLoader.Get("rock1");
+            wallRock2Sprite = tileLoader.Get("rock2");
 
             obstacleSprites.Add(wallRock1Sprite);
             obstacleSprites.Add(wallRock2Sprite);
@@ -227,24 +201,13 @@ namespace MainGame.Screens
 
             #region Create Bad Guys
 
-            enemySprite1 = Content.Load<Texture2D>("graphics/EnemySprite1");
-            enemyGladiator1 = Content.Load<Texture2D>("graphics/EnemyGladiator1");
-            enemyGladiator2 = Content.Load<Texture2D>("graphics/EnemyGladiator2");
-            enemyGladiator2Large = Content.Load<Texture2D>("graphics/EnemyGladiator2Large");
-            enemySkeleton1 = Content.Load<Texture2D>("graphics/EnemySkeleton1");
-            enemySkeleton2 = Content.Load<Texture2D>("graphics/EnemySkeleton2");
-            enemyGoblin1 = Content.Load<Texture2D>("graphics/EnemyGoblin1");
-            enemyFireSpider1 = Content.Load<Texture2D>("graphics/FireSpider");
-            enemyBlueSpider1 = Content.Load<Texture2D>("graphics/BlueSpider");
-
             pathfinder = new Pathfinding(GameConstants.TILES_WIDE, GameConstants.TILES_HIGH, GameConstants.TILE_SIZE, weaponDagger1, PathfinderType.BasicPathfinder);
-            enemyFactory = new EnemyFactory(weaponFactory, shieldFactory, charmFactory, pathfinder, healthBarSprite, enemySprite1, enemyGladiator1, enemyGladiator2, enemyGladiator2Large,
-                enemyGoblin1, enemySkeleton1, enemySkeleton2, enemyFireSpider1, enemyBlueSpider1);
+            enemyFactory = new EnemyFactory(pathfinder);
 
             #endregion
 
             #region Create User Interface
-            font = Content.Load<SpriteFont>("font/font");
+            font = fontLoader.Get("font");
             score = 0;
 
             Vector2 firstIconLocation = new Vector2((GameConstants.TILES_WIDE - 0.5f) * GameConstants.TILE_SIZE, (GameConstants.TILES_HIGH + 0.5f) * GameConstants.TILE_SIZE);
@@ -338,7 +301,7 @@ namespace MainGame.Screens
                 TradeScreenContents tradeContents = new TradeScreenContents(player1.HitPoints, level, player1.Weapon1, player1.Weapon2, player1.Shield1, player1.Charm1,
                     item1, item2, item3);
 
-                ScreenChanged(new TradeScreen(ScreenChanged, Content, tradeContents));
+                ScreenChanged(new TradeScreen(ScreenChanged, tradeContents));
             }
 
             #endregion
@@ -483,7 +446,7 @@ namespace MainGame.Screens
             #region Game Over
             if (player1.HitPoints <= 0)
             {
-                ScreenChanged(new GameOverScreen(ScreenChanged, Content));
+                ScreenChanged(new GameOverScreen(ScreenChanged));
             }
             #endregion
         }
