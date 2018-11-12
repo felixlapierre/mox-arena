@@ -594,7 +594,7 @@ namespace MainGame.Items.Weapons
             string name = "Grapple";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponSprites.Get("grapple");
+            Texture2D sprite = weaponSprites.Get("grapple1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;

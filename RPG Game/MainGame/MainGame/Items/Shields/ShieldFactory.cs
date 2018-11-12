@@ -68,7 +68,7 @@ namespace MainGame.Items.Shields
             string name = "Thunder Stone";
             Texture2D sprite = shieldLoader.Get("thunderStone1");
             List<Effect> activeEffects = new List<Effect>();
-            activeEffects.Add(new Effect(EffectType.Shockwave, 10, 1.0f, projectileLoader.Get("blueBall"), 5, 400));
+            activeEffects.Add(new Effect(EffectType.Shockwave, 10, 1.0f, projectileLoader.Get("blueBall1"), 5, 400));
             int cooldown = 6000;
             Shield shield = new Shield(name, sprite, activeEffects, cooldown);
             shield.ID = 3;

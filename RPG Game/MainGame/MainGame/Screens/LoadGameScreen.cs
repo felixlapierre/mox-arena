@@ -153,6 +153,7 @@ namespace MainGame.Screens
                 inputFile = File.OpenText("SaveGame" + slot.ToString());
 
                 //TODO: Clean up this code
+                //TODO: Saving and loading functions don't match
 
                 TradeContents.Level = int.Parse(inputFile.ReadLine());
                 TradeContents.Health = int.Parse(inputFile.ReadLine());
