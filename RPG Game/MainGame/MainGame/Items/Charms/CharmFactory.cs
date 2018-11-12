@@ -21,7 +21,7 @@ namespace MainGame.Items.Charms
         public CharmFactory()
         {
             charmLoader = CharmLoader.GetInstance();
-            charmSprite = charmLoader.Get("basic");
+            charmSprite = charmLoader.Get("basic1");
         }
         #endregion
 

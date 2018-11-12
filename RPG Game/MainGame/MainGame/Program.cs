@@ -14,7 +14,7 @@ namespace MainGame
         [STAThread]
         static void Main()
         {
-            using (var game = new Game2())
+            using (var game = new GameCore())
                 game.Run();
 
         }

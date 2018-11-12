@@ -11,7 +11,7 @@ namespace MainGame.ContentLoaders.Textures
     {
         private static UserInterfaceLoader Instance;
 
-        private UserInterfaceLoader(ContentManager content) : base(content, "/projectiles")
+        private UserInterfaceLoader(ContentManager content) : base(content, "/userinterface")
         {
 
         }

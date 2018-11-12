@@ -19,7 +19,7 @@ namespace MainGame.ContentLoaders
         #region Public Methods
         public ContentLoader(ContentManager content, string root)
         {
-            Content = new ContentManager(content.ServiceProvider, "Content" + root);
+            Content = new ContentManager(content.ServiceProvider, "Content/bin" + root);
         }
 
         public T Get(string name)

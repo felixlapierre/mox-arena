@@ -11,10 +11,24 @@ namespace MainGame.ContentLoaders
 {
     class TextureLoader : ContentLoader<Texture2D>
     {
-        public TextureLoader(ContentManager content, string root) : base(content, "/graphics" + root)
+        private static TextureLoader Instance;
+
+        protected TextureLoader(ContentManager content, string root) : base(content, "/graphics" + root)
         {
             //Leave root blank to load textures in graphics folder
         }
         
+        public static void Initialize(ContentManager content)
+        {
+            if(Instance == null)
+                Instance = new TextureLoader(content, "");
+        }
+
+        public static TextureLoader GetInstance()
+        {
+            if (Instance == null)
+                throw new LoaderNotInitializedException();
+            return Instance;
+        }
     }
 }

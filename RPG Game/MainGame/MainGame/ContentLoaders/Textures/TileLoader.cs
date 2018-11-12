@@ -11,7 +11,7 @@ namespace MainGame.ContentLoaders.Textures
     {
         private static TileLoader Instance;
 
-        private TileLoader(ContentManager content) : base(content, "/projectiles")
+        private TileLoader(ContentManager content) : base(content, "/tiles")
         {
 
         }

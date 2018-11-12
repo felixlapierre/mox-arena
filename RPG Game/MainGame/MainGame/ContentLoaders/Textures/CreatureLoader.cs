@@ -11,7 +11,7 @@ namespace MainGame.ContentLoaders.Textures
     {
         private static CreatureLoader Instance;
 
-        private CreatureLoader(ContentManager content) : base(content, "/projectiles")
+        private CreatureLoader(ContentManager content) : base(content, "/creatures")
         {
 
         }

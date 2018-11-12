@@ -12,6 +12,7 @@ namespace MainGame.ContentLoaders
     {
         public static void InitializeAllContentLoaders(ContentManager content)
         {
+            TextureLoader.Initialize(content);
             FontLoader.Initialize(content);
             CharmLoader.Initialize(content);
             CreatureLoader.Initialize(content);

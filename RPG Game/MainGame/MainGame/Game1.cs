@@ -148,7 +148,7 @@ namespace MainGame
         #endregion
 
         #region Enemies
-        EnemyFactory enemyFactory;
+        EnemyFactoryOld enemyFactory;
         List<Enemy> enemies = new List<Enemy>();
         List<Enemy> deadEnemies = new List<Enemy>();
 
@@ -167,7 +167,7 @@ namespace MainGame
         #endregion
 
         #region Weapons
-        public WeaponFactory weaponFactory;
+        public WeaponFactoryOld weaponFactory;
         Texture2D weaponSword1;
         Texture2D weaponSword2;
         Texture2D weaponBow1;
@@ -189,7 +189,7 @@ namespace MainGame
         #endregion
 
         #region Shields
-        public ShieldFactory shieldFactory;
+        public ShieldFactoryOld shieldFactory;
         Texture2D shieldBasic1;
         Texture2D shieldBasic2;
         Texture2D speedBoost1;
@@ -198,7 +198,7 @@ namespace MainGame
         #endregion
 
         #region Charms
-        public CharmFactory charmFactory;
+        public CharmFactoryOld charmFactory;
         Texture2D charmSprite;
         #endregion
 
@@ -429,7 +429,7 @@ namespace MainGame
             redShockwaveBullet = Content.Load<Texture2D>("graphics/redShockwaveBullet");
             blueShockwaveBullet = Content.Load<Texture2D>("graphics/blueShockwaveBullet");
 
-            weaponFactory = new WeaponFactory(weaponSword1, weaponBow1, weaponBow2, projectileBow1, weaponSword2, weaponAxe1, weaponAxe2,
+            weaponFactory = new WeaponFactoryOld(weaponSword1, weaponBow1, weaponBow2, projectileBow1, weaponSword2, weaponAxe1, weaponAxe2,
                 weaponMaul1, weaponMaulLarge, weaponHammer1, weaponDagger1, weaponSpear1, weaponSpear2, weaponSpear3, weaponShuriken1,
                 weaponShuriken2, weaponShuriken3, redShockwaveBullet, blueShockwaveBullet, weaponGrapple1);
             #endregion
@@ -441,12 +441,12 @@ namespace MainGame
             thunderStone = Content.Load<Texture2D>("graphics/thunderStone");
             elvenTrinket = Content.Load<Texture2D>("graphics/ElvenTrinket");
 
-            shieldFactory = new ShieldFactory(shieldBasic1, shieldBasic2, speedBoost1, thunderStone, blueShockwaveBullet, elvenTrinket);
+            shieldFactory = new ShieldFactoryOld(shieldBasic1, shieldBasic2, speedBoost1, thunderStone, blueShockwaveBullet, elvenTrinket);
             #endregion
 
             #region Load Charms
             charmSprite = Content.Load<Texture2D>("graphics/charmSprite");
-            charmFactory = new CharmFactory(charmSprite);
+            charmFactory = new CharmFactoryOld(charmSprite);
             #endregion
 
             #region Main Menu
@@ -748,7 +748,7 @@ namespace MainGame
             enemyBlueSpider1 = Content.Load<Texture2D>("graphics/BlueSpider");
 
             pathfinder = new Pathfinding(TilesWide, TilesHigh, TileSize, weaponDagger1, PathfinderType.BasicPathfinder);
-            enemyFactory = new EnemyFactory(weaponFactory, shieldFactory, charmFactory, pathfinder, healthBarSprite, enemySprite1, enemyGladiator1, enemyGladiator2, enemyGladiator2Large,
+            enemyFactory = new EnemyFactoryOld(weaponFactory, shieldFactory, charmFactory, pathfinder, healthBarSprite, enemySprite1, enemyGladiator1, enemyGladiator2, enemyGladiator2Large,
                 enemyGoblin1, enemySkeleton1, enemySkeleton2, enemyFireSpider1, enemyBlueSpider1);
 
             #endregion
@@ -2138,7 +2138,7 @@ namespace MainGame
                 box.Update();
         }
 
-        public void AddRandomItem(ItemBox itemBox, WeaponFactory weaponFactory, ShieldFactory shieldFactory)
+        public void AddRandomItem(ItemBox itemBox, WeaponFactoryOld weaponFactory, ShieldFactoryOld shieldFactory)
         {
             int selector = random.Next(1, 13);
             if (selector < 7) //Select weapon
@@ -2210,7 +2210,7 @@ namespace MainGame
             }
         }
 
-        public void CreateEnemies(EnemyFactory enemyFactory, List<Enemy> enemies)
+        public void CreateEnemies(EnemyFactoryOld enemyFactory, List<Enemy> enemies)
         {
             List<Enemy> choices = new List<Enemy>();
             Vector2 zero = new Vector2(0, 0);

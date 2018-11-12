@@ -40,8 +40,9 @@ namespace MainGame.Screens
         public MainMenuScreen(OnScreenChanged screenChanged) : base(screenChanged)
         {
             UserInterfaceLoader uiLoader = UserInterfaceLoader.GetInstance();
+            TileLoader tileLoader = TileLoader.GetInstance();
 
-            tileBrick1Sprite = uiLoader.Get("brick1");
+            tileBrick1Sprite = tileLoader.Get("brick1");
             titleSprite = uiLoader.Get("title");
             newGameSprite = uiLoader.Get("newGame");
             loadGameSprite = uiLoader.Get("loadGame");

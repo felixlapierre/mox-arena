@@ -145,6 +145,7 @@ namespace MainGame.Screens
             FontLoader fontLoader = FontLoader.GetInstance();
             CreatureLoader creatureLoader = CreatureLoader.GetInstance();
             TileLoader tileLoader = TileLoader.GetInstance();
+            WeaponLoader weaponLoader = WeaponLoader.GetInstance();
 
             weaponFactory = ItemFactoryContainer.Weapons;
             shieldFactory = ItemFactoryContainer.Shields;
@@ -152,9 +153,7 @@ namespace MainGame.Screens
 
             actionBarBackground = uiLoader.Get("blankBackground");
 
-
-            //TODO: STOP CHEATING
-            Texture2D pixel = uiLoader.Get("../pixel");
+            Texture2D pixel = weaponLoader.Get("pixel");
 
             lineDrawer = new LineDrawer(pixel);
 
