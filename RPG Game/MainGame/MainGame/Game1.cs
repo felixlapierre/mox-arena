@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Xml.Serialization;
 
 namespace MainGame
-{ 
+{
     /// </summary>
     public enum WeaponType
     {
@@ -148,7 +148,7 @@ namespace MainGame
         #endregion
 
         #region Enemies
-        EnemyFactory enemyFactory;
+        EnemyFactoryOld enemyFactory;
         List<Enemy> enemies = new List<Enemy>();
         List<Enemy> deadEnemies = new List<Enemy>();
 
@@ -167,7 +167,7 @@ namespace MainGame
         #endregion
 
         #region Weapons
-        public WeaponFactory weaponFactory;
+        public WeaponFactoryOld weaponFactory;
         Texture2D weaponSword1;
         Texture2D weaponSword2;
         Texture2D weaponBow1;
@@ -189,7 +189,7 @@ namespace MainGame
         #endregion
 
         #region Shields
-        public ShieldFactory shieldFactory;
+        public ShieldFactoryOld shieldFactory;
         Texture2D shieldBasic1;
         Texture2D shieldBasic2;
         Texture2D speedBoost1;
@@ -198,7 +198,7 @@ namespace MainGame
         #endregion
 
         #region Charms
-        public CharmFactory charmFactory;
+        public CharmFactoryOld charmFactory;
         Texture2D charmSprite;
         #endregion
 
@@ -212,8 +212,8 @@ namespace MainGame
 
         #region Tiles
         int TilesWide;
-        int TilesHigh;      
-            
+        int TilesHigh;
+
         List<GridEntity> tiles = new List<GridEntity>();
         List<GridEntity> obstacles = new List<GridEntity>();
         List<Texture2D> tileSprites = new List<Texture2D>();
@@ -429,8 +429,8 @@ namespace MainGame
             redShockwaveBullet = Content.Load<Texture2D>("graphics/redShockwaveBullet");
             blueShockwaveBullet = Content.Load<Texture2D>("graphics/blueShockwaveBullet");
 
-            weaponFactory = new WeaponFactory(weaponSword1, weaponBow1, weaponBow2, projectileBow1, weaponSword2, weaponAxe1, weaponAxe2,
-                weaponMaul1, weaponMaulLarge,  weaponHammer1, weaponDagger1, weaponSpear1, weaponSpear2, weaponSpear3, weaponShuriken1,
+            weaponFactory = new WeaponFactoryOld(weaponSword1, weaponBow1, weaponBow2, projectileBow1, weaponSword2, weaponAxe1, weaponAxe2,
+                weaponMaul1, weaponMaulLarge, weaponHammer1, weaponDagger1, weaponSpear1, weaponSpear2, weaponSpear3, weaponShuriken1,
                 weaponShuriken2, weaponShuriken3, redShockwaveBullet, blueShockwaveBullet, weaponGrapple1);
             #endregion
 
@@ -441,14 +441,14 @@ namespace MainGame
             thunderStone = Content.Load<Texture2D>("graphics/thunderStone");
             elvenTrinket = Content.Load<Texture2D>("graphics/ElvenTrinket");
 
-            shieldFactory = new ShieldFactory(shieldBasic1, shieldBasic2, speedBoost1, thunderStone, blueShockwaveBullet, elvenTrinket);
+            shieldFactory = new ShieldFactoryOld(shieldBasic1, shieldBasic2, speedBoost1, thunderStone, blueShockwaveBullet, elvenTrinket);
             #endregion
 
             #region Load Charms
             charmSprite = Content.Load<Texture2D>("graphics/charmSprite");
-            charmFactory = new CharmFactory(charmSprite);
+            charmFactory = new CharmFactoryOld(charmSprite);
             #endregion
-            
+
             #region Main Menu
             tileBrick1Sprite = Content.Load<Texture2D>(@"graphics\TileBrick1");
             titleSprite = Content.Load<Texture2D>(@"graphics/TitleSprite");
@@ -696,7 +696,7 @@ namespace MainGame
             #endregion
 
             #endregion
-            
+
             #region Create Player
             //Health bar sprite
             healthBarSprite = Content.Load<Texture2D>("graphics/HealthBar2");
@@ -748,7 +748,7 @@ namespace MainGame
             enemyBlueSpider1 = Content.Load<Texture2D>("graphics/BlueSpider");
 
             pathfinder = new Pathfinding(TilesWide, TilesHigh, TileSize, weaponDagger1, PathfinderType.BasicPathfinder);
-            enemyFactory = new EnemyFactory(weaponFactory, shieldFactory, charmFactory, pathfinder, healthBarSprite, enemySprite1, enemyGladiator1, enemyGladiator2, enemyGladiator2Large,
+            enemyFactory = new EnemyFactoryOld(weaponFactory, shieldFactory, charmFactory, pathfinder, healthBarSprite, enemySprite1, enemyGladiator1, enemyGladiator2, enemyGladiator2Large,
                 enemyGoblin1, enemySkeleton1, enemySkeleton2, enemyFireSpider1, enemyBlueSpider1);
 
             #endregion
@@ -788,7 +788,7 @@ namespace MainGame
             tradeItemBoxes = new List<ItemBox>();
             tradeItemBoxBackgrounds = new List<StaticEntity>();
 
-            playerTradeMenuHealth = new HealthBar("Trade Menu Health", new Vector2(TileSize, WindowHeight - (TileSize * 3 + 15) ), healthBarSprite);
+            playerTradeMenuHealth = new HealthBar("Trade Menu Health", new Vector2(TileSize, WindowHeight - (TileSize * 3 + 15)), healthBarSprite);
 
             Vector2 firstBoxLocation = new Vector2(TileSize / 2 + TileSize * 1, TileSize * 3);
             Vector2 secondBoxLocation = new Vector2(TileSize / 2 + TileSize * 3, TileSize * 3);
@@ -840,7 +840,7 @@ namespace MainGame
             #endregion
 
             #region Level editor
-            selectedObject = GetObstacleFromID(1,2,0,0);
+            selectedObject = GetObstacleFromID(1, 2, 0, 0);
             objectSelection.Add(GetObstacleFromID(1, 3, 0, 1));
             objectSelection.Add(GetObstacleFromID(2, 4, 0, 1));
             objectSelection.Add(GetObstacleFromID(3, 5, 0, 1));
@@ -853,7 +853,7 @@ namespace MainGame
             valueEditors.Add(new StaticEntity("Editor3", new Vector2(WindowWidth - valueEditor.Width / 2, WindowHeight / 2 + valueEditor.Height * 2), valueEditor));
             valueEditors.Add(new StaticEntity("Editor4", new Vector2(WindowWidth - valueEditor.Width / 2, WindowHeight / 2 + valueEditor.Height * 3), valueEditor));
 
-            basicSpawner = new Spawner("Spawner",7, 0, 0, new Vector2(7 * TileSize + TileSize / 2, TileSize / 2), charmSprite, 101, 200, 1, 0);
+            basicSpawner = new Spawner("Spawner", 7, 0, 0, new Vector2(7 * TileSize + TileSize / 2, TileSize / 2), charmSprite, 101, 200, 1, 0);
             createdSpawner = basicSpawner.Copy();
 
             editorMenuInfoBackgrounds.Add(new StaticEntity("TopLeft", new Vector2(0, 0), actionBarBackground));
@@ -868,7 +868,7 @@ namespace MainGame
             //DEBUG:
             foreach (GridEntity obstacle in obstacles)
                 Debug.WriteLine(obstacle.XPosition.ToString() + " " + obstacle.YPosition.ToString());
-            Debug.WriteLine("Player: " + (player1.Location.X / TileSize ).ToString() + " " + (player1.Location.Y / TileSize).ToString());
+            Debug.WriteLine("Player: " + (player1.Location.X / TileSize).ToString() + " " + (player1.Location.Y / TileSize).ToString());
         }
 
         /// <summary>
@@ -934,7 +934,7 @@ namespace MainGame
                         leftMousePreviouslyPressed = true;
                         InitiateLevelEditor();
                     }
-                    
+
                 }
             }
             #endregion
@@ -1079,7 +1079,7 @@ namespace MainGame
                 {
                     foreach (Enemy enemy in enemies)
                     {
-                        if (player1.CollisionRectangle.Intersects(enemy.Weapon1.CollisionRectangle) 
+                        if (player1.CollisionRectangle.Intersects(enemy.Weapon1.CollisionRectangle)
                             && enemy.HitPoints > 0
                             && enemy.Weapon1.IsActive
                             && player1.Unhittable == false)
@@ -1133,7 +1133,7 @@ namespace MainGame
                         //Collision with player weapons
                         if (enemy.InvincibilityFramesRemaining <= 0)
                         {
-                            if (enemy.CollisionRectangle.Intersects(player1.Weapon1.CollisionRectangle) 
+                            if (enemy.CollisionRectangle.Intersects(player1.Weapon1.CollisionRectangle)
                                 && player1.HitPoints > 0
                                 && player1.Weapon1.IsActive
                                 && enemy.Unhittable == false)
@@ -1145,7 +1145,7 @@ namespace MainGame
                                         player1.Heal(player1.Weapon1.Damage * player1.Charm1.Strength);
                                 }
                             }
-                            if (enemy.CollisionRectangle.Intersects(player1.Weapon2.CollisionRectangle) 
+                            if (enemy.CollisionRectangle.Intersects(player1.Weapon2.CollisionRectangle)
                                 && player1.HitPoints > 0
                                 && player1.Weapon2.IsActive
                                 && enemy.Unhittable == false)
@@ -1189,7 +1189,7 @@ namespace MainGame
                     }
                     foreach (Spawner spawner in spawners)
                     {
-                        spawner.Update(gameTime,player1.Location, enemies, enemyFactory);
+                        spawner.Update(gameTime, player1.Location, enemies, enemyFactory);
                     }
 
                 }
@@ -1266,7 +1266,7 @@ namespace MainGame
                     if (LoadGame(fileSelected) == true)
                         gameState = GameState.Trade;
                 }
-                
+
             }
             #endregion
 
@@ -1385,7 +1385,7 @@ namespace MainGame
 
             #region Update keyboard states
             if (keyboard.IsKeyDown(Keys.Escape))
-            escapeButtonPreviouslyPressed = true;
+                escapeButtonPreviouslyPressed = true;
             else
                 escapeButtonPreviouslyPressed = false;
 
@@ -1461,7 +1461,7 @@ namespace MainGame
             if (gameState == GameState.Sandbox || gameState == GameState.Trade)
             {
                 background.Draw(spriteBatch, new Rectangle(0, 0, WindowWidth, WindowHeight));
-                
+
                 #region Item Boxes
                 foreach (StaticEntity equipItemBoxBackground in equippedItemBoxBackgrounds)
                     equipItemBoxBackground.Draw(spriteBatch, Color.DimGray);
@@ -1534,7 +1534,7 @@ namespace MainGame
                 }
 
                 #endregion
-                
+
             }
             #endregion
 
@@ -1574,7 +1574,7 @@ namespace MainGame
                 #region Buttons
 
                 if (resetButton.CollisionRectangle.Contains(mouse.Position))
-                    resetButton.Draw(spriteBatch,Color.LightSteelBlue);
+                    resetButton.Draw(spriteBatch, Color.LightSteelBlue);
                 else
                     resetButton.Draw(spriteBatch);
 
@@ -1591,14 +1591,14 @@ namespace MainGame
                     else
                         saveButton.Draw(spriteBatch);
                 }
-                playerTradeMenuHealth.Draw(spriteBatch, player1, new Vector2(0,0));
+                playerTradeMenuHealth.Draw(spriteBatch, player1, new Vector2(0, 0));
                 #endregion
 
             }
             #endregion
 
             #region Battle
-            if (gameState == GameState.Battle || gameState == GameState.Paused || gameState == GameState.PlayerPaused 
+            if (gameState == GameState.Battle || gameState == GameState.Paused || gameState == GameState.PlayerPaused
                 || gameState == GameState.Editor)
             {
                 if (gameMode == GameMode.Adventure && looseCamera && gameState != GameState.Editor)
@@ -1752,7 +1752,7 @@ namespace MainGame
                 #endregion
 
                 selectedObject.Draw(spriteBatch);
-                
+
                 if (selectingObjects)
                 {
                     if (selectedObject.ID > SpawnerIDCutoff)
@@ -2097,7 +2097,7 @@ namespace MainGame
             foreach (StaticEntity itemBoxBackground in itemBoxBackgrounds)
             {
                 if (itemBoxBackgrounds.Count == itemBoxes.Count || itemBoxBackgrounds.IndexOf(itemBoxBackground) < itemBoxes.Count)
-                { 
+                {
                     ItemBox correspondingBox = itemBoxes.ElementAt(itemBoxBackgrounds.IndexOf(itemBoxBackground));
                     if (itemBoxBackground.CollisionRectangle.Contains(mouse.Position.X, mouse.Position.Y))
                         correspondingBox.IsHovered = true;
@@ -2138,7 +2138,7 @@ namespace MainGame
                 box.Update();
         }
 
-        public void AddRandomItem(ItemBox itemBox, WeaponFactory weaponFactory, ShieldFactory shieldFactory)
+        public void AddRandomItem(ItemBox itemBox, WeaponFactoryOld weaponFactory, ShieldFactoryOld shieldFactory)
         {
             int selector = random.Next(1, 13);
             if (selector < 7) //Select weapon
@@ -2197,7 +2197,7 @@ namespace MainGame
                         idChosen = -1;
                         chosenIdValid = true;
                     }
-                        
+
                 }
                 if (idChosen == -1)
                     itemBox.IsActive = false;
@@ -2210,7 +2210,7 @@ namespace MainGame
             }
         }
 
-        public void CreateEnemies(EnemyFactory enemyFactory, List<Enemy> enemies)
+        public void CreateEnemies(EnemyFactoryOld enemyFactory, List<Enemy> enemies)
         {
             List<Enemy> choices = new List<Enemy>();
             Vector2 zero = new Vector2(0, 0);
@@ -2470,7 +2470,7 @@ namespace MainGame
                     enemy.Weapon1 = weaponFactory.CreateHelsingor();
                     enemy.Weapon2 = weaponFactory.CreateIceBow();
                     enemy.Shield1 = shieldFactory.CreateBasicShield();
-                    enemies.Add(enemy);                    
+                    enemies.Add(enemy);
                     break;
                 #endregion
 
@@ -2481,7 +2481,7 @@ namespace MainGame
         }
 
         public void PickRandomEnemies(List<Enemy> mainEnemyList, List<Enemy> choices, int numberOfEnemies)
-        {            
+        {
             for (int i = 0; i < numberOfEnemies; i++)
             {
                 int enemyID = random.Next(0, choices.Count);
@@ -2491,7 +2491,7 @@ namespace MainGame
             }
         }
 
-        public void CreateEnemiesOld(EnemyFactory enemyFactory, List<Enemy> enemies)
+        public void CreateEnemiesOld(EnemyFactoryOld enemyFactory, List<Enemy> enemies)
         {
             //Determine the current difficulty level
             int difficultyLevel = 1 + (int)Math.Ceiling(((decimal)level / 4));
@@ -2535,7 +2535,7 @@ namespace MainGame
                 return;
             }
 
-            for (int i= 1; i <= numberOfEnemies; i++)
+            for (int i = 1; i <= numberOfEnemies; i++)
             {
                 //Main loop that creates an enemy
                 location = GetEnemyLocation();
@@ -2606,7 +2606,7 @@ namespace MainGame
         public void InitiateCombat(GameTime gameTime)
         {
             //Initialize a combat
-            player1 = new Player("Player1", playerStartingLocation, player1Sprite, new Vector2(0, 0), PlayerHitPoints, healthBarSprite, weapon1.Copy(), weapon2.Copy() , shield1.Copy(), charm1.Copy(), playerBaseSpeed);
+            player1 = new Player("Player1", playerStartingLocation, player1Sprite, new Vector2(0, 0), PlayerHitPoints, healthBarSprite, weapon1.Copy(), weapon2.Copy(), shield1.Copy(), charm1.Copy(), playerBaseSpeed);
 
             weapon1Icon.Sprite = weapon1.Sprite;
             weapon1Icon.UpdateDrawRectangle();
@@ -2979,7 +2979,7 @@ namespace MainGame
             }
             catch
             {
-                
+
             }
             tiles.Clear();
             CreateTiles();
@@ -3025,7 +3025,7 @@ namespace MainGame
             }
             outputFile.Close();
         }
-        
+
         public Vector2 ConvertToGrid(Vector2 location)
         {
             Vector2 gridPosition = new Vector2(0, 0);

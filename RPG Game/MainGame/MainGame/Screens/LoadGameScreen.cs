@@ -11,16 +11,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MainGame.ContentLoaders;
+using MainGame.ContentLoaders.Textures;
+
 namespace MainGame.Screens
 {
     class LoadGameScreen : Screen
     {
         #region Properties
         int fileSelected;
-
-        Texture2D blankButtonSprite;
-        Texture2D confirmButtonSprite;
-        Texture2D backButtonSprite;
 
         List<StaticEntity> fileButtons;
         List<String> levelData;
@@ -36,19 +35,20 @@ namespace MainGame.Screens
         Texture2D actionBarBackground;
         StaticEntity background;
 
-        ContentManager Content { get; set; }
         TradeScreenContents TradeContents { get; set; }
         #endregion
 
         #region Constructors
-        public LoadGameScreen(OnScreenChanged screenChanged, ContentManager content) : base(screenChanged)
+        public LoadGameScreen(OnScreenChanged screenChanged) : base(screenChanged)
         {
-            Content = content;
+            UserInterfaceLoader uiLoader = UserInterfaceLoader.GetInstance();
+            FontLoader fontLoader = FontLoader.GetInstance();
+
             var TileSize = GameConstants.TILE_SIZE;
             fileSelected = -1;
-            blankButtonSprite = Content.Load<Texture2D>("graphics/blankButton");
-            confirmButtonSprite = Content.Load<Texture2D>("graphics/confirmButton");
-            backButtonSprite = Content.Load<Texture2D>("graphics/backButton");
+            Texture2D blankButtonSprite = uiLoader.Get("select");
+            Texture2D confirmButtonSprite = uiLoader.Get("confirm");
+            Texture2D backButtonSprite = uiLoader.Get("back");
             backButton = new StaticEntity("Back Button", new Vector2(TileSize * 2, GameConstants.WINDOW_HEIGHT - TileSize), backButtonSprite);
 
             fileButtons = new List<StaticEntity>();
@@ -68,9 +68,10 @@ namespace MainGame.Screens
             }
             confirmButton = new StaticEntity("Confirm Button", new Vector2(TileSize * 5, GameConstants.WINDOW_HEIGHT - TileSize), confirmButtonSprite);
 
-            font = Content.Load<SpriteFont>("font/font");
-            font20 = Content.Load<SpriteFont>("font/font20");
-            actionBarBackground = Content.Load<Texture2D>("graphics/actionBarBackground");
+            font = fontLoader.Get("font");
+            font20 = fontLoader.Get("font20");
+
+            actionBarBackground = uiLoader.Get("blankBackground");
             background = new StaticEntity("Background", new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.WINDOW_HEIGHT / 2), actionBarBackground);
 
             for (int i = 0; i < GameConstants.NUMBER_OF_SAVES; i++)
@@ -89,12 +90,12 @@ namespace MainGame.Screens
             }
             if (backButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
             {
-                ScreenChanged(new MainMenuScreen(ScreenChanged, Content));
+                ScreenChanged(new MainMenuScreen(ScreenChanged));
             }
             else if (confirmButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
             {
                 if (LoadGame(fileSelected) == true)
-                    ScreenChanged(new TradeScreen(ScreenChanged, Content, TradeContents));
+                    ScreenChanged(new TradeScreen(ScreenChanged, TradeContents));
             }
         }
 
@@ -156,6 +157,7 @@ namespace MainGame.Screens
                 inputFile = File.OpenText("SaveGame" + slot.ToString());
 
                 //TODO: Clean up this code
+                //TODO: Saving and loading functions don't match
 
                 TradeContents.Level = int.Parse(inputFile.ReadLine());
                 TradeContents.Health = int.Parse(inputFile.ReadLine());

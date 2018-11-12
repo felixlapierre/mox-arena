@@ -10,14 +10,14 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using MainGame.ContentLoaders;
+using MainGame.ContentLoaders.Textures;
+
 namespace MainGame.Screens
 {
     class TradeScreen : Screen
     {
         #region Properties
-
-        ContentManager Content { get; set; }
-
         bool saveGameOverrideEnabled;
         List<ItemBox> tradeItemBoxes;
         List<StaticEntity> tradeItemBoxBackgrounds;
@@ -68,9 +68,12 @@ namespace MainGame.Screens
         #endregion
 
         #region Constructors
-        public TradeScreen(OnScreenChanged screenChanged, ContentManager content, TradeScreenContents tradeContents) : base(screenChanged)
+        public TradeScreen(OnScreenChanged screenChanged, TradeScreenContents tradeContents) : base(screenChanged)
         {
-            Content = content;
+            UserInterfaceLoader uiLoader = UserInterfaceLoader.GetInstance();
+            FontLoader fontLoader = FontLoader.GetInstance();
+            CreatureLoader creatureLoader = CreatureLoader.GetInstance();
+
             TradeContents = tradeContents;
             saveGameOverrideEnabled = false;
             tradeItemBoxes = new List<ItemBox>();
@@ -89,16 +92,15 @@ namespace MainGame.Screens
             oldShield1 = shield1;
             oldCharm1 = charm1;
 
-            actionBarBackground = Content.Load<Texture2D>("graphics/actionBarBackground");
+            actionBarBackground = uiLoader.Get("blankBackground");
             background = new StaticEntity("Background", new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.WINDOW_HEIGHT / 2), actionBarBackground);
-            playButtonSprite = Content.Load<Texture2D>("graphics/continueButton");
-            playButton = new StaticEntity("Play Button", new Vector2(GameConstants.WINDOW_WIDTH - GameConstants.TILE_SIZE * 5 / 2, GameConstants.WINDOW_HEIGHT - GameConstants.TILE_SIZE), playButtonSprite);
+            playButton = new StaticEntity("Play Button", new Vector2(GameConstants.WINDOW_WIDTH - GameConstants.TILE_SIZE * 5 / 2, GameConstants.WINDOW_HEIGHT - GameConstants.TILE_SIZE), uiLoader.Get("continue"));
 
             //TODO: Remove
 
-            font = Content.Load<SpriteFont>("font/font");
+            font = fontLoader.Get("font");
 
-            healthBarSprite = Content.Load<Texture2D>("graphics/HealthBar2");
+            healthBarSprite = creatureLoader.Get("healthBar1");
             playerTradeMenuHealth = new HealthBar("Trade Menu Health", new Vector2(GameConstants.TILE_SIZE, GameConstants.WINDOW_HEIGHT - (GameConstants.TILE_SIZE * 3 + 15)), healthBarSprite);
 
             Vector2 firstBoxLocation = new Vector2(GameConstants.TILE_SIZE / 2 + GameConstants.TILE_SIZE * 1, GameConstants.TILE_SIZE * 3);
@@ -171,10 +173,9 @@ namespace MainGame.Screens
             //tradeItemBoxes.Add(new ItemBox("item1", firstBoxLocation, actionBarBackground, tradeContents.Item1));
             //tradeItemBoxes.Add(new ItemBox("item2", secondBoxLocation, actionBarBackground, tradeContents.Item2));
             //tradeItemBoxes.Add(new ItemBox("item3", thirdBoxLocation, actionBarBackground, tradeContents.Item3));
-            healingButton = new StaticEntity("Healing", fourthBoxLocation, Content.Load<Texture2D>("graphics/Potions"));
-            resetButton = new StaticEntity("Reset Button", fifthBoxLocation, Content.Load<Texture2D>("graphics/resetButton"));
-            Texture2D saveButtonSprite = Content.Load<Texture2D>("graphics/saveButton");
-            saveButton = new StaticEntity("Save Button", new Vector2(GameConstants.WINDOW_WIDTH - GameConstants.TILE_SIZE * 3, GameConstants.TILE_SIZE * 2), saveButtonSprite);
+            healingButton = new StaticEntity("Healing", fourthBoxLocation, uiLoader.Get("potions"));
+            resetButton = new StaticEntity("Reset Button", fifthBoxLocation, uiLoader.Get("reset"));
+            saveButton = new StaticEntity("Save Button", new Vector2(GameConstants.WINDOW_WIDTH - GameConstants.TILE_SIZE * 3, GameConstants.TILE_SIZE * 2), uiLoader.Get("saveGame"));
 
             tradeItemBoxBackgrounds.Add(new StaticEntity("item1Background", firstBoxLocation, actionBarBackground));
             tradeItemBoxBackgrounds.Add(new StaticEntity("item2Background", secondBoxLocation, actionBarBackground));
@@ -308,7 +309,7 @@ namespace MainGame.Screens
             if (((level - 1) % 10 == 0 || saveGameOverrideEnabled) && saveButton.CollisionRectangle.Contains(mouse.Position)
                 && mouse.LeftButton == ButtonState.Pressed)
             {
-                ScreenChanged(new SaveGameScreen(ScreenChanged, Content, TradeContents));
+                ScreenChanged(new SaveGameScreen(ScreenChanged, TradeContents));
                 //fileSelected = -1;
                 //for (int i = 0; i < NumberOfSaves; i++)
                 //    CheckGameData(i, levelData, weapon1ItemBoxes, weapon2ItemBoxes, shield1ItemBoxes, charm1ItemBoxes);
@@ -328,7 +329,7 @@ namespace MainGame.Screens
             if (playButton.CollisionRectangle.Contains(new Vector2(mouse.X, mouse.Y)) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
             {
                 TradeScreenContents tradeContents = new TradeScreenContents(Health, level, weapon1, weapon2, shield1, charm1);
-                ScreenChanged(new CombatScreen(ScreenChanged, Content, tradeContents));
+                ScreenChanged(new CombatScreen(ScreenChanged, tradeContents));
             }
             leftMousePreviouslyPressed = mouse.LeftButton == ButtonState.Pressed;
         }

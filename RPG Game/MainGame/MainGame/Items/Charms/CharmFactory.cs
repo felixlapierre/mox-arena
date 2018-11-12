@@ -6,18 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MainGame.ContentLoaders.Textures;
+
 namespace MainGame.Items.Charms
 {
     public class CharmFactory
     {
         #region Properties
+        CharmLoader charmLoader;
         Texture2D charmSprite;
         #endregion
 
         #region Constructors
-        public CharmFactory(Texture2D charmSprite)
+        public CharmFactory()
         {
-            this.charmSprite = charmSprite;
+            charmLoader = CharmLoader.GetInstance();
+            charmSprite = charmLoader.Get("basic1");
         }
         #endregion
 

@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using MainGame.ContentLoaders.Textures;
+
 namespace MainGame.Screens
 {
     public class MainMenuScreen : Screen
@@ -22,7 +24,6 @@ namespace MainGame.Screens
         Texture2D loadGameSprite;
         Texture2D sandboxSprite;
         Texture2D adventureSprite;
-
         Texture2D tileBrick1Sprite;
 
         StaticEntity title;
@@ -31,23 +32,22 @@ namespace MainGame.Screens
         StaticEntity sandboxButton;
         StaticEntity adventureButton;
 
-        ContentManager Content { get; set; }
-
         //TODO: Get rid of this when buttons have been refactored
         bool leftMousePreviouslyPressed = false;
         #endregion
 
         #region Constructors
-        public MainMenuScreen(OnScreenChanged screenChanged, ContentManager content) : base(screenChanged)
+        public MainMenuScreen(OnScreenChanged screenChanged) : base(screenChanged)
         {
-            Content = content;
+            UserInterfaceLoader uiLoader = UserInterfaceLoader.GetInstance();
+            TileLoader tileLoader = TileLoader.GetInstance();
 
-            tileBrick1Sprite = content.Load<Texture2D>(@"graphics\TileBrick1");
-            titleSprite = content.Load<Texture2D>(@"graphics/TitleSprite");
-            newGameSprite = content.Load<Texture2D>(@"graphics/NewGameButton");
-            loadGameSprite = content.Load<Texture2D>(@"graphics/LoadGameButton");
-            sandboxSprite = content.Load<Texture2D>(@"graphics/SandboxButton");
-            adventureSprite = content.Load<Texture2D>(@"graphics/AchievementsButton");
+            tileBrick1Sprite = tileLoader.Get("brick1");
+            titleSprite = uiLoader.Get("title");
+            newGameSprite = uiLoader.Get("newGame");
+            loadGameSprite = uiLoader.Get("loadGame");
+            sandboxSprite = uiLoader.Get("sandbox");
+            adventureSprite = uiLoader.Get("adventure");
 
             title = new StaticEntity("Title Card", new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.TILE_SIZE * 2), titleSprite);
             newGameButton = new StaticEntity("New Game Button", new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.TILE_SIZE * 11 / 2), newGameSprite);
@@ -88,16 +88,16 @@ namespace MainGame.Screens
                     ItemFactoryContainer.Weapons.CreateSword(), ItemFactoryContainer.Weapons.CreateBow(),
                     ItemFactoryContainer.Shields.CreateBasicShield(), ItemFactoryContainer.Charms.CreateEmptyCharm());
 
-                ScreenChanged(new CombatScreen(ScreenChanged, Content, playerStartingGear));
+                ScreenChanged(new CombatScreen(ScreenChanged, playerStartingGear));
             }
             else if (loadGameButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
             {
-                ScreenChanged(new LoadGameScreen(ScreenChanged, Content));
+                ScreenChanged(new LoadGameScreen(ScreenChanged));
 
             }
             else if (sandboxButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
             {
-                ScreenChanged(new SandboxScreen(ScreenChanged, Content));
+                ScreenChanged(new SandboxScreen(ScreenChanged));
             }
             else if (adventureButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
             {

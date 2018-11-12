@@ -39,6 +39,7 @@ namespace MainGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            ContentLoaders.ContentLoaderInitializer.InitializeAllContentLoaders(Content);
 
             base.Initialize();
         }
@@ -54,7 +55,7 @@ namespace MainGame
 
             // TODO: use this.Content to load your game content here
             ItemFactoryContainer.Initialize(Content);
-            CurrentScreen = new MainMenuScreen(OnScreenChanged, Content);
+            CurrentScreen = new MainMenuScreen(OnScreenChanged);
         }
 
         /// <summary>

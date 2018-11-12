@@ -15,7 +15,8 @@ namespace MainGame
         static void Main()
         {
             using (var game = new GameCore())
-               game.Run();
+                game.Run();
+
         }
     }
 #endif

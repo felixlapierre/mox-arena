@@ -11,16 +11,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MainGame.ContentLoaders;
+using MainGame.ContentLoaders.Textures;
+
 namespace MainGame.Screens
 {
     class SaveGameScreen : Screen
     {
         #region Properties
         int fileSelected;
-
-        Texture2D blankButtonSprite;
-        Texture2D confirmButtonSprite;
-        Texture2D backButtonSprite;
 
         List<StaticEntity> fileButtons;
         List<String> levelData;
@@ -36,20 +35,21 @@ namespace MainGame.Screens
         Texture2D actionBarBackground;
         StaticEntity background;
 
-        ContentManager Content { get; set; }
         TradeScreenContents TradeContents { get; set; }
         #endregion
 
         #region Constructors
-        public SaveGameScreen(OnScreenChanged screenChanged, ContentManager content, TradeScreenContents tradeContents) : base(screenChanged)
+        public SaveGameScreen(OnScreenChanged screenChanged, TradeScreenContents tradeContents) : base(screenChanged)
         {
+            UserInterfaceLoader uiLoader = UserInterfaceLoader.GetInstance();
+            FontLoader fontLoader = FontLoader.GetInstance();
+
             TradeContents = tradeContents;
-            Content = content;
 
             fileSelected = -1;
-            blankButtonSprite = Content.Load<Texture2D>("graphics/blankButton");
-            confirmButtonSprite = Content.Load<Texture2D>("graphics/confirmButton");
-            backButtonSprite = Content.Load<Texture2D>("graphics/backButton");
+            Texture2D blankButtonSprite = uiLoader.Get("select");
+            Texture2D confirmButtonSprite = uiLoader.Get("confirm");
+            Texture2D backButtonSprite = uiLoader.Get("back");
             backButton = new StaticEntity("Back Button", new Vector2(GameConstants.TILE_SIZE * 2, GameConstants.WINDOW_HEIGHT - GameConstants.TILE_SIZE), backButtonSprite);
 
             fileButtons = new List<StaticEntity>();
@@ -69,10 +69,10 @@ namespace MainGame.Screens
             }
             confirmButton = new StaticEntity("Confirm Button", new Vector2(GameConstants.TILE_SIZE * 5, GameConstants.WINDOW_HEIGHT - GameConstants.TILE_SIZE), confirmButtonSprite);
 
-            font = Content.Load<SpriteFont>("font/font");
-            font20 = Content.Load<SpriteFont>("font/font20");
+            font = fontLoader.Get("font");
+            font20 = fontLoader.Get("font20");
 
-            actionBarBackground = Content.Load<Texture2D>("graphics/actionBarBackground");
+            actionBarBackground = uiLoader.Get("blankBackground");
             background = new StaticEntity("Background", new Vector2(GameConstants.WINDOW_WIDTH / 2, GameConstants.WINDOW_HEIGHT / 2), actionBarBackground);
 
             for (int i = 0; i < GameConstants.NUMBER_OF_SAVES; i++)
@@ -91,12 +91,12 @@ namespace MainGame.Screens
             }
             if (backButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
             {
-                ScreenChanged(new TradeScreen(ScreenChanged, Content, TradeContents));
+                ScreenChanged(new TradeScreen(ScreenChanged, TradeContents));
             }
             else if (confirmButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
             {
                 SaveGame(fileSelected);
-                ScreenChanged(new TradeScreen(ScreenChanged, Content, TradeContents));
+                ScreenChanged(new TradeScreen(ScreenChanged, TradeContents));
             }
         }
 

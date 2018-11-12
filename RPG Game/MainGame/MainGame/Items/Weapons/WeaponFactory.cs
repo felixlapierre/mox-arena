@@ -5,60 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MainGame.ContentLoaders.Textures;
 
 namespace MainGame.Items.Weapons
 {
     public class WeaponFactory
     {
         #region Properties
-        Texture2D weaponSword1;
-        Texture2D weaponBow1;
-        Texture2D weaponBow2;
-        Texture2D projectileBow1;
-        Texture2D weaponSword2;
-        Texture2D weaponAxe1;
-        Texture2D weaponAxe2;
-        Texture2D weaponMaul1;
-        Texture2D weaponMaulLarge;
-        Texture2D weaponHammer1;
-        Texture2D weaponDagger1;
-        Texture2D weaponSpear1;
-        Texture2D weaponSpear2;
-        Texture2D weaponSpear3;
-        Texture2D weaponShuriken1;
-        Texture2D weaponShuriken2;
-        Texture2D weaponShuriken3;
-        Texture2D redShockwaveBullet;
-        Texture2D blueShockwaveBullet;
-        Texture2D weaponGrapple1;
+        WeaponLoader weaponSprites;
+        ProjectileLoader projectileSprites;
         #endregion
 
         #region Constructors
-        public WeaponFactory(Texture2D weaponSword1, Texture2D weaponBow1, Texture2D weaponBow2, Texture2D projectileBow1, Texture2D weaponSword2,
-            Texture2D weaponAxe1, Texture2D weaponAxe2, Texture2D weaponMaul1, Texture2D weaponMaulLarge, Texture2D weaponHammer1, Texture2D weaponDagger1,
-            Texture2D weaponSpear1, Texture2D weaponSpear2, Texture2D weaponSpear3, Texture2D weaponShuriken1, Texture2D weaponShuriken2,
-            Texture2D weaponShuriken3, Texture2D redShockwaveBullet, Texture2D blueShockwaveBullet, Texture2D weaponGrapple1)
+        public WeaponFactory()
         {
-            this.weaponSword1 = weaponSword1;
-            this.weaponBow1 = weaponBow1;
-            this.weaponBow2 = weaponBow2;
-            this.projectileBow1 = projectileBow1;
-            this.weaponSword2 = weaponSword2;
-            this.weaponAxe1 = weaponAxe1;
-            this.weaponAxe2 = weaponAxe2;
-            this.weaponMaul1 = weaponMaul1;
-            this.weaponMaulLarge = weaponMaulLarge;
-            this.weaponHammer1 = weaponHammer1;
-            this.weaponDagger1 = weaponDagger1;
-            this.weaponSpear1 = weaponSpear1;
-            this.weaponSpear2 = weaponSpear2;
-            this.weaponSpear3 = weaponSpear3;
-            this.weaponShuriken1 = weaponShuriken1;
-            this.weaponShuriken2 = weaponShuriken2;
-            this.weaponShuriken3 = weaponShuriken3;
-            this.redShockwaveBullet = redShockwaveBullet;
-            this.blueShockwaveBullet = blueShockwaveBullet;
-            this.weaponGrapple1 = weaponGrapple1;
+            weaponSprites = WeaponLoader.GetInstance();
+            projectileSprites = ProjectileLoader.GetInstance();
         }
         #endregion
 
@@ -67,7 +29,7 @@ namespace MainGame.Items.Weapons
             string name = "Sword";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponSword2;
+            Texture2D sprite = weaponSprites.Get("sword2");
             float arc = (float)Math.PI / 8;
             float stabDistance = 75;
             int damage = 20;
@@ -86,7 +48,7 @@ namespace MainGame.Items.Weapons
             string name = "Broadsword";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponSword1;
+            Texture2D sprite = weaponSprites.Get("sword2");
             float arc = (float)Math.PI * 3 / 2;
             float stabDistance = 50;
             int damage = 15;
@@ -105,7 +67,7 @@ namespace MainGame.Items.Weapons
             string name = "Bow";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponBow1;
+            Texture2D sprite = weaponSprites.Get("bow1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -114,7 +76,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 100;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = projectileBow1;
+            Texture2D projectileSprite = projectileSprites.Get("arrow1");
             int projectileDamage = 7;
             float projectileKnockback = 0.30f;
             int projectileLifetime = 700;
@@ -132,7 +94,7 @@ namespace MainGame.Items.Weapons
             string name = "IceBow";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponBow2;
+            Texture2D sprite = weaponSprites.Get("bow2");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -141,7 +103,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 100;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = projectileBow1;
+            Texture2D projectileSprite = projectileSprites.Get("arrow1");
             int projectileDamage = 10;
             float projectileKnockback = 0f;
             int projectileLifetime = 500;
@@ -161,7 +123,7 @@ namespace MainGame.Items.Weapons
             string name = "ThrowingAxe";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponAxe1;
+            Texture2D sprite = weaponSprites.Get("axe1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -170,7 +132,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = weaponAxe1;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 10;
             float projectileKnockback = 0.30f;
             int projectileLifetime = 1000;
@@ -190,7 +152,7 @@ namespace MainGame.Items.Weapons
             string name = "DwarvenAxe";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponAxe2;
+            Texture2D sprite = weaponSprites.Get("axe2");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -200,7 +162,7 @@ namespace MainGame.Items.Weapons
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
             onHitEffects.Add(new Effect(EffectType.Speed, 1100, 0f));
-            Texture2D projectileSprite = weaponAxe2;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 7;
             float projectileKnockback = 0f;
             int projectileLifetime = 1000;
@@ -220,7 +182,7 @@ namespace MainGame.Items.Weapons
             string name = "Maul";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponMaul1;
+            Texture2D sprite = weaponSprites.Get("maul1");
             float arc = (float)Math.PI / 8;
             float stabDistance = 70;
             int damage = 25;
@@ -239,7 +201,7 @@ namespace MainGame.Items.Weapons
             string name = "Hammer";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponHammer1;
+            Texture2D sprite = weaponSprites.Get("hammer1");
             float arc = (float)Math.PI / 2;
             float stabDistance = 70;
             int damage = 25;
@@ -260,7 +222,7 @@ namespace MainGame.Items.Weapons
             string name = "Spear";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponSpear1;
+            Texture2D sprite = weaponSprites.Get("spear1");
             float arc = (float)Math.PI / 8;
             float stabDistance = 100;
             int damage = 15;
@@ -279,7 +241,7 @@ namespace MainGame.Items.Weapons
             string name = "ThrowingSpear";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponSpear2;
+            Texture2D sprite = weaponSprites.Get("spear2");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -288,7 +250,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = weaponSpear2;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 15;
             float projectileKnockback = 0.30f;
             int projectileLifetime = 500;
@@ -306,7 +268,7 @@ namespace MainGame.Items.Weapons
             string name = "JungleSpear";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponSpear3;
+            Texture2D sprite = weaponSprites.Get("spear3");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -316,7 +278,7 @@ namespace MainGame.Items.Weapons
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
             onHitEffects.Add(new Effect(EffectType.Poison, 5000, 4));
-            Texture2D projectileSprite = weaponSpear3;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 5;
             float projectileKnockback = 0.30f;
             int projectileLifetime = 500;
@@ -334,7 +296,7 @@ namespace MainGame.Items.Weapons
             string name = "ThrowingDagger";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponDagger1;
+            Texture2D sprite = weaponSprites.Get("dagger1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -344,7 +306,7 @@ namespace MainGame.Items.Weapons
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
             onHitEffects.Add(new Effect(EffectType.Poison, 5000, 5));
-            Texture2D projectileSprite = weaponDagger1;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 4;
             float projectileKnockback = 0.25f;
             int projectileLifetime = 700;
@@ -362,7 +324,7 @@ namespace MainGame.Items.Weapons
             string name = "Maverick";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponAxe1;
+            Texture2D sprite = weaponSprites.Get("axe1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -371,7 +333,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = weaponAxe1;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 200;
             float projectileKnockback = 0.30f;
             int projectileLifetime = 1500;
@@ -396,7 +358,7 @@ namespace MainGame.Items.Weapons
             string name = "FireBall";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = redShockwaveBullet;
+            Texture2D sprite = projectileSprites.Get("redBall1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -405,7 +367,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = redShockwaveBullet;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 20;
             float projectileKnockback = 0.25f;
             int projectileLifetime = 710;
@@ -413,7 +375,7 @@ namespace MainGame.Items.Weapons
             int projectileBounces = 0;
             int projectilePierces = 0;
             List<Effect> projectileActiveEffects = new List<Effect>();
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 700, 0.25f, redShockwaveBullet, projectileDamage, 200));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 700, 0.25f, sprite, projectileDamage, 200));
             Weapon weapon = new Weapon(name, location, collisionRectangleLeniency, sprite, arc, stabDistance, damage, knockback, cooldown, timeDisplayed, activeEffects, onHitEffects, projectileSprite, projectileDamage, projectileKnockback, projectileLifetime, projectileSpeed, projectileBounces, projectilePierces, projectileActiveEffects);
             weapon.ID = 12;
             return weapon;
@@ -424,7 +386,7 @@ namespace MainGame.Items.Weapons
             string name = "FireBolt";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = redShockwaveBullet;
+            Texture2D sprite = projectileSprites.Get("redBall1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -433,7 +395,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = redShockwaveBullet;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 10;
             float projectileKnockback = 0.0f;
             int projectileLifetime = 400;
@@ -441,10 +403,10 @@ namespace MainGame.Items.Weapons
             int projectileBounces = 0;
             int projectilePierces = 1;
             List<Effect> projectileActiveEffects = new List<Effect>();
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 100, 0.0f, redShockwaveBullet, 7, 50));
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 200, 0.0f, redShockwaveBullet, 7, 50));
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 300, 0.0f, redShockwaveBullet, 7, 50));
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 400, 0.0f, redShockwaveBullet, 7, 50));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 100, 0.0f, sprite, 7, 50));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 200, 0.0f, sprite, 7, 50));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 300, 0.0f, sprite, 7, 50));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 400, 0.0f, sprite, 7, 50));
             Weapon weapon = new Weapon(name, location, collisionRectangleLeniency, sprite, arc, stabDistance, damage, knockback, cooldown, timeDisplayed, activeEffects, onHitEffects, projectileSprite, projectileDamage, projectileKnockback, projectileLifetime, projectileSpeed, projectileBounces, projectilePierces, projectileActiveEffects);
             weapon.ID = 13;
             return weapon;
@@ -455,7 +417,7 @@ namespace MainGame.Items.Weapons
             string name = "Meteor";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = redShockwaveBullet;
+            Texture2D sprite = projectileSprites.Get("redBall1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -464,7 +426,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = redShockwaveBullet;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 30;
             float projectileKnockback = 0.30f;
             int projectileLifetime = 710;
@@ -472,13 +434,13 @@ namespace MainGame.Items.Weapons
             int projectileBounces = -1;
             int projectilePierces = 10;
             List<Effect> projectileActiveEffects = new List<Effect>();
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 100, 0.5f, redShockwaveBullet, 40, 100));
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 250, 0.5f, redShockwaveBullet, 40, 200));
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 400, 0.5f, redShockwaveBullet, 40, 300));
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 600, 0.5f, redShockwaveBullet, 40, 600));
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 633, 0.5f, redShockwaveBullet, 40, 500));
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 666, 0.5f, redShockwaveBullet, 40, 400));
-            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 700, 0.5f, redShockwaveBullet, 40, 300));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 100, 0.5f, sprite, 40, 100));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 250, 0.5f, sprite, 40, 200));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 400, 0.5f, sprite, 40, 300));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 600, 0.5f, sprite, 40, 600));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 633, 0.5f, sprite, 40, 500));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 666, 0.5f, sprite, 40, 400));
+            projectileActiveEffects.Add(new Effect(EffectType.Shockwave, 700, 0.5f, sprite, 40, 300));
             Weapon weapon = new Weapon(name, location, collisionRectangleLeniency, sprite, arc, stabDistance, damage, knockback, cooldown, timeDisplayed, activeEffects, onHitEffects, projectileSprite, projectileDamage, projectileKnockback, projectileLifetime, projectileSpeed, projectileBounces, projectilePierces, projectileActiveEffects);
             weapon.ID = 14;
             return weapon;
@@ -489,7 +451,7 @@ namespace MainGame.Items.Weapons
             string name = "Helsingor";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponMaulLarge;
+            Texture2D sprite = weaponSprites.Get("maul2");
             float arc = (float)Math.PI / 8;
             float stabDistance = 70;
             int damage = 25;
@@ -510,7 +472,7 @@ namespace MainGame.Items.Weapons
             string name = "Boteng Shuriken";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponShuriken1;
+            Texture2D sprite = projectileSprites.Get("shuriken1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -519,7 +481,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = weaponShuriken1;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 9;
             float projectileKnockback = 0.15f;
             int projectileLifetime = 700;
@@ -541,7 +503,7 @@ namespace MainGame.Items.Weapons
             string name = "Hira Shuriken";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponShuriken2;
+            Texture2D sprite = projectileSprites.Get("shuriken2");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -550,7 +512,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = weaponShuriken2;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 9;
             float projectileKnockback = 0.15f;
             int projectileLifetime = 700;
@@ -572,7 +534,7 @@ namespace MainGame.Items.Weapons
             string name = "Taago Shuriken";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponShuriken3;
+            Texture2D sprite = projectileSprites.Get("shuriken3");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -581,7 +543,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = weaponShuriken3;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 9;
             float projectileKnockback = 0.15f;
             int projectileLifetime = 700;
@@ -602,7 +564,7 @@ namespace MainGame.Items.Weapons
             string name = "Plasma Bolt";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = blueShockwaveBullet;
+            Texture2D sprite = projectileSprites.Get("blueBall1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -611,7 +573,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = blueShockwaveBullet;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 15;
             float projectileKnockback = 0.0f;
             int projectileLifetime = 10000;
@@ -632,7 +594,7 @@ namespace MainGame.Items.Weapons
             string name = "Grapple";
             Vector2 location = new Vector2(0, 0);
             int collisionRectangleLeniency = 5;
-            Texture2D sprite = weaponGrapple1;
+            Texture2D sprite = weaponSprites.Get("grapple1");
             float arc = 0f;
             float stabDistance = 0f;
             int damage = 0;
@@ -641,7 +603,7 @@ namespace MainGame.Items.Weapons
             int timeDisplayed = 0;
             List<Effect> activeEffects = new List<Effect>();
             List<Effect> onHitEffects = new List<Effect>();
-            Texture2D projectileSprite = weaponGrapple1;
+            Texture2D projectileSprite = sprite;
             int projectileDamage = 10;
             float projectileKnockback = 0f;
             int projectileLifetime = 1000;

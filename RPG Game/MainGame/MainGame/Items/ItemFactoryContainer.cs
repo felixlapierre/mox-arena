@@ -6,6 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MainGame.Items.Charms;
+using MainGame.Items.Weapons;
+using MainGame.Items.Shields;
+
 namespace MainGame.Items
 {
     public class ItemFactoryContainer
@@ -22,81 +26,11 @@ namespace MainGame.Items
                 return;
             IsInitialized = true;
 
-            #region Weapons
-            Texture2D weaponSword1;
-            Texture2D weaponSword2;
-            Texture2D weaponBow1;
-            Texture2D weaponBow2;
-            Texture2D projectileBow1;
-            Texture2D weaponAxe1;
-            Texture2D weaponAxe2;
-            Texture2D weaponDagger1;
-            Texture2D weaponSpear1;
-            Texture2D weaponSpear2;
-            Texture2D weaponSpear3;
-            Texture2D weaponMaul1;
-            Texture2D weaponMaulLarge;
-            Texture2D weaponHammer1;
-            Texture2D weaponShuriken1;
-            Texture2D weaponShuriken2;
-            Texture2D weaponShuriken3;
-            Texture2D weaponGrapple1;
-            #endregion
+            Weapons = new WeaponFactory();
 
-            #region Shields
-            Texture2D shieldBasic1;
-            Texture2D shieldBasic2;
-            Texture2D speedBoost1;
-            Texture2D thunderStone;
-            Texture2D elvenTrinket;
-            #endregion
+            Shields = new ShieldFactory();
 
-            #region Charms
-            Texture2D charmSprite;
-            #endregion
-
-            #region Load Weapons
-            weaponSword1 = Content.Load<Texture2D>("graphics/WeaponSword1");
-            weaponSword2 = Content.Load<Texture2D>("graphics/WeaponSword2");
-            weaponBow1 = Content.Load<Texture2D>("graphics/WeaponBow1");
-            weaponBow2 = Content.Load<Texture2D>("graphics/WeaponBow2");
-            projectileBow1 = Content.Load<Texture2D>("graphics/ProjectileBow1");
-            weaponAxe1 = Content.Load<Texture2D>("graphics/WeaponAxe1");
-            weaponAxe2 = Content.Load<Texture2D>("graphics/WeaponAxe2");
-            weaponMaul1 = Content.Load<Texture2D>("graphics/WeaponMaul1");
-            weaponMaulLarge = Content.Load<Texture2D>("graphics/WeaponMaulLarge");
-            weaponHammer1 = Content.Load<Texture2D>("graphics/WeaponHammer1");
-            weaponDagger1 = Content.Load<Texture2D>("graphics/WeaponDagger1");
-            weaponSpear1 = Content.Load<Texture2D>("graphics/WeaponSpear1");
-            weaponSpear2 = Content.Load<Texture2D>("graphics/WeaponSpear2");
-            weaponSpear3 = Content.Load<Texture2D>("graphics/WeaponSpear3");
-            weaponShuriken1 = Content.Load<Texture2D>("graphics/shuriken1");
-            weaponShuriken2 = Content.Load<Texture2D>("graphics/shuriken2");
-            weaponShuriken3 = Content.Load<Texture2D>("graphics/shuriken3");
-            weaponGrapple1 = Content.Load<Texture2D>("graphics/WeaponGrapple1");
-
-            Texture2D redShockwaveBullet = Content.Load<Texture2D>("graphics/redShockwaveBullet");
-            Texture2D blueShockwaveBullet = Content.Load<Texture2D>("graphics/blueShockwaveBullet");
-
-            Weapons = new WeaponFactory(weaponSword1, weaponBow1, weaponBow2, projectileBow1, weaponSword2, weaponAxe1, weaponAxe2,
-                weaponMaul1, weaponMaulLarge, weaponHammer1, weaponDagger1, weaponSpear1, weaponSpear2, weaponSpear3, weaponShuriken1,
-                weaponShuriken2, weaponShuriken3, redShockwaveBullet, blueShockwaveBullet, weaponGrapple1);
-            #endregion
-
-            #region Load Shields
-            shieldBasic1 = Content.Load<Texture2D>("graphics/Shield1");
-            shieldBasic2 = Content.Load<Texture2D>("graphics/Shield2");
-            speedBoost1 = Content.Load<Texture2D>("graphics/speedBoost1");
-            thunderStone = Content.Load<Texture2D>("graphics/thunderStone");
-            elvenTrinket = Content.Load<Texture2D>("graphics/ElvenTrinket");
-
-            Shields = new ShieldFactory(shieldBasic1, shieldBasic2, speedBoost1, thunderStone, blueShockwaveBullet, elvenTrinket);
-            #endregion
-
-            #region Load Charms
-            charmSprite = Content.Load<Texture2D>("graphics/charmSprite");
-            Charms = new CharmFactory(charmSprite);
-            #endregion
+            Charms = new CharmFactory();
         }
 
         public static Weapon GetWeaponFromID(int id)

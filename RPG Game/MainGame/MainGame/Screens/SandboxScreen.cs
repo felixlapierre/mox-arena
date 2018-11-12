@@ -10,6 +10,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using MainGame.Items.Charms;
+using MainGame.Items.Weapons;
+using MainGame.Items.Shields;
+
+using MainGame.ContentLoaders;
+using MainGame.ContentLoaders.Textures;
+
 namespace MainGame.Screens
 {
     public class SandboxScreen : Screen
@@ -23,10 +30,6 @@ namespace MainGame.Screens
         StaticEntity playButton;
         StaticEntity startButton;
         StaticEntity backButton;
-
-        Texture2D playButtonSprite;
-        Texture2D startButtonSprite;
-        Texture2D backButtonSprite;
 
         Texture2D actionBarBackground;
 
@@ -55,15 +58,15 @@ namespace MainGame.Screens
         ShieldFactory shieldFactory;
         CharmFactory charmFactory;
         bool leftMousePreviouslyPressed = false;
-
-        ContentManager Content { get; set; }
         #endregion
 
-        public SandboxScreen(OnScreenChanged screenChanged, ContentManager content) : base(screenChanged)
+        public SandboxScreen(OnScreenChanged screenChanged) : base(screenChanged)
         {
-            Content = content;
-            actionBarBackground = content.Load<Texture2D>("graphics/actionBarBackground");
-            font = content.Load<SpriteFont>("font/font");
+            UserInterfaceLoader uiLoader = UserInterfaceLoader.GetInstance();
+            FontLoader fontLoader = FontLoader.GetInstance();
+
+            actionBarBackground = uiLoader.Get("blankBackground");
+            font = fontLoader.Get("font");
 
             background = new StaticEntity("Background", new Vector2(WindowWidth / 2, WindowHeight / 2), actionBarBackground);
             itemBoxes = new List<ItemBox>();
@@ -71,9 +74,9 @@ namespace MainGame.Screens
             equippedItemBoxes = new List<ItemBox>();
             equippedItemBoxBackgrounds = new List<StaticEntity>();
 
-            playButtonSprite = content.Load<Texture2D>("graphics/continueButton");
-            startButtonSprite = content.Load<Texture2D>("graphics/startButton");
-            backButtonSprite = content.Load<Texture2D>("graphics/backButton");
+            Texture2D playButtonSprite = uiLoader.Get("continue");
+            Texture2D startButtonSprite = uiLoader.Get("start");
+            Texture2D backButtonSprite = uiLoader.Get("back");
 
             playButton = new StaticEntity("Play Button", new Vector2(WindowWidth - TileSize * 5 / 2, WindowHeight - TileSize), playButtonSprite);
             startButton = new StaticEntity("Start Button", new Vector2(WindowWidth / 2, WindowHeight / 2), startButtonSprite);
@@ -407,13 +410,13 @@ namespace MainGame.Screens
                 box.Update();
             if (backButton.CollisionRectangle.Contains(mouse.Position) && mouse.LeftButton == ButtonState.Pressed)
             {
-                ScreenChanged(new MainMenuScreen(ScreenChanged, Content));
+                ScreenChanged(new MainMenuScreen(ScreenChanged));
             }
 
             if (playButton.CollisionRectangle.Contains(new Vector2(mouse.X, mouse.Y)) && mouse.LeftButton == ButtonState.Pressed && !leftMousePreviouslyPressed)
             {
                 TradeScreenContents tradeContents = new TradeScreenContents(GameConstants.PLAYER_MAX_HIT_POINTS, 1, weapon1, weapon2, shield1, charm1);
-                ScreenChanged(new CombatScreen(ScreenChanged, Content, tradeContents));
+                ScreenChanged(new CombatScreen(ScreenChanged, tradeContents));
             }
             leftMousePreviouslyPressed = mouse.LeftButton == ButtonState.Pressed;
         } 
